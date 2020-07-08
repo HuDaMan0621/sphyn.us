@@ -19,7 +19,7 @@ export default function ProfilePage() {
         const fetchCustomer = async () => {
             // console.log(id);
             setIsLoading(true);
-            const result = await axios(`http://localhost:3010/customer/1/profile`); //await takes care of .then /customer/:id/profile
+            const result = await axios(`/customer/1/profile`); //await takes care of .then /customer/:id/profile
             console.log(result, 'this should be the result')
             setData(result.data); setIsLoading(false);
             console.log(result.data)
