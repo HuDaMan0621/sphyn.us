@@ -12,8 +12,9 @@ const customer = require('./models/customer');
 var app = express();
 
 // TODO PUT REACT APP HERE
-// app.use(express.static(path.join(__dirname, 'public')));
-
+app.get((req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client/build/index.html'))
+})
 // app.set('/api/v1', apiRouter);
 
 app.use(logger('dev'));
@@ -22,7 +23,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', apiRouter);
-app.use('/service/:id', apiRouter);
+// app.use('/service/:id', apiRouter);
 // app.use('/order/:id', apiRouter);
 
 // catch 404 and forward to error handler
