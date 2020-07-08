@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     zipcode: DataTypes.INTEGER
   }, {});
   Customer.associate = function(models) {
-  Customer.hasMany(models.Order, { through: 'CustomerOrder' });  
+  Customer.belongsToMany(models.Order, { through: 'CustomerOrder' });  
 };
   return Customer;
 };
