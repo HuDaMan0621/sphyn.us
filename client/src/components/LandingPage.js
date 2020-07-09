@@ -6,6 +6,7 @@ const {primaryColor, darkColor, lightColor} = colors;
 const main = css`
   color: ${primaryColor};
 
+
   h1 {
     font-size: 4rem;
   }

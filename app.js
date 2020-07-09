@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bcrypt = require('bcrypt');
+const session = require('express-session');
 
 var apiRouter = require('./routes/api');
     // customerRoute = require('./routes/api')
@@ -23,7 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', apiRouter);
-// app.use('/service/:id', apiRouter);
+app.use('/customer/:id', apiRouter);
 // app.use('/order/:id', apiRouter);
 
 // catch 404 and forward to error handler
