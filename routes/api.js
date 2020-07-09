@@ -3,7 +3,7 @@ var router = express.Router();
 const db = require('../models');
 const { route } = require('../app');
 const bcrypt = require('bcrypt');
-
+const session = require('express-session');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -34,12 +34,26 @@ router.get('/service/:id', (req, res,) => {
   })
 });
 
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    // router.post('/', (req, res) => {
+                    //   const { username, email, password } = req.body;
+
+                    //   bcrypt.hash(password, 10, (err, hash) => {
+
+                    //       db.User.create({
+                    //           username,
+                    //           email,
+                    //           password: hash,
+                    //       }).then((result) => {
+                    //           res.redirect('/users')
+                    //       });
+                    //   });
+                    // });
+//!!!!!!!!!!!!!!!!!!!!!!!!!
 
 //register route 
-router.post('/register', (req, res) => {
-
-  bcrypt.hash(password, 10, (err, hash) => {
-    const {
+router.post('/customer/:id', (req, res) => {
+var {
       first_name,
       last_name,
       email,
@@ -53,6 +67,8 @@ router.post('/register', (req, res) => {
       state,
       zipcode
     } = req.body;
+  bcrypt.hash(login_password, 10, (err, hash) => {
+    
 
     if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
     if (!last_name) { res.status(400).json({ error: 'last name field is required' }) }
@@ -63,70 +79,77 @@ router.post('/register', (req, res) => {
     if (!state) { res.status(400).json({ error: 'state field is required' }) }
     if (!zipcode) { res.status(400).json({ error: 'zip code field is required' }) }
 
-    db.User.create({
+    db.Customer.create({
       first_name,
       last_name,
       email,
       login_name,
       login_password: hash,
-      phone_number,
+      phone_number: phone_number || false,
       address_line_1,
-      address_line_2,
-      address_line_3,
+      address_line_2: address_line_2 || '',
+      address_line_3: address_line_3 || '',
       city,
       state,
       zipcode
     }).then((result) => {
+      // console.log()
       res.redirect('/login');  //after registration, redirects to login page 
     });
   });
 });
 
-// router.get('/', function(req, res, next) {
-//   console.log("hello world")
-//   db.Customer.findByPk(req.params.id, {
-//   include: [{
-//     model: db.Services,
-//     through: {
-//       attributes: []
-//     }
-//   }]
-// })
-//   .then(data => {
-//     res.json(data);
-//   })
-// })
-
-router.post('/customer/:id', (req, res) => {
-  const { first_name, last_name, email, login_name, login_password, phone_number, address_line_1, address_line_2, address_line_3, city, state, zipcode } = req.body;
-
-  if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
-  if (!last_name) { res.status(400).json({ error: 'last name field is required' }) }
-  if (!login_name) { res.status(400).json({ error: 'login name field is required' }) }
-  if (!login_password) { res.status(400).json({ error: 'password field is required' }) }
-  if (!address_line_1) { res.status(400).json({ error: 'address field is required' }) }
-  if (!city) { res.status(400).json({ error: 'city field is required' }) }
-  if (!state) { res.status(400).json({ error: 'state field is required' }) }
-  if (!zipcode) { res.status(400).json({ error: 'zip code field is required' }) }
-
-  db.Customer.create({
-    first_name,
-    last_name,
-    email,
-    login_name,
-    login_password,
-    phone_number: phone_number || false,
-    address_line_1,
-    address_line_2: address_line_2 || '',
-    address_line_3: address_line_3 || '',
-    city,
-    state,
-    zipcode,
+//login route
+router.post('/login', (req, res) => {
+  const { login_name, login_password } = req.body;
+  db.Customer.findOne({ where: { login_name: login_name} })
+  .then(Customer => {
+      bcrypt.compare(login_password, Customer.login_password, (err, match) => {
+          if(match) {
+              req.session.user = Customer;
+              res.redirect('/customer/:id/profile');
+          }
+          else {
+              res.send('Incorrect password!')
+          }
+      })
   })
-    .then(() => {
-      res.redirect(`/customer/:id/profile`) //TODO! we don't have this route yet, will need to create it
-    })
-})
+  .catch(() => {
+      res.send('Username not found. Please return to previous page and try again.')
+  });
+});
+
+
+// router.post('/customer/:id', (req, res) => {
+//   const { first_name, last_name, email, login_name, login_password, phone_number, address_line_1, address_line_2, address_line_3, city, state, zipcode } = req.body;
+
+//   if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
+//   if (!last_name) { res.status(400).json({ error: 'last name field is required' }) }
+//   if (!login_name) { res.status(400).json({ error: 'login name field is required' }) }
+//   if (!login_password) { res.status(400).json({ error: 'password field is required' }) }
+//   if (!address_line_1) { res.status(400).json({ error: 'address field is required' }) }
+//   if (!city) { res.status(400).json({ error: 'city field is required' }) }
+//   if (!state) { res.status(400).json({ error: 'state field is required' }) }
+//   if (!zipcode) { res.status(400).json({ error: 'zip code field is required' }) }
+
+//   db.Customer.create({
+//     first_name,
+//     last_name,
+//     email,
+//     login_name,
+//     login_password,
+//     phone_number: phone_number || false,
+//     address_line_1,
+//     address_line_2: address_line_2 || '',
+//     address_line_3: address_line_3 || '',
+//     city,
+//     state,
+//     zipcode,
+//   })
+//     .then(() => {
+//       res.redirect(`/login`) //TODO! we don't have this route yet, will need to create it
+//     })
+// })
 
 router.delete('/customer/:id', (req, res) => {
   db.Customer.destroy({
