@@ -1,7 +1,8 @@
 import React from 'react'
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import {colors, utilities} from '../styleVars';
+import { jsx, css } from '@emotion/core'
+import {colors} from '../styleVars'
+const {primaryColor, darkColor, lightColor} = colors;
 
 const {primaryColor, darkColor, secondaryColor, lightColor} = colors;
 const {borderRadius, animationSpeed} = utilities;
@@ -120,9 +121,10 @@ export default function LandingPage() {
           </div>
         </div>   
       </div>
+  h1 {
+    font-size: 4rem;
+  }
 
 
-    </div>
-  )
-}
+
 
