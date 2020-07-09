@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'  //
 
 export default class RegisterSection extends Component {
@@ -53,3 +54,4 @@ export default class RegisterSection extends Component {
         )
     }
 }
+

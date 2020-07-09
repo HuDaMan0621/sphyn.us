@@ -8,7 +8,6 @@ import LandingPage from './components/LandingPage';
 import RegisterSection from './components/RegisterSection';
 import LoginSection from './components/LoginSection';
 
-
 function App() {
   return (
     <BrowserRouter>
