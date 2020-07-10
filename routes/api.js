@@ -98,7 +98,8 @@ router.post('/login', (req, res) => {
     .then(Customer => {
       bcrypt.compare(login_password, Customer.login_password, (err, match) => {
         if (match) {
-          // req.session.Customer = Customer;
+          req.session.customer = Customer;
+          console.log(req.session);
           res.json(Customer)
           // res.redirect(`/customer/${Customer.id}/profile`);
         }
@@ -111,6 +112,18 @@ router.post('/login', (req, res) => {
       res.send('Username not found. Please return to previous page and try again.')
     });
 });
+
+router.get('/logout', function (req, res) {
+  req.logout();
+  res.status(200).json({ 
+    status: 'Bye Bye'
+  });
+  res.clearCookie('duoshuo_token');
+  req.session.destroy();
+  res.redirect('/');
+});
+
+ 
 // router.post('/customer/:id', (req, res) => {
 //   const { first_name, last_name, email, login_name, login_password, phone_number, address_line_1, address_line_2, address_line_3, city, state, zipcode } = req.body;
 //   if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }

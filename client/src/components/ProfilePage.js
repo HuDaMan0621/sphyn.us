@@ -2,6 +2,54 @@ import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios';
 import QRCode from 'qrcode.react';
 
+export default function ProfilePage(props) {
+
+
+    const [data2, setData2] = useState(null); //this is the state for the customer 
+    const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks 
+   
+    const logout = () => {
+        localStorage.clear('token');
+    }
+
+    // console.log(data2)
+    useEffect(() => {
+        console.log(props.match.params.id)
+        fetch(`/customer/${props.match.params.id}/profile`)
+            .then(data => data.json())
+            .then(data => {
+                setData2(data)
+                setIsLoading(false)
+            })
+    },[])
+
+
+    return (
+
+        <div>
+            {isLoading ? <div>Loading...</div> : (
+                <div>
+                    <QRCode value={`http://localhost:3000/customer/${data2.data.id}/profile`} />
+                    <h1>Profile Page!!!!!!</h1>
+                    <h1>{data2.data.first_name}</h1>
+                    {/* <h1>{data.last_name}</h1> */}
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                        // fetchCustomer();
+
+                    }}>
+                    <button onClick={logout()}>
+                        Logout
+                    </button>
+                    </form>
+                </div>
+            )}
+        </div>
+
+    )
+
+}
+
 // import react from 'react-router-dom';
 
 // const id  = req.match.params;
@@ -16,24 +64,8 @@ import QRCode from 'qrcode.react';
 // ({}) argument inside the method
 // [{}] 
 
-export default function ProfilePage(props) {
 
-
-    const [data2, setData2] = useState(null) //this is the state for the customer 
-    const [isLoading, setIsLoading] = useState(true) //displays loading when user clicks 
-
-    // console.log(data2)
-    useEffect(() => {
-        console.log(props.match.params.id)
-        fetch(`/customer/${props.match.params.id}/profile`)
-            .then(data => data.json())
-            .then(data => {
-                setData2(data)
-                setIsLoading(false)
-            })
-    })
-
-    // useEffect((data) => {
+   // useEffect((data) => {
     //     isLoading ? (<div>Loading...</div>) : (
 
     //         let didCancel = false
@@ -76,31 +108,4 @@ export default function ProfilePage(props) {
 
     //     // mountNode
     // );
-
-    return (
-
-        <div>
-            {isLoading ? <div>Loading...</div> : (
-                <div>
-                    <QRCode value={`http://localhost:3000/customer/${data2.data.id}/profile`} />
-                    <h1>Profile Page!!!!!!</h1>
-                    <h1>{data2.data.first_name}</h1>
-                    {/* <h1>{data.last_name}</h1> */}
-                    <form onSubmit={e => {
-                        e.preventDefault();
-                        // fetchCustomer();
-
-                    }}>
-                        <button type="submit">
-                            submit
-                    </button>
-                    </form>
-                </div>
-            )}
-        </div>
-
-    )
-
-}
-
 
