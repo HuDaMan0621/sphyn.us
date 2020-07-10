@@ -26,7 +26,7 @@ router.get('/customer/:id', function (req, res, next) {
 router.get('/customer/:id/profile', function (req, res, next) {
   db.Customer.findByPk(req.params.id)
     .then(data => {
-      res.json(data);
+      res.json({data: data});
     })
 });
 
@@ -98,11 +98,12 @@ router.post('/login', (req, res) => {
     .then(Customer => {
       bcrypt.compare(login_password, Customer.login_password, (err, match) => {
         if (match) {
-          req.session.user = Customer;
-          res.redirect('/customer/:id/profile');
+          // req.session.Customer = Customer;
+          res.json(Customer)
+          // res.redirect(`/customer/${Customer.id}/profile`);
         }
         else {
-          res.send('Incorrect password!')
+          res.send('Incorrect password.')
         }
       })
     })
