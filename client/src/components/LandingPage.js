@@ -1,23 +1,20 @@
 import React from 'react'
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core'
-import {colors} from '../styleVars'
-const {primaryColor, darkColor, lightColor} = colors;
-const main = css`
-  color: ${primaryColor};
+import { jsx, css } from '@emotion/core';
+import {colors, utilities} from '../styleVars';
+import Header from './Header';
+import Showcase from './Showcase';
+import About from './About';
 
-
-  h1 {
-    font-size: 4rem;
-  }
-
-
-`
+const {primaryColor, darkColor, secondaryColor, lightColor} = colors;
+const {borderRadius, animationSpeed} = utilities;
 
 export default function LandingPage() {
   return (
-    <div css={main}>
-      <h1>hello world</h1>
+    <div>
+     <Header/>
+     <Showcase/>
+     <About/>
     </div>
   )
 }
