@@ -33,6 +33,7 @@ var app = express();
 //   store: store,
 // }));
 
+
 // app.use(checkAuthentication);
 
 // function checkAuthentication(req, res, next) {

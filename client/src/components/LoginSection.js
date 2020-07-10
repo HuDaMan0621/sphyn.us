@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ProfilePage from './ProfilePage';
 
-
-
 export default class LoginSection extends Component {
     constructor(props) {
         super(props)
@@ -35,6 +33,7 @@ export default class LoginSection extends Component {
             .then(res => res.json())
             .then(data => {
                 this.setState({ data: data })
+
                 this.props.history.push('/customer/:id/profile')
             })
     }
