@@ -5,8 +5,8 @@ const { route } = require('../app');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const history = require('history')
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const store = new SequelizeStore({ db: db.sequelize })
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// const store = new SequelizeStore({ db: db.sequelize })
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -15,18 +15,21 @@ router.get('/', function (req, res, next) {
       res.json(data);
     })
 });
+
 router.get('/customer/:id', function (req, res, next) {
   db.Customer.findByPk(req.params.id)
     .then(data => {
       res.json(data);
     })
 });
+
 router.get('/customer/:id/profile', function (req, res, next) {
   db.Customer.findByPk(req.params.id)
     .then(data => {
       res.json(data);
     })
 });
+
 router.get('/service/:id', (req, res,) => {
   db.Service.findByPk(req.params.id)
     .then(data => {
@@ -80,6 +83,14 @@ router.post('/customer', (req, res) => {
     });
   });
 });
+
+router.get('/login', function (req, res, next) {
+  db.Customer.findAll()
+    .then(data => {
+      res.json(data);
+    })
+});
+
 //login route
 router.post('/login', (req, res) => {
   const { email, login_password } = req.body;
@@ -140,7 +151,8 @@ router.delete('/customer/:id', (req, res) => {
         res.json({ error: `could not find customer with id: ${req.params.id}` })
       }
     })
-})
+});
+
 router.put('/customer/:id', (req, res) => {
   console.log('THIS IS THE PUT ROUTE!!!! ')
   const {
@@ -202,6 +214,7 @@ router.put('/customer/:id', (req, res) => {
 // if (!state) { res.status(400).json({ error: 'state field is required' }) }
 // if (!zipcode) { res.status(400).json({ error: 'zip code field is required' }) }
 //  res.json(user)
+
 router.get('/order/:id', function (req, res, next) {
   db.Orders.findByPk(req.params.id
   ).then(res => {
