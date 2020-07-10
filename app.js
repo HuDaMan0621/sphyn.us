@@ -8,25 +8,30 @@ var apiRouter = require('./routes/api');
     // customerRoute = require('./routes/api')
 const { sequelize } = require('./models');
 const customer = require('./models/customer');
-// const { Sequelize } = require('sequelize/types');
 const db = require('./models');
 const session = require('express-session');
 
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const store = new SequelizeStore({ db: db.sequelize })
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// const store = new SequelizeStore({ db: db.sequelize })
 
 var app = express();
 
-app.use(session( {
-  secret: 'secret',
-  resave: false, 
-  saveUninitialized: false,
-  cookie: {
-    //secure: true,
-    maxAge: 86400000,
-  },
-  store: store,
-}));
+// app.use(session({  
+//   genid: function(req) {    
+// return genuuid() // use UUIDs for session IDs  
+// },  
+// secret: 'keyboard cat'}))
+
+// app.use(session( {
+//   secret: 'secret',
+//   resave: false, 
+//   saveUninitialized: false,
+//   cookie: {
+//     //secure: true,
+//     maxAge: 86400000,
+//   },
+//   store: store,
+// }));
 
 // app.use(checkAuthentication);
 

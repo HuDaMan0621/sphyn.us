@@ -26,7 +26,7 @@ export default class RegisterSection extends Component {
                 'Content-Type': 'application/json;charset=UTF-8'
             },
         })
-            .then(res => res.json())
+            // .then(res => res.json())
             .then(data => {
                 this.props.history.push('/login')
             })

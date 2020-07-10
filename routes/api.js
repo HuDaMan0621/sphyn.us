@@ -5,8 +5,8 @@ const { route } = require('../app');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const history = require('history')
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const store = new SequelizeStore({ db: db.sequelize })
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// const store = new SequelizeStore({ db: db.sequelize })
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -80,6 +80,15 @@ router.post('/customer', (req, res) => {
     });
   });
 });
+
+router.get('/login', function (req, res, next) {
+  db.Customer.findAll()
+    .then(data => {
+      res.json(data);
+    })
+});
+
+
 //login route
 router.post('/login', (req, res) => {
   const { email, login_password } = req.body;
