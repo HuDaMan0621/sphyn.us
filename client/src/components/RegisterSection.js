@@ -35,20 +35,20 @@ export default class RegisterSection extends Component {
     handleChange = (e) => {
         const { name, value } = e.target;
         this.setState({
-          [name]: value
+            [name]: value
         })
-      }
+    }
 
     render() {
         return (
             <div>
                 <form onSubmit={this.handleFormSubmit}>
-                    <label htmlFor="firstName">First Name<input className="firstName" placeholder="First name" onChange={this.handleChange}value={this.state.first_name}></input></label>
-                    <label htmlFor="lastName">Last Name<input className="lastName" placeholder="Last name" onChange={this.handleChange} value={this.state.last_name}></input></label>
-                    <label htmlFor="email"><input className="email" placeholder="Email@Email.com" onChange={this.handleChange} value={this.state.email}></input></label>
+                    <label htmlFor="firstName">First Name<input className="firstName" name="first_name" placeholder="First name" onChange={this.handleChange} value={this.state.first_name}></input></label>
+                    <label htmlFor="lastName">Last Name<input className="lastName" name="last_name" placeholder="Last name" onChange={this.handleChange} value={this.state.last_name}></input></label>
+                    <label htmlFor="email"><input className="email" name="email" placeholder="Email@Email.com" onChange={this.handleChange} value={this.state.email}></input></label>
                     {/* <label htmlFor="loginName"><input className="loginName" placeholder="User Name" onChange={this.handleChange} value={this.state.login_name}></input></label> */}
-                    <label htmlFor="loginPassword"><input type="password" className="loginPassword" placeholder="Password"onChange={this.handleChange} value={this.state.login_password}></input></label>
-                    <label htmlFor="phoneNumber"><label htmlFor="phoneNumber"><input className="phoneNumber" placeholder="Phone Number" onChange={this.handleChange} value={this.state.phone_number}></input></label></label>
+                    <label htmlFor="loginPassword"><input type="password" name="login_password" className="loginPassword" placeholder="Password" onChange={this.handleChange} value={this.state.login_password}></input></label>
+                    <label htmlFor="phoneNumber"><input className="phoneNumber" name="phone_number" placeholder="Phone Number" onChange={this.handleChange} value={this.state.phone_number}></input></label>
                     {/* <label htmlFor="address_line_1"><input className="address_line_1" placeholder="Address" onChange={this.handleChange} value={this.state.address_line_1}></input></label> */}
                     {/* <label htmlFor="address_line_2"><input className="address_line_2" placeholder="Unit/Suite/Apt #" onChange={this.handleChange} value={this.state.address_line_2}></input></label> */}
                     {/* <label htmlFor="address_line_3"><input className="address_line_3" placeholder="Address Line 3" onChange={this.handleChange} value={this.state.address_line_3}></input></label> */}

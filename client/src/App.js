@@ -17,6 +17,9 @@ function App() {
           <Route path="/customer/:id/profile"  component={ProfilePage} />
           <Route path="/register" component={RegisterSection} />
           <Route path="/login" component={LoginSection} />
+          {/* <Route path="/customer" com */}
+
+          
         </Switch>
       </div>
     </BrowserRouter>

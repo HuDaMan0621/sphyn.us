@@ -5,6 +5,8 @@ const { route } = require('../app');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const history = require('history')
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const store = new SequelizeStore({ db: db.sequelize })
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -26,28 +28,28 @@ router.get('/customer/:id/profile', function (req, res, next) {
     })
 });
 router.get('/service/:id', (req, res,) => {
-  db.Service.findByPk(req.params.id) 
-  .then(data => {
-    res.json(data);
-  })
+  db.Service.findByPk(req.params.id)
+    .then(data => {
+      res.json(data);
+    })
 });
 
 //register route  
 router.post('/customer', (req, res) => {
-var {
-      first_name,
-      last_name,
-      email,
-      // login_name,
-      login_password,
-      phone_number,
-      // address_line_1,
-      // address_line_2,
-      // address_line_3,
-      // city,
-      // state,
-      // zipcode
-    } = req.body;
+  var {
+    first_name,
+    last_name,
+    email,
+    // login_name,
+    login_password,
+    phone_number,
+    // address_line_1,
+    // address_line_2,
+    // address_line_3,
+    // city,
+    // state,
+    // zipcode
+  } = req.body;
   bcrypt.hash(login_password, 10, (err, hash) => {
     // if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
     // if (!last_name) { res.status(400).json({ error: 'last name field is required' }) }
@@ -70,30 +72,32 @@ var {
       // city,
       // state,
       // zipcode
-    }).then((result) => {
-      // console.log()
+    })
+    .then((result) => {
+    //   delete db.Customer.login_password; //! we commented these 2 lines to test the login route
+    //   req.session.db.Customer = Customer; //!
       res.redirect('/login');  //after registration, redirects to login page 
     });
   });
 });
 //login route
 router.post('/login', (req, res) => {
-  const { login_name, login_password } = req.body;
-  db.Customer.findOne({ where: { login_name: login_name} })
-  .then(Customer => {
+  const { email, login_password } = req.body;
+  db.Customer.findOne({ where: { email: email } })
+    .then(Customer => {
       bcrypt.compare(login_password, Customer.login_password, (err, match) => {
-          if(match) {
-              req.session.user = Customer;
-              res.redirect('/customer/:id/profile');
-          }
-          else {
-              res.send('Incorrect password!')
-          }
+        if (match) {
+          req.session.user = Customer;
+          res.redirect('/customer/:id/profile');
+        }
+        else {
+          res.send('Incorrect password!')
+        }
       })
-  })
-  .catch(() => {
+    })
+    .catch(() => {
       res.send('Username not found. Please return to previous page and try again.')
-  });
+    });
 });
 // router.post('/customer/:id', (req, res) => {
 //   const { first_name, last_name, email, login_name, login_password, phone_number, address_line_1, address_line_2, address_line_3, city, state, zipcode } = req.body;
