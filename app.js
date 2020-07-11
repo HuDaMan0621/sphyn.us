@@ -16,7 +16,7 @@ const store = new SequelizeStore({ db: db.sequelize })
 
 var app = express();
 
-
+// This is a test comment, please remove
 app.use(
   session({
     secret: 'secret', // used to sign the cookie
