@@ -261,8 +261,8 @@ router.post('/booking', (req, res) => {
     zipcode,
     price
   })
-    .then((result) => {
-      // res.redirect('/???');
+    .then(() => {
+      res.redirect('/');
     });
 });
 

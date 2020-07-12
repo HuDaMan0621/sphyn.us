@@ -9,7 +9,7 @@ export default class BookingPage extends Component {
         city: 'atlanta',
         state: 'ga',
         zipcode: '11111',
-        price:'',
+        price:'100',
     }
 
     handleFormSubmit = (e) => {
@@ -22,10 +22,10 @@ export default class BookingPage extends Component {
             },
         })
             // .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                this.props.history.push(`/customer/${data.id}/profile`)
-            })
+            // .then(data => {
+            //     console.log(data)
+            //     this.props.history.push(`/customer/${data.id}/profile`)
+            // })
     }
 
     handleChange = (e) => {
