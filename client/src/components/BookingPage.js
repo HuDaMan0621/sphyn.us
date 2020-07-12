@@ -22,10 +22,12 @@ export default class BookingPage extends Component {
             },
         })
             // .then(res => res.json())
-            // .then(data => {
-            //     console.log(data)
-            //     this.props.history.push(`/customer/${data.id}/profile`)
-            // })
+            .then(res => {
+                console.log("this is the data", res)
+                // console.log('this is new', data.body)
+                console.log('state', this.state)
+                // this.props.history.push(`/customer/${data.id}/profile`)
+            })
     }
 
     handleChange = (e) => {
