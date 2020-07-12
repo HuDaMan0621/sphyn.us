@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ProfilePage from './ProfilePage';
+// import ProfilePage from './ProfilePage';
 // import QRCode from 'qrcode.react';
 import axios from 'axios';
 

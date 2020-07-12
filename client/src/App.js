@@ -7,6 +7,7 @@ import ProfilePage from './components/ProfilePage';
 import LandingPage from './components/LandingPage';
 import RegisterSection from './components/RegisterSection';
 import LoginSection from './components/LoginSection';
+import BookingPage from './components/BookingPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/customer/:id/profile"  component={ProfilePage} />
           <Route path="/register" component={RegisterSection} />
           <Route path="/login" component={LoginSection} />
+          <Route path="/booking" component={BookingPage} />
           {/* <Route path="/customer" com */}
 
           
