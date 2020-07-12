@@ -261,8 +261,13 @@ router.post('/booking', (req, res) => {
     zipcode,
     price
   })
-    .then(() => {
-      res.redirect('/');
+  // const { id } = req.params;
+  // db.CustomerOrder.findOne({ where: { customer_id : id}})
+    .then((response) => {
+      console.log('response', response);
+      const newBookingOrder = response.dataValues.id;
+      console.log(newBookingOrder);
+      res.redirect(`/customer/1/profile/${newBookingOrder}`); //!customer/:id, this id is the customer in the database. 
     });
 });
 

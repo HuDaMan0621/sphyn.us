@@ -10,8 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER
   }, {});
   Services.associate = function(models) {
-    Services.belongsToMany(models.Order, { through: 'OrderService' })
-    Services.hasOne(models.Customer, {through: 'Orders'})
+    // Services.belongsToMany(models.Order, { through: 'OrderService' })
+    Services.hasOne(models.Order)
   };
 
   return Services;

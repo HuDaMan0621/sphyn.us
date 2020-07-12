@@ -26,7 +26,7 @@ export default class BookingPage extends Component {
                 console.log("this is the data", res)
                 // console.log('this is new', data.body)
                 console.log('state', this.state)
-                // this.props.history.push(`/customer/${data.id}/profile`)
+                // this.props.history.push(`/customer/${this.state.customer_id}/profile`)
             })
     }
 
