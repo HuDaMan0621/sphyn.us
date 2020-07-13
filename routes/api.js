@@ -245,7 +245,7 @@ router.get('/order/:id', function (req, res, next) {
 
 
 router.post('/booking', checkAuthentication, (req, res) => {
-  const {
+const {
     nick_name,
     sq_ft,
     address,
@@ -264,8 +264,6 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price
   })
-    // const { id } = req.params;
-    // db.CustomerOrder.findOne({ where: { customer_id : id}})
     .then((Service) => {
       res.json(
         Service
