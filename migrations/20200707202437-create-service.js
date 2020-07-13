@@ -8,8 +8,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      sq_ft: {
-        type: Sequelize.INTEGER
+      nick_name:{
+        type: Sequelize.TEXT
+      },
+      sq_ft:{
+        type: Sequelize.TEXT
+      },
+      address:{
+        type: Sequelize.TEXT
+      },
+      city:{
+        type: Sequelize.TEXT
+      },
+      state: {
+        type: Sequelize.TEXT
+      },
+      zipcode: {
+        type: Sequelize.TEXT
       },
       price: {
         type: Sequelize.INTEGER

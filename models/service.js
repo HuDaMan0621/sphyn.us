@@ -1,11 +1,18 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
-  const Service = sequelize.define('Service', {
-    sq_ft: DataTypes.INTEGER,
+  const Services = sequelize.define('Services', {
+    nick_name: DataTypes.TEXT,
+    sq_ft: DataTypes.TEXT,
+    address: DataTypes.TEXT,
+    city: DataTypes.TEXT,
+    state: DataTypes.TEXT,
+    zipcode: DataTypes.TEXT,
     price: DataTypes.INTEGER
   }, {});
-  Service.associate = function(models) {
-    Service.belongsToMany(models.Order, { through: 'OrderService' })
+  Services.associate = function(models) {
+    // Services.belongsToMany(models.Order, { through: 'OrderService' })
+    Services.hasOne(models.Order)
   };
-  return Service;
+
+  return Services;
 };

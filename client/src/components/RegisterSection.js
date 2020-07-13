@@ -3,12 +3,12 @@ import React, { Component } from 'react'  //
 
 export default class RegisterSection extends Component {
     state = {
-        first_name: 'this',
-        last_name: 'this',
-        email: 'this@this.com',
+        first_name: '',
+        last_name: '',
+        email: '@email.com',
         // login_name: 'this',
-        login_password: 'this',
-        phone_number: '1111111',
+        login_password: '',
+        phone_number: '',
         // address_line_1: 'this',
         // address_line_2: 'this',
         // address_line_3: 'this',

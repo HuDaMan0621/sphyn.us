@@ -17,6 +17,9 @@ module.exports = {
       schedule_confirm: {
         type: Sequelize.BOOLEAN
       },
+      service_id:{
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

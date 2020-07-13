@@ -5,8 +5,8 @@ const { route } = require('../app');
 const bcrypt = require('bcrypt');
 const session = require('express-session');
 const history = require('history')
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
-// const store = new SequelizeStore({ db: db.sequelize })
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const store = new SequelizeStore({ db: db.sequelize })
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -26,7 +26,7 @@ router.get('/customer/:id', function (req, res, next) {
 router.get('/customer/:id/profile', function (req, res, next) {
   db.Customer.findByPk(req.params.id)
     .then(data => {
-      res.json({data: data});
+      res.json({ data: data });
     })
 });
 
@@ -76,11 +76,11 @@ router.post('/customer', (req, res) => {
       // state,
       // zipcode
     })
-    .then((result) => {
+    // .then((result) => {
     //   delete db.Customer.login_password; //! we commented these 2 lines to test the login route
     //   req.session.db.Customer = Customer; //!
-      res.redirect('/login');  //after registration, redirects to login page 
-    });
+    // res.redirect('/login');  //after registration, redirects to login page 
+    // });
   });
 });
 
@@ -112,18 +112,19 @@ router.post('/login', (req, res) => {
       res.send('Username not found. Please return to previous page and try again.')
     });
 });
+//! redirect with json ?
 
-router.get('/logout', function (req, res) {
-  req.logout();
-  res.status(200).json({ 
-    status: 'Bye Bye'
-  });
-  res.clearCookie('duoshuo_token');
-  req.session.destroy();
-  res.redirect('/');
-});
+// router.get('/logout', function (req, res) {
+//   req.logout();
+//   res.status(200).json({ 
+//     status: 'Bye Bye'
+//   });
+//   res.clearCookie('duoshuo_token');
+//   req.session.destroy();
+//   res.redirect('/');
+// });
 
- 
+
 // router.post('/customer/:id', (req, res) => {
 //   const { first_name, last_name, email, login_name, login_password, phone_number, address_line_1, address_line_2, address_line_3, city, state, zipcode } = req.body;
 //   if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
@@ -238,4 +239,37 @@ router.get('/order/:id', function (req, res, next) {
       console.log(data);
     })
 });
+
+
+router.post('/booking', (req, res) => {
+  const {
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price,
+  } = req.body;
+  
+  db.Services.create({
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price
+  })
+  // const { id } = req.params;
+  // db.CustomerOrder.findOne({ where: { customer_id : id}})
+    .then((response) => {
+      console.log('response', response);
+      const newBookingOrder = response.dataValues.id;
+      console.log(newBookingOrder);
+      res.redirect(`/customer/1/profile/${newBookingOrder}`); //!customer/:id, this id is the customer in the database. 
+    });
+});
+
+
 module.exports = router;
