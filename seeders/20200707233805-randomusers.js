@@ -102,6 +102,7 @@ module.exports = {
     return await queryInterface.bulkInsert('CustomerOrder', [
       {
         order_id: '1',
+        customer_id: '1',
         // createdAt: new Date(),
         // updatedAt: new Date(),
       },

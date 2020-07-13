@@ -17,7 +17,14 @@ module.exports = {
           key: 'id'
         }
       },
-      
+      customer_id: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Customers',
+          key: 'id',
+        }
+      },
     })
   },
 

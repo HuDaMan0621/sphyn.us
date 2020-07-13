@@ -16,12 +16,12 @@ router.get('/', function (req, res, next) {
 //customer profile route 
 router.get('/customer/profile', function (req, res) {
   console.log('this is req.session.customer', req.session.customer)
-  if ( !req.session.customer){  
+  if (!req.session.customer) {
     res.status(401).json({
       error: 'Unauthorized User'
     })
   } else {
-      res.json({ data: req.session.customer});
+    res.status(200).json({ data: req.session.customer });
   }
 });
 
@@ -254,7 +254,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price,
   } = req.body;
-  
+
   db.Services.create({
     nick_name,
     sq_ft,
@@ -264,8 +264,8 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price
   })
-  // const { id } = req.params;
-  // db.CustomerOrder.findOne({ where: { customer_id : id}})
+    // const { id } = req.params;
+    // db.CustomerOrder.findOne({ where: { customer_id : id}})
     .then((Service) => {
       res.json(
         Service

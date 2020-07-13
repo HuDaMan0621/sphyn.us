@@ -9,7 +9,7 @@ export default class BookingPage extends Component {
         city: 'atlanta',
         state: 'ga',
         zipcode: '11111',
-        price: '100',
+        price: '',
     }
 
     handleFormSubmit = (e) => {
@@ -24,7 +24,7 @@ export default class BookingPage extends Component {
             .then(res => {
                 console.log('this is RESSSSS', res)
                 if (res.ok === false) {
-                    this.props.history.push(`/login`)
+                    this.props.history.push(`/login`)  
                 } else {
                     this.props.history.push(`/customer/profile`)
                 }
@@ -49,7 +49,8 @@ export default class BookingPage extends Component {
                     <label htmlFor="state"><input className="state" placeholder="State" onChange={this.handleChange} value={this.state.state}></input></label>
                     <label htmlFor="zipcode"><input className="zipcode" placeholder="Zip Code" onChange={this.handleChange} value={this.state.zipcode}></input></label>
                     <label htmlFor="price">
-                        <select name="price" onChange={this.handleChange} value={this.state.price}>
+                        <select name="price" onChange={this.handleChange} value={this.state.price} required>
+                            <option className="packageEmpty" value="" disabled>Please Select a Package</option>
                             <option className="package1" value="150">Package 1 $150</option>
                             <option className="package2" value="300">Package 2 $300</option>
                             <option className="package3" value="5000">Package 3 $5000</option>
