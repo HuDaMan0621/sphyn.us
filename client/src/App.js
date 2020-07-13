@@ -15,7 +15,7 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/customer/:id/profile"  component={ProfilePage} />
+          <Route path="/customer/profile"  component={ProfilePage} />
           <Route path="/register" component={RegisterSection} />
           <Route path="/login" component={LoginSection} />
           <Route path="/booking" component={BookingPage} />
