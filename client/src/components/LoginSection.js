@@ -33,11 +33,11 @@ export default class LoginSection extends Component {
         //     },
         // })
             // .then(res => res.json())
-            axios.post('/login', {
+            axios.post('/api/v1/login', {
                 ...this.state,
             }).then(res => {
                 this.setState({data:res.data})
-                this.props.history.push(`/customer/${res.data.id}/profile`)
+                this.props.history.push(`/customer/profile`)
 
             })
             // .then(data => {

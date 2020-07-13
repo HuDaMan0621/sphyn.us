@@ -1,12 +1,10 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
-const { route } = require('../app');
+
 const bcrypt = require('bcrypt');
-const session = require('express-session');
-const history = require('history')
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const store = new SequelizeStore({ db: db.sequelize })
+const checkAuthentication = require('../auth');
+
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -16,22 +14,29 @@ router.get('/', function (req, res, next) {
     })
 });
 
-router.get('/customer/:id', function (req, res, next) {
-  db.Customer.findByPk(req.params.id)
-    .then(data => {
-      res.json(data);
+//customer profile route 
+router.get('/customer/profile', function (req, res) {
+  console.log('this is req.session.customer', req.session.customer)
+  if ( !req.session.customer){  
+    res.status(401).json({
+      error: 'Unauthorized User'
     })
+  } else {
+      res.json({ data: req.session.customer});
+  }
 });
 
-router.get('/customer/:id/profile', function (req, res, next) {
-  db.Customer.findByPk(req.params.id)
-    .then(data => {
-      res.json({ data: data });
-    })
-});
+//! if we need to get a customer's profile that's not logged in, we will use this.
+// router.get('/customer/profile/:id', function (req, res, next) { 
+//   db.Customer.findByPk(req.params.id)
+//   .then(data => {
+//     res.json(data);
+//   })
+// });
 
-router.get('/service/:id', (req, res,) => {
-  db.Service.findByPk(req.params.id)
+
+router.get('/service', checkAuthentication, (req, res,) => {
+  db.Service.findByPk(req.session.customer.id)
     .then(data => {
       res.json(data);
     })
@@ -241,7 +246,8 @@ router.get('/order/:id', function (req, res, next) {
 });
 
 
-router.post('/booking', (req, res) => {
+router.post('/booking', checkAuthentication, (req, res) => {
+
   const {
     nick_name,
     sq_ft,
@@ -263,11 +269,11 @@ router.post('/booking', (req, res) => {
   })
   // const { id } = req.params;
   // db.CustomerOrder.findOne({ where: { customer_id : id}})
-    .then((response) => {
-      console.log('response', response);
-      const newBookingOrder = response.dataValues.id;
-      console.log(newBookingOrder);
-      res.redirect(`/customer/1/profile/${newBookingOrder}`); //!customer/:id, this id is the customer in the database. 
+    .then((Service) => {
+      res.json(
+        Service
+      ); //!customer/:id, this id is the customer in the database. 
+
     });
 });
 

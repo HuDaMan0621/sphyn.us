@@ -19,7 +19,7 @@ export default class RegisterSection extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        fetch('/customer', {
+        fetch('/api/v1/customer', {
             method: 'POST',
             body: JSON.stringify(this.state),
             headers: {

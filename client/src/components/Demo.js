@@ -29,11 +29,18 @@ export default function Demo() {
         <div css={demo} >
             <div className='Demo'>
                 <div className="demo-image">
-                    <img src="./images/kitchen.jpg" alt="kitchen" />
+                    <iframe width='853' height='480' src='https://my.matterport.com/show/?m=RJhF4E8pb7q' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
                 </div>
                 <div className="demo-image">
-                    <img src="./images/living-room.jpg" alt="living-room" />
+                    <iframe width='853' height='480' src='https://my.matterport.com/show/?m=zimbbJHhX7y' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
                 </div>
+                <div className="demo-image">
+                    <iframe width='853' height='480' src='https://my.matterport.com/show/?m=CoPaqg84uwx' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
+                </div>
+                <div className="demo-image">
+                    <iframe width='853' height='480' src='http://panoramic-leather.surge.sh/' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
+                </div>
+                {/* iframe of matterport demo */}
             </div>
         </div>
     )

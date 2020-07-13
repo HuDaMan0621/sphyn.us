@@ -7,7 +7,6 @@ export default function ProfilePage(props) {
 
     const [data2, setData2] = useState(null); //this is the state for the customer 
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks 
-   
     const logout = () => {
         localStorage.clear('token');
     }
@@ -15,7 +14,7 @@ export default function ProfilePage(props) {
     // console.log(data2)
     useEffect(() => {
         console.log(props.match.params.id)
-        fetch(`/customer/${props.match.params.id}/profile`)
+        fetch(`/api/v1/customer/profile`)
             .then(data => data.json())
             .then(data => {
                 setData2(data)
@@ -23,20 +22,18 @@ export default function ProfilePage(props) {
             })
     },[])
 
-
+    console.log('this is data2', data2)
     return (
-
         <div>
             {isLoading ? <div>Loading...</div> : (
                 <div>
-                    <QRCode value={`http://localhost:3000/customer/${data2.data.id}/profile`} />
+                    <QRCode value={`http://localhost:3000/customer/${data2.data.id}/showcase`} />
                     <h1>Profile Page!!!!!!</h1>
                     <h1>{data2.data.first_name}</h1>
                     {/* <h1>{data.last_name}</h1> */}
                     <form onSubmit={e => {
                         e.preventDefault();
                         // fetchCustomer();
-
                     }}>
                     <button onClick={logout()}>
                         Logout
