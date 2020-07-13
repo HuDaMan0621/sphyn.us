@@ -29,8 +29,6 @@ app.use(
   })
 );
 
-
-
 store.sync();  //!THIS IS THE SESSION, VERY IMPORTANT
 
 app.use(logger('dev'));
@@ -39,7 +37,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/api/v1', apiRouter); 
-
 
 // TODO PUT REACT APP HERE
 app.get((req, res) => {

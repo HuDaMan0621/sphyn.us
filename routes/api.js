@@ -5,7 +5,6 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 const checkAuthentication = require('../auth');
 
-
 /* GET home page. */
 router.get('/', function (req, res, next) {
   db.Customer.findAll()
@@ -17,12 +16,12 @@ router.get('/', function (req, res, next) {
 //customer profile route 
 router.get('/customer/profile', function (req, res) {
   console.log('this is req.session.customer', req.session.customer)
-  if ( !req.session.customer){  
+  if (!req.session.customer) {
     res.status(401).json({
       error: 'Unauthorized User'
     })
   } else {
-      res.json({ data: req.session.customer});
+    res.status(200).json({ data: req.session.customer });
   }
 });
 
@@ -33,7 +32,6 @@ router.get('/customer/profile', function (req, res) {
 //     res.json(data);
 //   })
 // });
-
 
 router.get('/service', checkAuthentication, (req, res,) => {
   db.Service.findByPk(req.session.customer.id)
@@ -247,8 +245,7 @@ router.get('/order/:id', function (req, res, next) {
 
 
 router.post('/booking', checkAuthentication, (req, res) => {
-
-  const {
+const {
     nick_name,
     sq_ft,
     address,
@@ -257,7 +254,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price,
   } = req.body;
-  
+
   db.Services.create({
     nick_name,
     sq_ft,
@@ -267,13 +264,10 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price
   })
-  // const { id } = req.params;
-  // db.CustomerOrder.findOne({ where: { customer_id : id}})
     .then((Service) => {
       res.json(
         Service
       ); //!customer/:id, this id is the customer in the database. 
-
     });
 });
 

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
     schedule_confirm: DataTypes.BOOLEAN
   }, {});
   Order.associate = function(models) {
-    Order.belongsTo(models.Customer),
+    Order.belongsTo(models.Customer, { through: 'CustomerOrder' }),
     // Order.belongsToMany(models.Services, { through: 'OrderService' })
     Order.belongsTo(models.Services,  { through: 'OrderService' })
   };
