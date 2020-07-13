@@ -5,6 +5,7 @@ const db = require('../models');
 const bcrypt = require('bcrypt');
 const checkAuthentication = require('../auth');
 
+
 /* GET home page. */
 router.get('/', function (req, res, next) {
   db.Customer.findAll()
@@ -32,6 +33,7 @@ router.get('/customer/profile', function (req, res) {
 //     res.json(data);
 //   })
 // });
+
 
 router.get('/service', checkAuthentication, (req, res,) => {
   db.Service.findByPk(req.session.customer.id)
@@ -245,6 +247,7 @@ router.get('/order/:id', function (req, res, next) {
 
 
 router.post('/booking', checkAuthentication, (req, res) => {
+
   const {
     nick_name,
     sq_ft,
@@ -270,6 +273,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
       res.json(
         Service
       ); //!customer/:id, this id is the customer in the database. 
+
     });
 });
 

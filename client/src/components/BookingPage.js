@@ -10,6 +10,7 @@ export default class BookingPage extends Component {
         state: 'ga',
         zipcode: '11111',
         price: '100',
+
     }
 
     handleFormSubmit = (e) => {
@@ -50,6 +51,7 @@ export default class BookingPage extends Component {
                     <label htmlFor="zipcode"><input className="zipcode" placeholder="Zip Code" onChange={this.handleChange} value={this.state.zipcode}></input></label>
                     <label htmlFor="price">
                         <select name="price" onChange={this.handleChange} value={this.state.price}>
+
                             <option className="package1" value="150">Package 1 $150</option>
                             <option className="package2" value="300">Package 2 $300</option>
                             <option className="package3" value="5000">Package 3 $5000</option>
