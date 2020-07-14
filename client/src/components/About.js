@@ -9,7 +9,7 @@ const { borderRadius, animationSpeed } = utilities;
 
 const about = css`
   .about {
-    padding: 1rem 0;
+    padding: ${utilities.sectionPadding};
     max-width: 1100px;
     margin: auto;
 
@@ -17,7 +17,7 @@ const about = css`
       font-size: 2rem;
       margin: auto;
       border-bottom: solid 2px ${primaryColor};
-      width: 70%;
+      width: 30%;
       margin-bottom: 2rem;
       @media (min-width: 768px) {
         font-size: 4rem;
@@ -29,13 +29,11 @@ const about = css`
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1rem;
-        align-items: left;
+        align-items: center;
         text-align: left;
       }
 
       .about-content {
-        margin-bottom: 2rem;
-        padding: 0 1rem;
         line-height: 2;
 
         h3 {
@@ -62,10 +60,6 @@ const about = css`
             text-align: center;
           }
         }
-      }
-
-      .about-image {
-        height: 100%;
       }
 
       .about-image img {
