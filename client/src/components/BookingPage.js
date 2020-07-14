@@ -25,7 +25,6 @@ export default class BookingPage extends Component {
                 console.log('this is RESSSSS', res)
                 if (res.ok === false) {
                     this.props.history.push(`/login`)  
-
                 } else {
                     this.props.history.push(`/customer/profile`)
                 }
@@ -52,7 +51,6 @@ export default class BookingPage extends Component {
                     <label htmlFor="price">
                         <select name="price" onChange={this.handleChange} value={this.state.price} required>
                             <option className="packageEmpty" value="" disabled>Please Select a Package</option>
-
                             <option className="package1" value="150">Package 1 $150</option>
                             <option className="package2" value="300">Package 2 $300</option>
                             <option className="package3" value="5000">Package 3 $5000</option>
