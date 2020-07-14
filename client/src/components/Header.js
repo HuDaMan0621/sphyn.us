@@ -5,6 +5,7 @@ import { colors, utilities } from '../styleVars';
 import Logout from './Logout';
 import { Link } from 'react-router-dom';
 
+
 const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
 const { borderRadius, animationSpeed } = utilities;
 

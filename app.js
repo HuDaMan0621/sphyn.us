@@ -11,8 +11,8 @@ const customer = require('./models/customer');
 const db = require('./models');
 const session = require('express-session');
 
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const store = new SequelizeStore({ db: db.sequelize })
+// const SequelizeStore = require('connect-session-sequelize')(session.Store);
+// const store = new SequelizeStore({ db: db.sequelize })
 
 var app = express();
 

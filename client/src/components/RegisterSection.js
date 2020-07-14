@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'  
 
 export default class RegisterSection extends Component {
@@ -38,7 +37,7 @@ export default class RegisterSection extends Component {
                         <label htmlFor="email"><input className="email" name="email" placeholder="Email@Email.com" onChange={this.handleChange} value={this.state.email}></input></label>
                         <label htmlFor="loginPassword"><input type="password" name="login_password" className="loginPassword" placeholder="Password" onChange={this.handleChange} value={this.state.login_password}></input></label>
                         <label htmlFor="phoneNumber"><input className="phoneNumber" name="phone_number" placeholder="Phone Number" onChange={this.handleChange} value={this.state.phone_number}></input></label>
-                            <button className="submit" type="submit">Submit</button>
+                         <button className="submit" type="submit">Submit</button>
                     </form>
             </div>
         )

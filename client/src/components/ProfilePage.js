@@ -5,7 +5,6 @@ import Logout from './Logout';
 import { Link } from 'react-router-dom';
 
 export default function ProfilePage(props) {
-
     const [data2, setData2] = useState({error: ' '}); //this is the state for the customer 
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks 
     useEffect(() => {
@@ -42,34 +41,6 @@ export default function ProfilePage(props) {
     )
 }
 
-//! Do we want to display their Iframe here? <div> matterport iframe<div>
 
 
-// router.post('/', (req, res) => {
-//     const { username, email, password } = req.body;
-//     db.User.findOne( // get the user info
-//       {
-//         where: {
-//           [Op.or]: [
-//             { username: req.body.username },
-//             { email: req.body.email }
-//           ]
-//         }
-//       }).then((result) => {
-//         console.log(result);
-//         if (result == null) {
-//           bcrypt.hash(req.body.password, 10, (err, hash) => {
-//             db.User.create({
-//               username,
-//               email,
-//               password: hash,
-//             }).then((result) => {
-//               res.render('index', { errorMessage: `Welcome ${result.username} Please Log In` })
-//             });
-//           });
-//         } else {
-//           res.render('index', { errorMessage: 'Username or Email Already in Database' }) //! method to search the db to find if user already exist 
-//         }
-//       })
-//   })
 
