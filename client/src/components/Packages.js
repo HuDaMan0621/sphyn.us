@@ -2,9 +2,11 @@ import React from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { colors, utilities } from '../styleVars';
+import { Link } from 'react-router-dom';
 
 const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
 const { borderRadius, animationSpeed } = utilities;
+
 
 const packages = css`
 .Packages-wrapper {
@@ -72,13 +74,15 @@ export default function Packages() {
                             <li>Test bullet</li>
                         </ul>
                     </div>
+                    <Link to="/login">Returning User Book Now</Link>
+                    <Link to="/register">New User Book Now</Link>
                 </div>
                 <div className="package">
                     <div className="heading">
                         <h3>Test Package Title</h3>
                         <p>These are some test package details</p>
                     </div>
-                    <div className="price">$150</div>
+                    <div className="price">$300</div>
                     <div className="details">
                         <ul>
                             <li>Test bullet</li>
@@ -87,13 +91,15 @@ export default function Packages() {
                             <li>Test bullet</li>
                         </ul>
                     </div>
+                    <Link to="/login">Returning User Book Now</Link>
+                    <Link to="/register">New User Book Now</Link>
                 </div>
                 <div className="package">
                     <div className="heading">
                         <h3>Test Package Title</h3>
                         <p>These are some test package details</p>
                     </div>
-                    <div className="price">$150</div>
+                    <div className="price">$500</div>
                     <div className="details">
                         <ul>
                             <li>Test bullet</li>
@@ -102,6 +108,8 @@ export default function Packages() {
                             <li>Test bullet</li>
                         </ul>
                     </div>
+                    <Link to="/login">Returning User Book Now</Link>
+                    <Link to="/register">New User Book Now</Link>
                 </div>
             </div>
         </div >

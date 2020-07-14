@@ -14,8 +14,8 @@ router.get('/', function (req, res, next) {
 });
 
 //customer profile route 
-
 router.get('/customer/profile', checkAuthentication, function (req, res) {
+  console.log('this is req.session.customer', req.session.customer)
   if (!req.session.customer) {
     res.status(401).json({
       error: 'Unauthorized User'
@@ -89,12 +89,11 @@ router.post('/login', (req, res) => {
       res.send('Username not found. Please return to previous page and try again.')
     });
 });
-//! redirect with json ?
-
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
 })
+
 
 router.delete('/customer/:id', (req, res) => {
   db.Customer.destroy({
@@ -179,6 +178,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price
   })
+
     .then((Service) => {
       res.json(
         Service

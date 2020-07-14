@@ -7,9 +7,7 @@ import { Link } from 'react-router-dom';
 export default function ProfilePage(props) {
     const [data2, setData2] = useState({error: ' '}); //this is the state for the customer 
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks 
-
     useEffect(() => {
-        // console.log(props.match.params.id)
         fetch(`/api/v1/customer/profile`)
             .then(data => data.json())
             .then(data => {
@@ -18,8 +16,7 @@ export default function ProfilePage(props) {
                 setData2(data)
                 setIsLoading(false)
             })
-            .catch (error => console.log('Please Login')
-                            
+            .catch (error => console.log('Please Login')          
             )
     },[])
 
@@ -34,15 +31,16 @@ export default function ProfilePage(props) {
                     {/* <h1>{data.last_name}</h1> */}
                     <form onSubmit={e => {
                         e.preventDefault();
-                        // fetchCustomer();
                     }}>
                     <Logout/>
                     </form>
+                    <Link to='/booking'>Book Service</Link>
                 </div>
             )}
         </div>
     )
 }
+
 
 
 

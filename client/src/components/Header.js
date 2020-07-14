@@ -3,6 +3,8 @@ import React from 'react';
 import { jsx, css } from '@emotion/core';
 import { colors, utilities } from '../styleVars';
 import Logout from './Logout';
+import { Link } from 'react-router-dom';
+
 
 const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
 const { borderRadius, animationSpeed } = utilities;
@@ -39,9 +41,8 @@ export default function Header() {
       <header>
         <h1>Sphyn</h1>
         <div className="user-links">
-          <a href="#">Sign In</a>
-          <a href="#">Sign Up</a>
-          {/* <a href="" */}
+          <Link to="/login">Sign In</Link>
+          <Link to="/register">Sign Up</Link>
         </div>
       </header>
     </div>
