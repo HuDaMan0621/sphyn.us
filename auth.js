@@ -4,8 +4,8 @@ function checkAuthentication(req, res, next) {
         next();
     } else {
         res.status(401).json({ error: 'User Not Authorized' });
+
     };
 };
 
 module.exports = checkAuthentication;
-
