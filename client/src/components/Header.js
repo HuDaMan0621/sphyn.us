@@ -13,9 +13,13 @@ const header = css`
   header {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     padding: 1rem;
     color: ${darkColor};
     align-items: center;
+    @media(min-width: 500px) {
+      flex-direction: row;
+    }
 
     .user-links {
       a {

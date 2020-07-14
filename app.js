@@ -11,8 +11,8 @@ const customer = require('./models/customer');
 const db = require('./models');
 const session = require('express-session');
 
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
-// const store = new SequelizeStore({ db: db.sequelize })
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const store = new SequelizeStore({ db: db.sequelize })
 
 var app = express();
 
@@ -22,10 +22,6 @@ app.use(
     resave: false, // update session even w/ no changes
     saveUninitialized: true, // always create a session
     store,
-    // cookie: {
-    //   secure: false, // true: only accept https req’s
-    //   maxAge: 6000000, // time in seconds
-    // },
   })
 );
 

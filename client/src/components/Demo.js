@@ -19,27 +19,24 @@ const demo = css`
 .demo-image > img {
     border-radius: ${borderRadius};
 }
-
-    
-
 `
-
 export default function Demo() {
     return (
         <div css={demo} >
             <div className='Demo'>
                 <div className="demo-image">
-                    <iframe width='853' height='480' src='https://my.matterport.com/show/?m=RJhF4E8pb7q' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
+                    <iframe width='100%' height='100%' src='https://my.matterport.com/show/?m=RJhF4E8pb7q' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
                 </div>
                 <div className="demo-image">
-                    <iframe width='853' height='480' src='https://my.matterport.com/show/?m=zimbbJHhX7y' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
+                    <iframe width='100%' height='100%' src='https://my.matterport.com/show/?m=zimbbJHhX7y' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
                 </div>
                 <div className="demo-image">
-                    <iframe width='853' height='480' src='https://my.matterport.com/show/?m=CoPaqg84uwx' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
+                    <iframe width='100%' height='100%' src='https://my.matterport.com/show/?m=CoPaqg84uwx' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
                 </div>
                 <div className="demo-image">
-                    <iframe width='853' height='480' src='http://panoramic-leather.surge.sh/' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
-            </div>  
+                    <iframe width='100%' height='100%' src='http://panoramic-leather.surge.sh/' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
+            </div> 
+            </div> 
         </div>
     )
 }

@@ -1,8 +1,9 @@
 export const colors = {
-  primaryColor: '#84a9ac',
-  darkColor: '#204051',
-  secondaryColor: '#3b6978',
-  lightColor: '#e7dfd5',
+  primaryColor: '#da464d',
+  darkColor: '#232834',
+  secondaryColor: '#3e879f',
+  lightColor: '#f1f4f2',
+  mediumColor: '#465e6b'
 }
 
 export const utilities = {
