@@ -1,8 +1,8 @@
 import React from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { colors, utilities } from '../styleVars';
-import Logout from './Logout';
+import { colors, utilities } from '../../styleVars';
+import Logout from '../Logout';
 import { Link } from 'react-router-dom';
 
 const { primaryColor, darkColor, secondaryColor, lightColor } = colors;

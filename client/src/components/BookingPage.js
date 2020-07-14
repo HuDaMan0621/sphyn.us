@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 // import Packages from './Packages';
 
+import PayPalButton from './Paypal/PayPalButton';
+
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { colors, utilities } from '../styleVars';
@@ -79,10 +81,11 @@ export default class BookingPage extends Component {
             .then(res => {
                 console.log('this is RESSSSS', res)
                 if (res.ok === false) {
-                    this.props.history.push(`/login`)  
-                } else {
-                    this.props.history.push(`/customer/profile`)
+                    this.props.history.push(`/login`)
                 }
+                // else {
+                // this.props.history.push(`/customer/profile`)
+                // }
             })
     }
 
@@ -115,55 +118,57 @@ export default class BookingPage extends Component {
                 </form>
                 {/* <Packages/> */}
                 <div css={packages} >
-            <h1>Packages</h1>
-            <div className='Packages-wrapper'>
-                <div className="package">
-                    <div className="heading">
-                        <h3>Test Package Title</h3>
-                        <p>These are some test package details</p>
+                    <h1>Packages</h1>
+                    <div className='Packages-wrapper'>
+                        <div className="package">
+                            <div className="heading">
+                                <h3>Test Package Title</h3>
+                                <p>These are some test package details</p>
+                            </div>
+                            <div className="price">$150</div>
+                            <div className="details">
+                                <ul>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="package">
+                            <div className="heading">
+                                <h3>Test Package Title</h3>
+                                <p>These are some test package details</p>
+                            </div>
+                            <div className="price">$300</div>
+                            <div className="details">
+                                <ul>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div className="package">
+                            <div className="heading">
+                                <h3>Test Package Title</h3>
+                                <p>These are some test package details</p>
+                            </div>
+                            <div className="price">$500</div>
+                            <div className="details">
+                                <ul>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                    <li>Test bullet</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div className="price">$150</div>
-                    <div className="details">
-                        <ul>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="package">
-                    <div className="heading">
-                        <h3>Test Package Title</h3>
-                        <p>These are some test package details</p>
-                    </div>
-                    <div className="price">$300</div>
-                    <div className="details">
-                        <ul>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="package">
-                    <div className="heading">
-                        <h3>Test Package Title</h3>
-                        <p>These are some test package details</p>
-                    </div>
-                    <div className="price">$500</div>
-                    <div className="details">
-                        <ul>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                            <li>Test bullet</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div >
+                </div >
+                <PayPalButton />
+                
             </div>
         )
     }
