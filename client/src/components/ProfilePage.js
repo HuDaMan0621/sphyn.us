@@ -8,11 +8,7 @@ export default function ProfilePage(props) {
 
     const [data2, setData2] = useState({error: ' '}); //this is the state for the customer 
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks 
-    // const [redirect, setRedirect] = useState(false);
-
-    // console.log(data2)
     useEffect(() => {
-        // console.log(props.match.params.id)
         fetch(`/api/v1/customer/profile`)
             .then(data => data.json())
             .then(data => {
@@ -21,8 +17,7 @@ export default function ProfilePage(props) {
                 setData2(data)
                 setIsLoading(false)
             })
-            .catch (error => console.log('Please Login')
-                            
+            .catch (error => console.log('Please Login')          
             )
     },[])
 
@@ -37,72 +32,44 @@ export default function ProfilePage(props) {
                     {/* <h1>{data.last_name}</h1> */}
                     <form onSubmit={e => {
                         e.preventDefault();
-                        // fetchCustomer();
                     }}>
                     <Logout/>
                     </form>
+                    <Link to='/booking'>Book Service</Link>
                 </div>
             )}
         </div>
     )
 }
 
-// import react from 'react-router-dom';
-
-// const id  = req.match.params;
-// console.log(id); //user id 
-
-//get the user id from redux/global state
-//once they login, 
-//get the id off use selector
-
-// {} object
-// somename() = method 
-// ({}) argument inside the method
-// [{}] 
+//! Do we want to display their Iframe here? <div> matterport iframe<div>
 
 
-   // useEffect((data) => {
-    //     isLoading ? (<div>Loading...</div>) : (
-
-    //         let didCancel = false
-    //         const fetchCustomer = async () => {
-    //             fetch(`/customer/${data.id}/profile`, {
-    //                 method: 'GET',
-    //                 body: JSON.stringify(),
-    //                 headers: {
-    //                     'Content-Type': 'application/json;charset=UTF-8'
-    //                 },
-    //             }) .then(data => {
-    //                 // this.props.history.push('/login')
-    //             })
-    //             setIsLoading(true);
-    //             const result = await axios(`/customer/${data.id}/profile`); //await takes care of .then /customer/:id/profile
-    //             // console.log(profile_data, 'this should be the result')
-    //             setData2(result.data2); setIsLoading(false);
-    //             console.log(result.data2)
-
-    //         }; fetchCustomer();
-
-    //         return () => {
-    //             didCancel = true;
-    //         };
-    //         // if (!didCancel) {
-    //         //     dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
-    //         //   }
-    //         // } catch (error) {
-    //         //   if (!didCancel) {
-    //         //     dispatch({ type: 'FETCH_FAILURE' });
-    //         //   }
-    //         // }
-    //     }, []
-    //     );  //fetching all users
-    //     )
-
-
-
-    // React.render(
-
-    //     // mountNode
-    // );
+// router.post('/', (req, res) => {
+//     const { username, email, password } = req.body;
+//     db.User.findOne( // get the user info
+//       {
+//         where: {
+//           [Op.or]: [
+//             { username: req.body.username },
+//             { email: req.body.email }
+//           ]
+//         }
+//       }).then((result) => {
+//         console.log(result);
+//         if (result == null) {
+//           bcrypt.hash(req.body.password, 10, (err, hash) => {
+//             db.User.create({
+//               username,
+//               email,
+//               password: hash,
+//             }).then((result) => {
+//               res.render('index', { errorMessage: `Welcome ${result.username} Please Log In` })
+//             });
+//           });
+//         } else {
+//           res.render('index', { errorMessage: 'Username or Email Already in Database' }) //! method to search the db to find if user already exist 
+//         }
+//       })
+//   })
 

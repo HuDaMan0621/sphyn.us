@@ -40,7 +40,6 @@ export default function Demo() {
                 <div className="demo-image">
                     <iframe width='853' height='480' src='http://panoramic-leather.surge.sh/' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
                 </div>
-                {/* iframe of matterport demo */}
             </div>
         </div>
     )
