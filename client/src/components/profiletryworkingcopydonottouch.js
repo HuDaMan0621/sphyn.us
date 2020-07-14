@@ -2,22 +2,21 @@ import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios';
 import QRCode from 'qrcode.react';
 import Logout from './Logout';
-import { Link } from 'react-router-dom';
 
 export default function ProfilePage(props) {
 
-    const [data2, setData2] = useState({error: ' '}); //this is the state for the customer 
+    const [data2, setData2] = useState(null); //this is the state for the customer 
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks 
-    // const [redirect, setRedirect] = useState(false);
+    const logout = () => {
+        localStorage.clear('token');
+    }
 
     // console.log(data2)
     useEffect(() => {
-        // console.log(props.match.params.id)
+        console.log(props.match.params.id)
         fetch(`/api/v1/customer/profile`)
             .then(data => data.json())
             .then(data => {
-                console.log('this is data')
-                console.log(data)
                 setData2(data)
                 setIsLoading(false)
             })
@@ -29,7 +28,7 @@ export default function ProfilePage(props) {
     console.log('this is data2', data2)
     return (
         <div>
-            {data2.error ? <div>User Not Authorized. <br/>Please <Link to="/login">Login</Link></div> : (
+            {isLoading ? <div>Loading...</div> : (
                 <div>
                     <QRCode value={`http://localhost:3000/customer/${data2.data.id}/showcase`} />
                     <h1>Profile Page!!!!!!</h1>

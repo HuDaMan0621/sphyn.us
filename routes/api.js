@@ -14,7 +14,7 @@ router.get('/', function (req, res, next) {
 });
 
 //customer profile route 
-router.get('/customer/profile', function (req, res) {
+router.get('/customer/profile', checkAuthentication, function (req, res) {
   console.log('this is req.session.customer', req.session.customer)
   if (!req.session.customer) {
     res.status(401).json({
@@ -32,6 +32,8 @@ router.get('/customer/profile', function (req, res) {
 //     res.json(data);
 //   })
 // });
+
+
 
 router.get('/service', checkAuthentication, (req, res,) => {
   db.Service.findByPk(req.session.customer.id)
@@ -126,6 +128,10 @@ router.post('/login', (req, res) => {
 //   req.session.destroy();
 //   res.redirect('/');
 // });
+
+router.get('/logout', (req, res) => {
+  req.session.destroy();
+})
 
 
 // router.post('/customer/:id', (req, res) => {
