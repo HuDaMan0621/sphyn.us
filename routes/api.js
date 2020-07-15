@@ -148,7 +148,7 @@ router.put('/customer/:id', (req, res) => {
 });
 
 router.get('/order/:id', function (req, res, next) {
-  db.Orders.findByPk(req.params.id
+  db.Order.findByPk(req.params.id
   ).then(res => {
     res.json();
   })
@@ -169,21 +169,38 @@ router.post('/booking', checkAuthentication, (req, res) => {
     price,
   } = req.body;
 
-  db.Services.create({
-    nick_name,
-    sq_ft,
-    address,
-    city,
-    state,
-    zipcode,
-    price
-  })
+//   router.post('/register', (req, res) => {
+//     const { name, email, phone, address } = req.body;
+//     db.User.findByPk(req.session.user.id)
+//         .then((User) => {
+//             User.createContact({
+//                 name,
+//                 email,
+//                 phone,
+//                 address,
+//             })
+//         }).then((result) => {
+//             res.redirect('/contact');
+//         });
+// });
 
-    .then((Service) => {
+  db.Customer.findByPk(req.session.customer.id)
+    .then((Customer) => {
+      Customer.createServices({
+        nick_name,
+        sq_ft,
+        address,
+        city,
+        state,
+        zipcode,
+        price
+      })
+    }).then((Service) => {
       res.json(
         Service
       ); //!customer/:id, this id is the customer in the database. 
     });
+    
 });
 
 

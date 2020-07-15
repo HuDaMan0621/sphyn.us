@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   Services.associate = function(models) {
     Services.hasOne(models.Order, {foreignKey: 'service_id'})
+    Services.belongsTo(models.Customer, {foreignKey: 'customer_id'});
   };
 
   return Services;
