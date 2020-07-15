@@ -1,8 +1,8 @@
-import React, { Component, useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
 import QRCode from 'qrcode.react';
 import Logout from './Logout';
 import { Link } from 'react-router-dom';
+import Service from './Service';
 
 export default function ProfilePage(props) {
     const [data2, setData2] = useState({error: ' '}); //this is the state for the customer 
@@ -37,6 +37,7 @@ export default function ProfilePage(props) {
                     <Link to='/booking'>Book Service</Link>
                 </div>
             )}
+            <Service />
         </div>
     )
 }

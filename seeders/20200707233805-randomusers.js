@@ -29,7 +29,7 @@ module.exports = {
       {
         completed: true,
         reschedule: false,
-        schedule_confirm: null,
+        schedule_confirm: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -76,9 +76,9 @@ module.exports = {
     }, {
       first_name: 'Sam',
       last_name: 'Sammy',
-      email: 'SamSammy@sam.com',
+      email: 'test@email.com',
       // login_name: 'ssuser',
-      login_password: 'password',
+      login_password: '$2b$10$g5HBNZzSpAI574Yk7mcvFOToqHTnWPWMHInMmxnDX6JN31XXW3Ta.',
       phone_number: '1112222',
       // address_line_1: '923 Mars Road',
       // address_line_2: 'Apt# 5A',
@@ -90,15 +90,6 @@ module.exports = {
       updatedAt: new Date(),
     }], {});
 
-    await queryInterface.bulkInsert('OrderService', [
-      {
-        customer_id: '1',
-        service_id: '1',
-        // createdAt: new Date(),
-        // updatedAt: new Date(),
-      },
-    ]
-    )
     return await queryInterface.bulkInsert('CustomerOrder', [
       {
         order_id: '1',
@@ -115,6 +106,5 @@ module.exports = {
     await queryInterface.bulkDelete('Order', null, {})
     await queryInterface.bulkDelete('Customer', null, {})
     await queryInterface.bulkDelete('CustomerOrder', null, {})
-    await queryInterface.bulkDelete('OrderService', null, {})
   }
 };

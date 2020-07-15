@@ -33,10 +33,10 @@ router.get('/customer/profile', checkAuthentication, function (req, res) {
 //   })
 // });
 
-router.get('/service', checkAuthentication, (req, res,) => {
-  db.Service.findByPk(req.session.customer.id)
+router.get('/customer/services', checkAuthentication, (req, res,) => {
+  db.Services.findByPk(req.session.customer.id, {include: db.Order})
     .then(data => {
-      res.json(data);
+      res.json(data || []);
     })
 });
 

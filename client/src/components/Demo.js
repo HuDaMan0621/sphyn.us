@@ -41,5 +41,6 @@ export default function Demo() {
                     <iframe width='853' height='480' src='http://panoramic-leather.surge.sh/' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
             </div>  
         </div>
+        </div>
     )
 }

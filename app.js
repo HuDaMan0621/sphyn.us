@@ -11,8 +11,8 @@ const customer = require('./models/customer');
 const db = require('./models');
 const session = require('express-session');
 
-// const SequelizeStore = require('connect-session-sequelize')(session.Store);
-// const store = new SequelizeStore({ db: db.sequelize })
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+const store = new SequelizeStore({ db: db.sequelize })
 
 var app = express();
 
@@ -53,7 +53,7 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-
+ console.error(err)
   // render the error page
   res.status(err.status || 500);
   res.json('error');

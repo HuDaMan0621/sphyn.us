@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.TEXT,
   }, {});
   Customer.associate = function(models) {
-  Customer.belongsToMany(models.Order, { through: 'CustomerOrder' });  
+    Customer.hasMany(models.Order, {
+      foreignKey: 'customer_id'});
 };
   return Customer;
 };

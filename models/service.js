@@ -10,8 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     price: DataTypes.INTEGER
   }, {});
   Services.associate = function(models) {
-    // Services.belongsToMany(models.Order, { through: 'OrderService' })
-    Services.hasOne(models.Order)
+    Services.hasOne(models.Order, {foreignKey: 'service_id'})
   };
 
   return Services;
