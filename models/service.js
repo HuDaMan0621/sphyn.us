@@ -7,10 +7,12 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.TEXT,
     state: DataTypes.TEXT,
     zipcode: DataTypes.TEXT,
-    price: DataTypes.INTEGER
+    price: DataTypes.INTEGER,
+    order_id: DataTypes.INTEGER,
+    customer_id: DataTypes.INTEGER,
   }, {});
   Services.associate = function(models) {
-    Services.hasOne(models.Order, {foreignKey: 'service_id'})
+    Services.hasOne(models.Order, {foreignKey: 'order_id'})
     Services.belongsTo(models.Customer, {foreignKey: 'customer_id'});
   };
 

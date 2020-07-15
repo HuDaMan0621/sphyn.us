@@ -34,7 +34,7 @@ router.get('/customer/profile', checkAuthentication, function (req, res) {
 // });
 
 router.get('/customer/services', checkAuthentication, (req, res,) => {
-  db.Services.findByPk(req.session.customer.id, {include: db.Order})
+  db.Services.findAll()
     .then(data => {
       res.json(data || []);
     })
@@ -184,18 +184,17 @@ router.post('/booking', checkAuthentication, (req, res) => {
 //         });
 // });
 
-  db.Customer.findByPk(req.session.customer.id)
-    .then((Customer) => {
-      Customer.createServices({
+  db.Services.create({
         nick_name,
         sq_ft,
         address,
         city,
         state,
         zipcode,
-        price
+        price,
+        customer_id: (req.session.customer.id)
       })
-    }).then((Service) => {
+    .then((Service) => {
       res.json(
         Service
       ); //!customer/:id, this id is the customer in the database. 

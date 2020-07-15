@@ -16,14 +16,15 @@ export default function Service() {
 
     return (
         <div>
-            {serviceInfo.map(((service, i) => {
+            <div>Service List:</div>
+            {serviceInfo.map((service, i) => {
                 return (
                     <div key={i}> 
                         <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br/></p>
                     </div>
 
                 )
-            }))}
+            })}
         </div>
     )
 }
