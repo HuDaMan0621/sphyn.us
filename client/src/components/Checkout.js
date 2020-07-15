@@ -4,7 +4,7 @@ import PayPalButton2 from './Paypal/PayPalButton';
 import PayPalButton3 from './Paypal/PayPalButton';
 import { Link } from 'react-router-dom';
 // import BookingPage from './BookingPage';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
@@ -62,28 +62,25 @@ const packages = css`
 //! can't pass the props from BookingPage
 class Checkout extends Component {
     constructor(props) {
-        console.log('this is a line 64 on Checkout')
         super(props);
         this.state = {};
-        console.log(this.state.props)
-        console.log('after this.state')
     }
 
     render() {
         return (
             <div>
                 {console.log('line 75 ')}
-                <h1>{this.props.nick_name}{this.props.price}</h1> 
-                <h1>Confirm previous selection by paying the correct package</h1>
+                {/* <h1>{this.props.nick_name}{this.props.price}</h1> */}
+                <h1>Please Review before Paying!</h1>
                 <div css={packages} >
-                    <h1>Packages</h1>
+                    {/* <h1>Packages</h1> */}
                     <div className='Packages-wrapper'>
                         <div className="package1">
                             <div className="heading">
-                                <h3>Test Package Title</h3>
-                                <p>These are some test package details</p>
+                                <h3>Nick Name: {this.props.nick_name}</h3>
+                                <p>Price $ {this.props.price}</p>
                             </div>
-                            <div className="price">{this.props.nick_name}{this.props.price} this is price</div>
+                            <div className="price"></div>
                             <div className="details">
                                 <ul>
                                     <li>Test bullet</li>
@@ -92,52 +89,19 @@ class Checkout extends Component {
                                     <li>Test bullet</li>
                                 </ul>
                             </div>
-                            <PayPalButton />
-                        </div>
-                        <div className="package2">
-                            <div className="heading">
-                                <h3>Test Package Title</h3>
-                                <p>These are some test package details</p>
-                            </div>
-                            <div className="price">$300</div>
-                            <div className="details">
-                                <ul>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                </ul>
-                            </div>
-                            <PayPalButton2 />
-                        </div>
-                        <div className="package3">
-                            <div className="heading">
-                                <h3>Test Package Title</h3>
-                                <p>These are some test package details</p>
-                            </div>
-                            <div className="price">$500</div>
-                            <div className="details">
-                                <ul>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                </ul>
-                            </div>
-                            <PayPalButton3 />
+                            <PayPalButton price={this.props.price}/>  {/* turnary operation to show payment buttons 1 2 or 3 depends on the price */}
                         </div>
                     </div>
                 </div >
-                {/* <div style={{ display: "none" }}><BookingPage/></div> */}
             </div>
         )
     }
 }
 
 
-Checkout.propTypes = {
-    nick_name: PropTypes.string,
-    price: PropTypes.number
-}; 
+// Checkout.propTypes = {
+//     nick_name: PropTypes.string,
+//     price: PropTypes.number
+// };
 
 export default Checkout;

@@ -15,12 +15,12 @@ export default class LoginSection extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-            axios.post('/api/v1/login', {
-                ...this.state,
-            }).then(res => {
-                this.setState({data:res.data})
-                this.props.history.push(`/customer/profile`)
-            })
+        axios.post('/api/v1/login', {
+            ...this.state,
+        }).then(res => {
+            this.setState({ data: res.data })
+            this.props.history.push(`/customer/profile`)
+        })
     }
 
     handleChange = (e) => {

@@ -65,9 +65,6 @@ export default class BookingPage extends Component {
             price: '',
             submitted: false,
         }
-        // this.handleFormSubmit = this.handleFormSubmit.bind(this);
-        // this.handleChange = this.handleChange.bind(this);
-        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleFormSubmit = (e) => {
@@ -84,36 +81,24 @@ export default class BookingPage extends Component {
                     this.props.history.push(`/login`)
                 }
                 else {
-                    // this.props.history.push(`/checkout`)
-                    // res.redirect(`customer/profile/checkout`)
                     this.setState({ submitted: true })
-                    console.log(this.state.price);
-                    console.log(this.state.nick_name);
                 }
             })
     }
 
     handleChange = async (e) => {
         const { name, value } = e.target;
-        // console.log('this is the string', e.target);
         await this.setState({
             [name]: value
         })
     }
 
-    // <Link to='/checkout'>Click Here to Pay</Link>
-
     render() {
-        // if (this.props.history && this.props.history.location.pathName === '/checkout') {
-        //     return <Checkout nick_name={this.state.nick_name} price={this.state.price} />
-        // }{data2.error ? <div>User Not Authorized. <br/>Please <Link to="/login">Login</Link></div> : (
-
         return (
             <div>{
                 ! this.state.submitted ? (
                     <div>
                         <form onSubmit={this.handleFormSubmit}  >
-                            {/* <div style={{ display: "none" }}><Checkout nick_name={this.state.nick_name} price={this.state.price} /></div> */}
                             <label htmlFor="nick_name">Nick Name<input className="nickName" name="nick_name" placeholder="My First House" onChange={this.handleChange} value={this.state.nick_name}></input></label>
                             <label htmlFor="sq_ft">Size of the Property in Square Foot<input className="sq_ft" name="sq_ft" placeholder="Square Foot of the House" onChange={this.handleChange} value={this.state.sq_ft}></input></label>
                             <label htmlFor="address"><input className="address" name="address" placeholder="Address of the house needs 3D service" onChange={this.handleChange} value={this.state.address}></input></label>
@@ -121,7 +106,7 @@ export default class BookingPage extends Component {
                             <label htmlFor="state"><input className="state" name="state" placeholder="State" onChange={this.handleChange} value={this.state.state}></input></label>
                             <label htmlFor="zipcode"><input className="zipcode" name="zipcode" placeholder="Zip Code" onChange={this.handleChange} value={this.state.zipcode}></input></label>
                             <label htmlFor="price">
-                                <select name="price" onChange={this.handleChange} value={this.state.price} required>
+                                <select name="price" onChange={this.handleChange} value={this.state.price} className={this.state.className} required>
                                     <option className="packageEmpty" value="" disabled>Please Select a Package</option>
                                     <option className="package1" value="150">Package 1 $150</option>
                                     <option className="package2" value="300">Package 2 $300</option>
@@ -129,10 +114,7 @@ export default class BookingPage extends Component {
                                 </select>
                             </label>
                             <button className="submit" type="submit">Click Here To Pay</button>
-
                         </form >
-                        {/* <div style={{ display: "none" }}><BookingPage/></div> */}
-                        {/* <Packages/> */}
                         < div css={packages} >
                             <h1>Packages</h1>
                             <div className='Packages-wrapper'>

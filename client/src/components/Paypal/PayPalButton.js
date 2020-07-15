@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import scriptLoader from "react-async-script-loader";
-
+import { Link } from 'react-router-dom';
 const CLIENT = {
 	sandbox:
 		process.env.REACT_APP_API_KEY_SANDBOX,
@@ -23,7 +23,7 @@ class PaypalButton extends React.Component {
 		this.state = {
 			showButtons: false,
 			loading: true,
-			paid: false
+			paid: false,
 		};
 
 		window.React = React;
@@ -59,10 +59,10 @@ class PaypalButton extends React.Component {
 		return actions.order.create({
 			purchase_units: [
 				{
-					description: +"Package 1",
+					description: + "The Package",
 					amount: {
 						currency_code: "USD",
-						value: 150
+						value: this.props.price
 					}
 				}
 			]
@@ -88,10 +88,9 @@ class PaypalButton extends React.Component {
 				{showButtons && (
 					<div>
 						<div>
-							<h2>Package 1</h2>
-							<h2>Total checkout Amount $150</h2>
+							<h2>{this.props.nick_name}</h2>
+				<h2>Total checkout Amount {this.props.value}</h2>
 						</div>
-
 						<PayPalButton
 							createOrder={(data, actions) => this.createOrder(data, actions)}
 							onApprove={(data, actions) => this.onApprove(data, actions)}
@@ -103,12 +102,13 @@ class PaypalButton extends React.Component {
 					<div className="main">
 						{/* <img alt="Mercedes G-Wagon" src={Car} /> */}
 						<h2>
-							Thank you! you just purchased Package 1. We will follow up with you!{" "}
+							{`Thank you for your purchase! We will follow up with you!`}{" "}
 							
 							<span role="img" aria-label="emoji">
 								{" "}
                 			😉
               				</span>
+							<Link to="/customer/profile"><br/>Back to Profile</Link>
 						</h2>
 					</div>
 				)}

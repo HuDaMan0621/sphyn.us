@@ -171,7 +171,6 @@ router.get('/order/:id', function (req, res, next) {
     })
 });
 
-
 router.post('/booking', checkAuthentication, (req, res) => {
   const {
     nick_name,
@@ -201,12 +200,12 @@ router.post('/booking', checkAuthentication, (req, res) => {
     });
 });
 
-router.get('/checkout', checkAuthentication, (req, res) => {
-  db.customer.findByPk()
-    .then(data => {
-      res.json(data);
-      console.log(data);
-    })
-})
+// router.get('/checkout', checkAuthentication, (req, res) => {
+//   db.customer.findByPk()
+//     .then(data => {
+//       res.json(data);
+//       console.log(data);
+//     })
+// })
 
 module.exports = router;
