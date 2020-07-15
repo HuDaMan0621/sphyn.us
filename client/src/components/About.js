@@ -4,9 +4,6 @@ import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
 import { Link } from "react-router-dom";
 
-const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
-const { borderRadius, animationSpeed } = utilities;
-
 const about = css`
   .about {
     padding: ${utilities.sectionPadding};
@@ -16,9 +13,10 @@ const about = css`
     .m-heading {
       font-size: 2rem;
       margin: auto;
-      border-bottom: solid 2px ${primaryColor};
+      border-bottom: solid 2px ${colors.primaryColor};
       width: 30%;
       margin-bottom: 2rem;
+
       @media (min-width: 768px) {
         font-size: 4rem;
       }
@@ -29,7 +27,6 @@ const about = css`
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1rem;
-        align-items: center;
         text-align: left;
       }
 
@@ -41,6 +38,10 @@ const about = css`
           margin-top: 1rem;
         }
 
+        p {
+          margin-bottom: 2rem;
+        }
+
         ul {
           text-align: left;
 
@@ -50,11 +51,11 @@ const about = css`
         }
 
         .services {
-          background: ${darkColor};
-          color: ${lightColor};
+          background: ${colors.darkColor};
+          color: ${colors.lightColor};
           padding: 1rem;
           margin-top: 2rem;
-          border-radius: ${borderRadius};
+          border-radius: ${utilities.borderRadius};
 
           h3 {
             text-align: center;
@@ -64,8 +65,8 @@ const about = css`
 
       .about-image img {
         height: 100%;
-        max-height: 500px;
-        border-radius: ${borderRadius};
+        max-height: 700px;
+        border-radius: ${utilities.borderRadius};
       }
     }
   }
@@ -94,7 +95,7 @@ export default function About() {
             </p>
           </div>
           <div className="about-image">
-            <img src="./images/about-image.jpg" alt="" />
+            <img src="./images/about.jpg" alt="" />
           </div>
         </div>
       </div>

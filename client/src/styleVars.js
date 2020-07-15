@@ -9,5 +9,5 @@ export const colors = {
 export const utilities = {
   borderRadius: "3px",
   animationSpeed: "0.3s",
-  sectionPadding: "2rem 1rem",
+  sectionPadding: "3rem 1rem",
 };
