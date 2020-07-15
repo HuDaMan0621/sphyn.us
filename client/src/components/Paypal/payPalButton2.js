@@ -16,7 +16,7 @@ const CLIENT_ID =
 
 let PayPalButton = null;
 
-class PaypalButton extends React.Component {
+class PaypalButton2 extends React.Component {
 	constructor(props) {
 		super(props);
 
@@ -59,10 +59,10 @@ class PaypalButton extends React.Component {
 		return actions.order.create({
 			purchase_units: [
 				{
-					description: +"Package 1",
+					description: +"Package 2",
 					amount: {
 						currency_code: "USD",
-						value: 150
+						value: 300
 					}
 				}
 			]
@@ -88,8 +88,8 @@ class PaypalButton extends React.Component {
 				{showButtons && (
 					<div>
 						<div>
-							<h2>Package 1</h2>
-							<h2>Total checkout Amount $150</h2>
+							<h2>Package 2 </h2>
+							<h2>Total checkout Amount $300</h2>
 						</div>
 
 						<PayPalButton
@@ -103,7 +103,7 @@ class PaypalButton extends React.Component {
 					<div className="main">
 						{/* <img alt="Mercedes G-Wagon" src={Car} /> */}
 						<h2>
-							Thank you! you just purchased Package 1. We will follow up with you!{" "}
+							Thank you! you just purchased Package 2. We will follow up with you!{" "}
 							
 							<span role="img" aria-label="emoji">
 								{" "}
@@ -117,7 +117,7 @@ class PaypalButton extends React.Component {
 	}
 }
 
-export default scriptLoader(`https://www.paypal.com/sdk/js?client-id=AZtWTqU1qtntI0ygpgR73nf0CzWA4-N71CAOVeUU2whqdiMhPGw4QnpKf0-OPd7KJIgOZ04nnjY9645z`)(PaypalButton);
+export default scriptLoader(`https://www.paypal.com/sdk/js?client-id=AZtWTqU1qtntI0ygpgR73nf0CzWA4-N71CAOVeUU2whqdiMhPGw4QnpKf0-OPd7KJIgOZ04nnjY9645z`)(PaypalButton2);
 
 // Payment Approved:  
 // {payerID: "XB2GZGFRRVQJS", orderID: "10168667T5646802D"}

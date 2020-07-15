@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-// import Packages from './Packages';
-
-import PayPalButton from './Paypal/PayPalButton';
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
 import { colors, utilities } from '../styleVars';
+import { Link } from 'react-router-dom';
+import Checkout from './Checkout';
 
 const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
 const { borderRadius, animationSpeed } = utilities;
@@ -44,8 +43,6 @@ const packages = css`
         li {
             padding: .5rem 0;
         }
-
-
         
     }
 
@@ -53,12 +50,9 @@ const packages = css`
         margin: 1rem 0;
     }
 
-    
-
 `
 
 export default class BookingPage extends Component {
-
     state = {
         nick_name: '',
         sq_ft: '',
@@ -79,13 +73,13 @@ export default class BookingPage extends Component {
             },
         })
             .then(res => {
-                console.log('this is RESSSSS', res)
                 if (res.ok === false) {
                     this.props.history.push(`/login`)
                 }
-                // else {
-                // this.props.history.push(`/customer/profile`)
-                // }
+                else {
+                    this.props.history.push(`/checkout`)
+                    // res.redirect(`customer/profile/checkout`)
+                }
             })
     }
 
@@ -96,10 +90,12 @@ export default class BookingPage extends Component {
         })
     }
 
+    // <Link to='/checkout'>Click Here to Pay</Link>
+
     render() {
         return (
             <div>
-                <form onSubmit={this.handleFormSubmit}>
+                <form onSubmit={this.handleFormSubmit} >
                     <label htmlFor="nick_name">Nick Name<input className="nickName" name="nick_name" placeholder="My First House" onChange={this.handleChange} value={this.state.nick_name}></input></label>
                     <label htmlFor="sq_ft">Size of the Property in Square Foot<input className="sq_ft" name="sq_ft" placeholder="Square Foot of the House" onChange={this.handleChange} value={this.state.sq_ft}></input></label>
                     <label htmlFor="address"><input className="address" name="address" placeholder="Address of the house needs 3D service" onChange={this.handleChange} value={this.state.address}></input></label>
@@ -114,10 +110,12 @@ export default class BookingPage extends Component {
                             <option className="package3" value="5000">Package 3 $500</option>
                         </select>
                     </label>
-                    <button className="submit" type="submit">Submit</button>
-                </form>
+                    <button className="submit" type="submit">Click Here To Pay</button>
+                    <div style={{ display: "none" }}><Checkout/></div>
+                </form >
+
                 {/* <Packages/> */}
-                <div css={packages} >
+                < div css={packages} >
                     <h1>Packages</h1>
                     <div className='Packages-wrapper'>
                         <div className="package">
@@ -167,9 +165,7 @@ export default class BookingPage extends Component {
                         </div>
                     </div>
                 </div >
-                <PayPalButton />
-                
-            </div>
+            </div >
         )
     }
 }

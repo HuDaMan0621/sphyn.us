@@ -48,44 +48,17 @@ router.post('/customer', (req, res) => {
     first_name,
     last_name,
     email,
-    // login_name,
     login_password,
     phone_number,
-    // address_line_1,
-    // address_line_2,
-    // address_line_3,
-    // city,
-    // state,
-    // zipcode
   } = req.body;
   bcrypt.hash(login_password, 10, (err, hash) => {
-    // if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
-    // if (!last_name) { res.status(400).json({ error: 'last name field is required' }) }
-    // // if (!login_name) { res.status(400).json({ error: 'login name field is required' }) }
-    // if (!login_password) { res.status(400).json({ error: 'password field is required' }) }
-    // if (!address_line_1) { res.status(400).json({ error: 'address field is required' }) }
-    // if (!city) { res.status(400).json({ error: 'city field is required' }) }
-    // if (!state) { res.status(400).json({ error: 'state field is required' }) }
-    // if (!zipcode) { res.status(400).json({ error: 'zip code field is required' }) }
     db.Customer.create({
       first_name,
       last_name,
       email,
-      // login_name,
       login_password: hash,
       phone_number: phone_number || false,
-      // address_line_1,
-      // address_line_2: address_line_2 || '',
-      // address_line_3: address_line_3 || '',
-      // city,
-      // state,
-      // zipcode
     })
-    // .then((result) => {
-    //   delete db.Customer.login_password; //! we commented these 2 lines to test the login route
-    //   req.session.db.Customer = Customer; //!
-    // res.redirect('/login');  //after registration, redirects to login page 
-    // });
   });
 });
 
@@ -133,35 +106,6 @@ router.get('/logout', (req, res) => {
   req.session.destroy();
 })
 
-
-// router.post('/customer/:id', (req, res) => {
-//   const { first_name, last_name, email, login_name, login_password, phone_number, address_line_1, address_line_2, address_line_3, city, state, zipcode } = req.body;
-//   if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
-//   if (!last_name) { res.status(400).json({ error: 'last name field is required' }) }
-//   if (!login_name) { res.status(400).json({ error: 'login name field is required' }) }
-//   if (!login_password) { res.status(400).json({ error: 'password field is required' }) }
-//   if (!address_line_1) { res.status(400).json({ error: 'address field is required' }) }
-//   if (!city) { res.status(400).json({ error: 'city field is required' }) }
-//   if (!state) { res.status(400).json({ error: 'state field is required' }) }
-//   if (!zipcode) { res.status(400).json({ error: 'zip code field is required' }) }
-//   db.Customer.create({
-//     first_name,
-//     last_name,
-//     email,
-//     login_name,
-//     login_password,
-//     phone_number: phone_number || false,
-//     address_line_1,
-//     address_line_2: address_line_2 || '',
-//     address_line_3: address_line_3 || '',
-//     city,
-//     state,
-//     zipcode,
-//   })
-//     .then(() => {
-//       res.redirect(`/login`) //TODO! we don't have this route yet, will need to create it
-//     })
-// })
 router.delete('/customer/:id', (req, res) => {
   db.Customer.destroy({
     where: {
@@ -213,31 +157,9 @@ router.put('/customer/:id', (req, res) => {
     res.redirect('/');
   });
 });
-//   db.contact.update
-//     .then(customer => {
-//       first_name,
-//         last_name,
-//         email,
+
 //         login_name,  //TODO search db to see if db is available
 //         login_password,  //TODO check to see if the password is matching
-//         phone_number,
-//         address_line_1,
-//         address_line_2,
-//         address_line_3,
-//         city,
-//         state,
-//         zipcode
-//     }
-// )},)
-// if (!first_name) { res.status(400).json({ error: 'first name field is required' }) }
-// if (!last_name) { res.status(400).json({ error: 'last name field is required' }) }
-// if (!login_name) { res.status(400).json({ error: 'login name field is required' }) }
-// if (!login_password) { res.status(400).json({ error: 'password field is required' }) }
-// if (!address_line_1) { res.status(400).json({ error: 'address field is required' }) }
-// if (!city) { res.status(400).json({ error: 'city field is required' }) }
-// if (!state) { res.status(400).json({ error: 'state field is required' }) }
-// if (!zipcode) { res.status(400).json({ error: 'zip code field is required' }) }
-//  res.json(user)
 
 router.get('/order/:id', function (req, res, next) {
   db.Orders.findByPk(req.params.id
@@ -279,5 +201,12 @@ router.post('/booking', checkAuthentication, (req, res) => {
     });
 });
 
+router.get('customer/profile/checkout', checkAuthentication, (req, res) => {
+  db.customer.findByPk()
+    .then(data => {
+      res.json(data);
+      console.log(data);
+    })
+})
 
 module.exports = router;
