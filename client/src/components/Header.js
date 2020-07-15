@@ -20,11 +20,12 @@ const header = css`
     .user-links {
       a {
         color: ${colors.darkColor};
-        padding: 0 0.5rem;
+        padding: 0.25rem 0.5rem;
         transition: all ${utilities.animationSpeed} ease-in-out;
 
         &:hover {
-          color: ${colors.primaryColor};
+          color: ${colors.secondaryColor};
+          border-bottom: 1px solid ${colors.darkColor};
         }
       }
     }

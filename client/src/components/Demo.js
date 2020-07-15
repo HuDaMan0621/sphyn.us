@@ -3,13 +3,10 @@ import React from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
 
-const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
-const { borderRadius, animationSpeed } = utilities;
-
 const demo = css`
   .demo {
     padding: ${utilities.sectionPadding};
-    background: ${darkColor};
+    background: ${colors.darkColor};
     @media (min-width: 768px) {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
