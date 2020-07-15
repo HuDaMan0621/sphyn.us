@@ -201,7 +201,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     });
 });
 
-router.get('customer/profile/checkout', checkAuthentication, (req, res) => {
+router.get('/checkout', checkAuthentication, (req, res) => {
   db.customer.findByPk()
     .then(data => {
       res.json(data);

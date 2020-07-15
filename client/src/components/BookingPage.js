@@ -53,14 +53,21 @@ const packages = css`
 `
 
 export default class BookingPage extends Component {
-    state = {
-        nick_name: '',
-        sq_ft: '',
-        address: '',
-        city: '',
-        state: '',
-        zipcode: '',
-        price: '',
+    constructor(props) {
+        super(props);
+        this.state = {
+            nick_name: '',
+            sq_ft: '',
+            address: '',
+            city: '',
+            state: '',
+            zipcode: '',
+            price: '',
+            submitted: false,
+        }
+        // this.handleFormSubmit = this.handleFormSubmit.bind(this);
+        // this.handleChange = this.handleChange.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleFormSubmit = (e) => {
@@ -77,15 +84,19 @@ export default class BookingPage extends Component {
                     this.props.history.push(`/login`)
                 }
                 else {
-                    this.props.history.push(`/checkout`)
+                    // this.props.history.push(`/checkout`)
                     // res.redirect(`customer/profile/checkout`)
+                    this.setState({ submitted: true })
+                    console.log(this.state.price);
+                    console.log(this.state.nick_name);
                 }
             })
     }
 
-    handleChange = (e) => {
+    handleChange = async (e) => {
         const { name, value } = e.target;
-        this.setState({
+        // console.log('this is the string', e.target);
+        await this.setState({
             [name]: value
         })
     }
@@ -93,79 +104,86 @@ export default class BookingPage extends Component {
     // <Link to='/checkout'>Click Here to Pay</Link>
 
     render() {
-        return (
-            <div>
-                <form onSubmit={this.handleFormSubmit} >
-                    <label htmlFor="nick_name">Nick Name<input className="nickName" name="nick_name" placeholder="My First House" onChange={this.handleChange} value={this.state.nick_name}></input></label>
-                    <label htmlFor="sq_ft">Size of the Property in Square Foot<input className="sq_ft" name="sq_ft" placeholder="Square Foot of the House" onChange={this.handleChange} value={this.state.sq_ft}></input></label>
-                    <label htmlFor="address"><input className="address" name="address" placeholder="Address of the house needs 3D service" onChange={this.handleChange} value={this.state.address}></input></label>
-                    <label htmlFor="city"><input className="city" name="city" placeholder="City" onChange={this.handleChange} value={this.state.city}></input></label>
-                    <label htmlFor="state"><input className="state" name="state" placeholder="State" onChange={this.handleChange} value={this.state.state}></input></label>
-                    <label htmlFor="zipcode"><input className="zipcode" name="zipcode" placeholder="Zip Code" onChange={this.handleChange} value={this.state.zipcode}></input></label>
-                    <label htmlFor="price">
-                        <select name="price" onChange={this.handleChange} value={this.state.price} required>
-                            <option className="packageEmpty" value="" disabled>Please Select a Package</option>
-                            <option className="package1" value="150">Package 1 $150</option>
-                            <option className="package2" value="300">Package 2 $300</option>
-                            <option className="package3" value="5000">Package 3 $500</option>
-                        </select>
-                    </label>
-                    <button className="submit" type="submit">Click Here To Pay</button>
-                    <div style={{ display: "none" }}><Checkout/></div>
-                </form >
+        // if (this.props.history && this.props.history.location.pathName === '/checkout') {
+        //     return <Checkout nick_name={this.state.nick_name} price={this.state.price} />
+        // }{data2.error ? <div>User Not Authorized. <br/>Please <Link to="/login">Login</Link></div> : (
 
-                {/* <Packages/> */}
-                < div css={packages} >
-                    <h1>Packages</h1>
-                    <div className='Packages-wrapper'>
-                        <div className="package">
-                            <div className="heading">
-                                <h3>Test Package Title</h3>
-                                <p>These are some test package details</p>
+        return (
+            <div>{
+                ! this.state.submitted ? (
+                    <div>
+                        <form onSubmit={this.handleFormSubmit}  >
+                            {/* <div style={{ display: "none" }}><Checkout nick_name={this.state.nick_name} price={this.state.price} /></div> */}
+                            <label htmlFor="nick_name">Nick Name<input className="nickName" name="nick_name" placeholder="My First House" onChange={this.handleChange} value={this.state.nick_name}></input></label>
+                            <label htmlFor="sq_ft">Size of the Property in Square Foot<input className="sq_ft" name="sq_ft" placeholder="Square Foot of the House" onChange={this.handleChange} value={this.state.sq_ft}></input></label>
+                            <label htmlFor="address"><input className="address" name="address" placeholder="Address of the house needs 3D service" onChange={this.handleChange} value={this.state.address}></input></label>
+                            <label htmlFor="city"><input className="city" name="city" placeholder="City" onChange={this.handleChange} value={this.state.city}></input></label>
+                            <label htmlFor="state"><input className="state" name="state" placeholder="State" onChange={this.handleChange} value={this.state.state}></input></label>
+                            <label htmlFor="zipcode"><input className="zipcode" name="zipcode" placeholder="Zip Code" onChange={this.handleChange} value={this.state.zipcode}></input></label>
+                            <label htmlFor="price">
+                                <select name="price" onChange={this.handleChange} value={this.state.price} required>
+                                    <option className="packageEmpty" value="" disabled>Please Select a Package</option>
+                                    <option className="package1" value="150">Package 1 $150</option>
+                                    <option className="package2" value="300">Package 2 $300</option>
+                                    <option className="package3" value="500">Package 3 $500</option>
+                                </select>
+                            </label>
+                            <button className="submit" type="submit">Click Here To Pay</button>
+
+                        </form >
+                        {/* <div style={{ display: "none" }}><BookingPage/></div> */}
+                        {/* <Packages/> */}
+                        < div css={packages} >
+                            <h1>Packages</h1>
+                            <div className='Packages-wrapper'>
+                                <div className="package">
+                                    <div className="heading">
+                                        <h3>Test Package Title</h3>
+                                        <p>These are some test package details</p>
+                                    </div>
+                                    <div className="price">$150</div>
+                                    <div className="details">
+                                        <ul>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="package">
+                                    <div className="heading">
+                                        <h3>Test Package Title</h3>
+                                        <p>These are some test package details</p>
+                                    </div>
+                                    <div className="price">$300</div>
+                                    <div className="details">
+                                        <ul>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div className="package">
+                                    <div className="heading">
+                                        <h3>Test Package Title</h3>
+                                        <p>These are some test package details</p>
+                                    </div>
+                                    <div className="price">$500</div>
+                                    <div className="details">
+                                        <ul>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                            <li>Test bullet</li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="price">$150</div>
-                            <div className="details">
-                                <ul>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="package">
-                            <div className="heading">
-                                <h3>Test Package Title</h3>
-                                <p>These are some test package details</p>
-                            </div>
-                            <div className="price">$300</div>
-                            <div className="details">
-                                <ul>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div className="package">
-                            <div className="heading">
-                                <h3>Test Package Title</h3>
-                                <p>These are some test package details</p>
-                            </div>
-                            <div className="price">$500</div>
-                            <div className="details">
-                                <ul>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div >
-            </div >
+                        </div ></div>) : <Checkout nick_name={this.state.nick_name} price={this.state.price} />
+            } </div>
         )
     }
 }

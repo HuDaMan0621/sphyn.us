@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-// import Recipes from './components/Recipes';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import Register from './components/RegisterPage';
 import ProfilePage from './components/ProfilePage';
@@ -16,14 +15,10 @@ function App() {
       <div className="App">
         <Switch>
           <Route path="/" exact component={LandingPage} />
-          <Route path="/customer/profile"  component={ProfilePage} />
+          <Route path="/customer/profile" component={ProfilePage} />
           <Route path="/register" component={RegisterSection} />
           <Route path="/login" component={LoginSection} />
           <Route path="/booking" component={BookingPage} />
-          <Route path="/checkout" component={Checkout} />
-          {/* <Route path="/customer" com */}
-
-          
         </Switch>
       </div>
     </BrowserRouter>

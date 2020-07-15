@@ -3,6 +3,8 @@ import PayPalButton from './Paypal/PayPalButton';
 import PayPalButton2 from './Paypal/PayPalButton';
 import PayPalButton3 from './Paypal/PayPalButton';
 import { Link } from 'react-router-dom';
+// import BookingPage from './BookingPage';
+import PropTypes from 'prop-types';
 
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
@@ -57,22 +59,31 @@ const packages = css`
     
 
 `
+//! can't pass the props from BookingPage
+class Checkout extends Component {
+    constructor(props) {
+        console.log('this is a line 64 on Checkout')
+        super(props);
+        this.state = {};
+        console.log(this.state.props)
+        console.log('after this.state')
+    }
 
-
-export default class Checkout extends Component {
     render() {
         return (
             <div>
+                {console.log('line 75 ')}
+                <h1>{this.props.nick_name}{this.props.price}</h1> 
                 <h1>Confirm previous selection by paying the correct package</h1>
                 <div css={packages} >
                     <h1>Packages</h1>
                     <div className='Packages-wrapper'>
-                        <div className="package">
+                        <div className="package1">
                             <div className="heading">
                                 <h3>Test Package Title</h3>
                                 <p>These are some test package details</p>
                             </div>
-                            <div className="price">$150</div>
+                            <div className="price">{this.props.nick_name}{this.props.price} this is price</div>
                             <div className="details">
                                 <ul>
                                     <li>Test bullet</li>
@@ -83,7 +94,7 @@ export default class Checkout extends Component {
                             </div>
                             <PayPalButton />
                         </div>
-                        <div className="package">
+                        <div className="package2">
                             <div className="heading">
                                 <h3>Test Package Title</h3>
                                 <p>These are some test package details</p>
@@ -99,7 +110,7 @@ export default class Checkout extends Component {
                             </div>
                             <PayPalButton2 />
                         </div>
-                        <div className="package">
+                        <div className="package3">
                             <div className="heading">
                                 <h3>Test Package Title</h3>
                                 <p>These are some test package details</p>
@@ -117,10 +128,16 @@ export default class Checkout extends Component {
                         </div>
                     </div>
                 </div >
-
-
+                {/* <div style={{ display: "none" }}><BookingPage/></div> */}
             </div>
-
         )
     }
 }
+
+
+Checkout.propTypes = {
+    nick_name: PropTypes.string,
+    price: PropTypes.number
+}; 
+
+export default Checkout;
