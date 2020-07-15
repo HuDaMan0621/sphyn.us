@@ -17,10 +17,7 @@ const login = css`
     border-bottom: solid 2px ${colors.primaryColor};
     width: 30%;
     margin-bottom: 2rem;
-
-    @media (min-width: 768px) {
-      font-size: 4rem;
-    }
+    color: ${colors.lightColor};
   }
 
   form {
