@@ -8,6 +8,7 @@ const register = css`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin: 1rem;
 
   .m-heading {
     font-size: 2rem;
@@ -31,7 +32,11 @@ const register = css`
     select {
       display: block;
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.5rem 0;
+    }
+
+    option {
+        background: red;
     }
 
     button {
@@ -221,10 +226,18 @@ export default class BookingPage extends Component {
           <div className="price">$150</div>
           <div className="details">
             <ul>
-              <li>Test bullet</li>
-              <li>Test bullet</li>
-              <li>Test bullet</li>
-              <li>Test bullet</li>
+              <li>
+                <span>-</span> Test bullet
+              </li>
+              <li>
+                <span>-</span> Test bullet
+              </li>
+              <li>
+                <span>-</span> Test bullet
+              </li>
+              <li>
+                <span>-</span> Test bullet
+              </li>
             </ul>
           </div>
         </div>
