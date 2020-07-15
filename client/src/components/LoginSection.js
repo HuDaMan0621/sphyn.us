@@ -12,7 +12,7 @@ const login = css`
   margin-top: 5vh;
 
   .m-heading {
-    font-size: 2rem;
+    font-size: 1.3rem;
     margin: auto;
     border-bottom: solid 2px ${colors.primaryColor};
     width: 30%;
@@ -32,7 +32,7 @@ const login = css`
     label {
       display: block;
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.5rem 0;
     }
 
     button {
