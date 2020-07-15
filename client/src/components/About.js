@@ -1,5 +1,5 @@
-import React from "react";
 /** @jsx jsx */
+import React from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
 import { Link } from "react-router-dom";
