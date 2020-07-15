@@ -31,7 +31,7 @@ const login = css`
     label {
       display: block;
       width: 100%;
-      padding: 0.5rem;
+      padding: 0.5rem 0;
     }
 
     button {
