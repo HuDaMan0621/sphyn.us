@@ -61,63 +61,64 @@ const login = css`
 `;
 
 export default class LoginSection extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      login_password: "",
-      data: {},
+    constructor(props) {
+        super(props);
+        this.state = {
+            email: "",
+            login_password: "",
+            data: {},
+        };
+    }
+
+
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        axios
+            .post("/api/v1/login", {
+                ...this.state,
+            })
+            .then((res) => {
+                this.setState({ data: res.data });
+                this.props.history.push(`/customer/profile`);
+            });
     };
-  }
 
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    axios
-      .post("/api/v1/login", {
-        ...this.state,
-      })
-      .then((res) => {
-        this.setState({ data: res.data });
-        this.props.history.push(`/customer/profile`);
-      });
-  };
+    handleChange = (e) => {
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value,
+        });
+    };
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  render() {
-    return (
-      <div css={login}>
-        <form onSubmit={this.handleFormSubmit}>
-          <h3 className="m-heading">Sign In</h3>
-          <label htmlFor="email">
-            <input
-              htmlFor="email"
-              className="email"
-              name="email"
-              placeholder="Email"
-              onChange={this.handleChange}
-              value={this.state.email}
-            ></input>
-          </label>
-          <label htmlFor="loginPassword">
-            <input
-              className="loginPassword"
-              name="login_password"
-              placeholder="Password"
-              onChange={this.handleChange}
-              value={this.state.login_password}
-            ></input>
-          </label>
-          <button className="submit" type="submit">
-            Submit
+    render() {
+        return (
+            <div css={login}>
+                <form onSubmit={this.handleFormSubmit}>
+                    <h3 className="m-heading">Sign In</h3>
+                    <label htmlFor="email">
+                        <input
+                            htmlFor="email"
+                            className="email"
+                            name="email"
+                            placeholder="Email"
+                            onChange={this.handleChange}
+                            value={this.state.email}
+                        ></input>
+                    </label>
+                    <label htmlFor="loginPassword">
+                        <input
+                            className="loginPassword"
+                            name="login_password"
+                            placeholder="Password"
+                            onChange={this.handleChange}
+                            value={this.state.login_password}
+                        ></input>
+                    </label>
+                    <button className="submit" type="submit">
+                        Submit
           </button>
-        </form>
-      </div>
-    );
-  }
+                </form>
+            </div>
+        );
+    }
 }

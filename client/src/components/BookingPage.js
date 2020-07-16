@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
+import Checkout from "./Checkout";
 
 const register = css`
   display: flex;
@@ -101,43 +102,51 @@ const register = css`
 `;
 
 export default class BookingPage extends Component {
-  state = {
-    nick_name: "",
-    sq_ft: "",
-    address: "",
-    city: "",
-    state: "",
-    zipcode: "",
-    price: "",
-  };
+    constructor(props) {
+        super(props);
+        this.state = {
+            nick_name: '',
+            sq_ft: '',
+            address: '',
+            city: '',
+            state: '',
+            zipcode: '',
+            price: '',
+            submitted: false,
+        }
+    }
 
-  handleFormSubmit = (e) => {
-    e.preventDefault();
-    fetch("/api/v1/booking", {
-      method: "POST",
-      body: JSON.stringify(this.state),
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    }).then((res) => {
-      console.log("this is RESSSSS", res);
-      if (res.ok === false) {
-        this.props.history.push(`/login`);
-      } else {
-        this.props.history.push(`/customer/profile`);
-      }
-    });
-  };
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        fetch('/api/v1/booking', {
+            method: 'POST',
+            body: JSON.stringify(this.state),
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8'
+            },
+        })
+            .then(res => {
+                if (res.ok === false) {
+                    this.props.history.push(`/login`)
+                }
+                else {
+                    this.setState({ submitted: true })
+                }
+            })
+    }
 
-  handleChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  };
+
+    handleChange = async (e) => {
+        const { name, value } = e.target;
+        await this.setState({
+            [name]: value
+        })
+    }
 
   render() {
     return (
+        <div >{
+            !this.state.submitted ? (
       <div css={register}>
         <form onSubmit={this.handleFormSubmit}>
           <label htmlFor="nick_name">
@@ -242,6 +251,6 @@ export default class BookingPage extends Component {
           </div>
         </div>
       </div>
-    );
+    ) : <Checkout nick_name={this.state.nick_name} price={this.state.price} />}</div>);
   }
 }

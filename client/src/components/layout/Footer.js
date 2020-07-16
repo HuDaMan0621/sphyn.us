@@ -1,7 +1,7 @@
 import React from "react";
 /** @jsx jsx */
 import { jsx, css } from "@emotion/core";
-import { colors, utilities } from "../styleVars";
+import { colors, utilities } from "../../styleVars";
 
 const footer = css`
   display: grid;

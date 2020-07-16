@@ -22,7 +22,6 @@ export default function Service() {
                     <div key={i}> 
                         <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br/></p>
                     </div>
-
                 )
             })}
         </div>
