@@ -2,13 +2,18 @@
 import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
+import { Link } from "react-router-dom";
 
 const login = css`
   display: flex;
   height: 100vh;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   margin-top: 5vh;
+
+  a {
+    color: ${colors.darkColor};
+  }
 
   .m-heading {
     font-size: 2rem;
@@ -142,6 +147,7 @@ export default class RegisterSection extends Component {
             Submit
           </button>
         </form>
+        <Link to="/">Back to home</Link>
       </div>
     );
   }
