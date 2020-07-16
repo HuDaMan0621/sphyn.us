@@ -82,6 +82,7 @@ const packages = css`
 
           a {
             color: ${colors.darkColor};
+            display: block;
           }
         }
 

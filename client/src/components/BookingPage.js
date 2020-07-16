@@ -6,6 +6,7 @@ import Checkout from "./Checkout";
 import Package1 from "./packageDetails/Package1";
 import Package2 from "./packageDetails/Package2";
 import Package3 from "./packageDetails/Package3";
+import { Link } from "react-router-dom";
 
 const register = css`
   display: flex;
@@ -14,7 +15,12 @@ const register = css`
   align-items: center;
   margin: 1rem;
 
-    .m-heading {
+  a {
+    color: ${colors.darkColor};
+    margin-top: 2rem;
+  }
+
+  .m-heading {
     font-size: 2rem;
     margin: auto;
     border-bottom: solid 2px ${colors.primaryColor};
@@ -239,17 +245,16 @@ export default class BookingPage extends Component {
                 >
                   <option className="packageEmpty" value="" disabled>
                     Please Select a Package
-              </option>
+                  </option>
                   <option className="package1" value="150">
                     Package 1 $150
-              </option>
+                  </option>
                   <option className="package2" value="300">
                     Package 2 $300
-              </option>
-                  <option className="package3" value="5000">
+                  </option>
+                  <option className="package3" value="500">
                     Package 3 $500
-              </option>
-
+                  </option>
                 </select>
               </label>
               <button className="submit" type="submit">
@@ -261,6 +266,7 @@ export default class BookingPage extends Component {
               <div className="price">${this.state.price}</div>
               <div className="details">{this.state.packageDetails}</div>
             </div>
+            <Link to="/">Back to home</Link>
           </div>
         ) : (
           <Checkout nick_name={this.state.nick_name} price={this.state.price} />
