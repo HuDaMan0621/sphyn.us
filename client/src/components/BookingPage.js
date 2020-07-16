@@ -116,7 +116,7 @@ export default class BookingPage extends Component {
       price: "",
       submitted: false,
       package: "Package",
-      packageDetails: "",
+      packageDetails: "Waiting for package selection",
     };
   }
 
