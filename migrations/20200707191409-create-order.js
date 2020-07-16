@@ -9,16 +9,27 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       completed: {
-        type: Sequelize.BOOLEAN
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       reschedule: {
-        type: Sequelize.BOOLEAN
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
       schedule_confirm: {
-        type: Sequelize.BOOLEAN
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       },
-      service_id:{
-        type: Sequelize.INTEGER
+      payment_received: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      service_date: {
+        type: Sequelize.DATE
       },
       createdAt: {
         allowNull: false,

@@ -1,56 +1,105 @@
-import React, { Component } from 'react'
-
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { colors, utilities } from '../styleVars';
-import { Link } from 'react-router-dom';
-import Checkout from './Checkout';
+import React, { Component } from "react";
+import { jsx, css } from "@emotion/core";
+import { colors, utilities } from "../styleVars";
+import Checkout from "./Checkout";
 
-const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
-const { borderRadius, animationSpeed } = utilities;
+const register = css`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
 
-const packages = css`
-.Packages-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 1rem;
-    padding: 0 2rem;
-    justify-content: end;
-    
-}
+  .m-heading {
+    font-size: 2rem;
+    margin: auto;
+    border-bottom: solid 2px ${colors.primaryColor};
+    width: 30%;
+    margin-bottom: 2rem;
+    color: ${colors.lightColor};
+  }
+
+  form {
+    background: ${colors.secondaryColor};
+    padding: 1rem;
+    width: 100%;
+    max-width: 600px;
+    margin: 1rem;
+    border-radius: ${utilities.borderRadius};
+
+    input,
+    label,
+    select {
+      display: block;
+      width: 100%;
+      padding: 0.5rem 0;
+    }
+
+    option {
+        background: red;
+    }
+
+    button {
+      display: block;
+      margin: auto;
+      margin: 0.25rem auto;
+      padding: 0.5rem;
+      width: 100%;
+      background: ${colors.primaryColor};
+      border: none;
+      cursor: pointer;
+      border-radius: ${utilities.borderRadius};
+      transition: all ${utilities.animationSpeed} ease;
+
+      &:hover {
+        background: transparent;
+        border: 1px solid ${colors.primaryColor};
+        color: ${colors.lightColor};
+      }
+
+      a {
+        color: ${colors.lightColor};
+      }
+    }
+  }
 
     .package {
-        border: 1px solid ${lightColor};
-        border-radius: ${borderRadius};
-    }
+      border: 1px solid ${colors.darkColor};
+      border-radius: ${utilities.borderRadius};
+      width: 100%;
+      max-width: 600px;
 
-    .heading {
-        background-color: ${darkColor};
-        color: ${lightColor}
-    }
+      .heading {
+        background: ${colors.secondaryColor};
+        color: ${colors.lightColor};
+        padding: 1rem;
+      }
 
-    .price {
-        border-bottom: 1px solid ${lightColor};
-        font-size: 3em;
-    }
+      .price {
+        font-size: 2.5rem;
+        border-bottom: 1px solid ${colors.mediumColor};
+        padding: 0.5rem;
+      }
 
-    .details {
-        //  background-color: ${lightColor};
-        text-align: left;
-        // color: ${secondaryColor};
-        padding: 1rem .5rem;
+      .details {
+        padding: 1rem;
 
-        li {
-            padding: .5rem 0;
+        ul {
+          text-align: left;
+
+          li {
+            padding: 0.25rem 0;
+
+            span {
+              color: ${colors.primaryColor};
+            }
+          }
         }
-        
+      }
     }
-
-    h1 {
-        margin: 1rem 0;
-    }
-
-`
+  }
+`;
 
 export default class BookingPage extends Component {
     constructor(props) {
@@ -86,6 +135,7 @@ export default class BookingPage extends Component {
             })
     }
 
+
     handleChange = async (e) => {
         const { name, value } = e.target;
         await this.setState({
@@ -93,79 +143,114 @@ export default class BookingPage extends Component {
         })
     }
 
-    render() {
-        return (
-            <div>{
-                !this.state.submitted ? (
-                    <div>
-                        <form onSubmit={this.handleFormSubmit}  >
-                            <label htmlFor="nick_name">Nick Name<input className="nickName" name="nick_name" placeholder="My First House" onChange={this.handleChange} value={this.state.nick_name}></input></label>
-                            <label htmlFor="sq_ft">Size of the Property in Square Foot<input className="sq_ft" name="sq_ft" placeholder="Square Foot of the House" onChange={this.handleChange} value={this.state.sq_ft}></input></label>
-                            <label htmlFor="address"><input className="address" name="address" placeholder="Address of the house needs 3D service" onChange={this.handleChange} value={this.state.address}></input></label>
-                            <label htmlFor="city"><input className="city" name="city" placeholder="City" onChange={this.handleChange} value={this.state.city}></input></label>
-                            <label htmlFor="state"><input className="state" name="state" placeholder="State" onChange={this.handleChange} value={this.state.state}></input></label>
-                            <label htmlFor="zipcode"><input className="zipcode" name="zipcode" placeholder="Zip Code" onChange={this.handleChange} value={this.state.zipcode}></input></label>
-                            <label htmlFor="price">
-                                <select name="price" onChange={this.handleChange} value={this.state.price} className={this.state.className} required>
-                                    <option className="packageEmpty" value="" disabled>Please Select a Package</option>
-                                    <option className="package1" value="150">Package 1 $150</option>
-                                    <option className="package2" value="300">Package 2 $300</option>
-                                    <option className="package3" value="500">Package 3 $500</option>
-                                </select>
-                            </label>
-                            <button className="submit" type="submit">Click Here To Pay</button>
-                        </form >
-                        < div css={packages} >
-                            <h1>Packages</h1>
-                            <div className='Packages-wrapper'>
-                                <div className="package">
-                                    <div className="heading">
-                                        <h3>Test Package Title</h3>
-                                        <p>These are some test package details</p>
-                                    </div>
-                                    <div className="price">$150</div>
-                                    <div className="details">
-                                        <ul>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="package">
-                                    <div className="heading">
-                                        <h3>Test Package Title</h3>
-                                        <p>These are some test package details</p>
-                                    </div>
-                                    <div className="price">$300</div>
-                                    <div className="details">
-                                        <ul>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div className="package">
-                                    <div className="heading">
-                                        <h3>Test Package Title</h3>
-                                        <p>These are some test package details</p>
-                                    </div>
-                                    <div className="price">$500</div>
-                                    <div className="details">
-                                        <ul>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                            <li>Test bullet</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div ></div>) : <Checkout nick_name={this.state.nick_name} price={this.state.price} />
-            } </div>
-        )
-    }
+  render() {
+    return (
+        <div >{
+            !this.state.submitted ? (
+      <div css={register}>
+        <form onSubmit={this.handleFormSubmit}>
+          <label htmlFor="nick_name">
+            <input
+              className="nickName"
+              name="nick_name"
+              placeholder="Enter name of home"
+              onChange={this.handleChange}
+              value={this.state.nick_name}
+            ></input>
+          </label>
+          <label htmlFor="sq_ft">
+            <input
+              className="sq_ft"
+              name="sq_ft"
+              placeholder="Square Foot of the House"
+              onChange={this.handleChange}
+              value={this.state.sq_ft}
+            ></input>
+          </label>
+          <label htmlFor="address">
+            <input
+              className="address"
+              name="address"
+              placeholder="Address of the house needs 3D service"
+              onChange={this.handleChange}
+              value={this.state.address}
+            ></input>
+          </label>
+          <label htmlFor="city">
+            <input
+              className="city"
+              name="city"
+              placeholder="City"
+              onChange={this.handleChange}
+              value={this.state.city}
+            ></input>
+          </label>
+          <label htmlFor="state">
+            <input
+              className="state"
+              name="state"
+              placeholder="State"
+              onChange={this.handleChange}
+              value={this.state.state}
+            ></input>
+          </label>
+          <label htmlFor="zipcode">
+            <input
+              className="zipcode"
+              name="zipcode"
+              placeholder="Zip Code"
+              onChange={this.handleChange}
+              value={this.state.zipcode}
+            ></input>
+          </label>
+          <label htmlFor="price">
+            <select
+              name="price"
+              onChange={this.handleChange}
+              value={this.state.price}
+              required
+            >
+              <option className="packageEmpty" value="" disabled>
+                Please Select a Package
+              </option>
+              <option className="package1" value="150">
+                Package 1 $150
+              </option>
+              <option className="package2" value="300">
+                Package 2 $300
+              </option>
+              <option className="package3" value="5000">
+                Package 3 $500
+              </option>
+            </select>
+          </label>
+          <button className="submit" type="submit">
+            Submit
+          </button>
+        </form>
+        <div className="package">
+          <div className="heading">
+            <h3>Package</h3>
+          </div>
+          <div className="price">$150</div>
+          <div className="details">
+            <ul>
+              <li>
+                <span>-</span> Test bullet
+              </li>
+              <li>
+                <span>-</span> Test bullet
+              </li>
+              <li>
+                <span>-</span> Test bullet
+              </li>
+              <li>
+                <span>-</span> Test bullet
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    ) : <Checkout nick_name={this.state.nick_name} price={this.state.price} />}</div>);
+  }
 }

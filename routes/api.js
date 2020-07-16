@@ -33,12 +33,10 @@ router.get('/customer/profile', checkAuthentication, function (req, res) {
 //   })
 // });
 
-
-
-router.get('/service', checkAuthentication, (req, res,) => {
-  db.Service.findByPk(req.session.customer.id)
+router.get('/customer/services', checkAuthentication, (req, res,) => {
+  db.Services.findAll()
     .then(data => {
-      res.json(data);
+      res.json(data || []);
     })
 });
 
@@ -162,7 +160,7 @@ router.put('/customer/:id', (req, res) => {
 //         login_password,  //TODO check to see if the password is matching
 
 router.get('/order/:id', function (req, res, next) {
-  db.Orders.findByPk(req.params.id
+  db.Order.findByPk(req.params.id
   ).then(res => {
     res.json();
   })
@@ -182,22 +180,37 @@ router.post('/booking', checkAuthentication, (req, res) => {
     price,
   } = req.body;
 
+//   router.post('/register', (req, res) => {
+//     const { name, email, phone, address } = req.body;
+//     db.User.findByPk(req.session.user.id)
+//         .then((User) => {
+//             User.createContact({
+//                 name,
+//                 email,
+//                 phone,
+//                 address,
+//             })
+//         }).then((result) => {
+//             res.redirect('/contact');
+//         });
+// });
+
   db.Services.create({
-    nick_name,
-    sq_ft,
-    address,
-    city,
-    state,
-    zipcode,
-    price
-  })
-    // const { id } = req.params;
-    // db.CustomerOrder.findOne({ where: { customer_id : id}})
+        nick_name,
+        sq_ft,
+        address,
+        city,
+        state,
+        zipcode,
+        price,
+        customer_id: (req.session.customer.id)
+      })
     .then((Service) => {
       res.json(
         Service
       ); //!customer/:id, this id is the customer in the database. 
     });
+    
 });
 
 // router.get('/checkout', checkAuthentication, (req, res) => {

@@ -1,42 +1,39 @@
-import React from 'react';
+import React from "react";
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { colors, utilities } from '../../styleVars';
-import Logout from '../Logout';
-import { Link } from 'react-router-dom';
-
-const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
-const { borderRadius, animationSpeed } = utilities;
+import { jsx, css } from "@emotion/core";
+import { colors, utilities } from "../../styleVars";
+import { Link } from "react-router-dom";
 
 const header = css`
   header {
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
     padding: 1rem;
-    color: ${darkColor};
+    color: ${colors.darkColor};
     align-items: center;
+    @media (min-width: 500px) {
+      flex-direction: row;
+    }
 
     .user-links {
       a {
-        color: ${darkColor};
-        padding: 0 0.5rem;
-        transition: all ${animationSpeed} ease-in-out;
+        color: ${colors.darkColor};
+        padding: 0.25rem 0.5rem;
+        transition: all ${utilities.animationSpeed} ease-in-out;
 
         &:hover {
-          color: ${primaryColor};
+          color: ${colors.secondaryColor};
+          border-bottom: 1px solid ${colors.darkColor};
         }
       }
     }
   }
-`
-
-//! we need a state to know if we are login or not
-//! a hook useEffect? set if "logged in" to true 
-//
+`;
 
 export default function Header() {
   return (
-    <div css={header} className='header'>
+    <div css={header} className="header">
       <header>
         <h1>Sphyn</h1>
         <div className="user-links">
@@ -45,5 +42,5 @@ export default function Header() {
         </div>
       </header>
     </div>
-  )
+  );
 }
