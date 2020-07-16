@@ -5,7 +5,6 @@ import Logout from './Logout';
 import { Link } from 'react-router-dom';
 
 export default function ProfilePage(props) {
-
     const [data2, setData2] = useState({error: ' '}); //this is the state for the customer 
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks 
     useEffect(() => {

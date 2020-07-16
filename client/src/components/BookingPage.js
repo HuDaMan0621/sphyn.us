@@ -96,7 +96,7 @@ export default class BookingPage extends Component {
     render() {
         return (
             <div>{
-                ! this.state.submitted ? (
+                !this.state.submitted ? (
                     <div>
                         <form onSubmit={this.handleFormSubmit}  >
                             <label htmlFor="nick_name">Nick Name<input className="nickName" name="nick_name" placeholder="My First House" onChange={this.handleChange} value={this.state.nick_name}></input></label>
