@@ -7,7 +7,8 @@ import LandingPage from './components/layout/LandingPage';
 import RegisterSection from './components/RegisterSection';
 import LoginSection from './components/LoginSection';
 import BookingPage from './components/BookingPage';
-import Checkout from './components/Checkout';
+import Showcase from './components/Showcase';
+
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/register" component={RegisterSection} />
           <Route path="/login" component={LoginSection} />
           <Route path="/booking" component={BookingPage} />
+          <Route path="/showcase" component={Showcase} />
         </Switch>
       </div>
     </BrowserRouter>

@@ -180,38 +180,53 @@ router.post('/booking', checkAuthentication, (req, res) => {
     price,
   } = req.body;
 
-//   router.post('/register', (req, res) => {
-//     const { name, email, phone, address } = req.body;
-//     db.User.findByPk(req.session.user.id)
-//         .then((User) => {
-//             User.createContact({
-//                 name,
-//                 email,
-//                 phone,
-//                 address,
-//             })
-//         }).then((result) => {
-//             res.redirect('/contact');
-//         });
-// });
+  //   router.post('/register', (req, res) => {
+  //     const { name, email, phone, address } = req.body;
+  //     db.User.findByPk(req.session.user.id)
+  //         .then((User) => {
+  //             User.createContact({
+  //                 name,
+  //                 email,
+  //                 phone,
+  //                 address,
+  //             })
+  //         }).then((result) => {
+  //             res.redirect('/contact');
+  //         });
+  // });
 
   db.Services.create({
-        nick_name,
-        sq_ft,
-        address,
-        city,
-        state,
-        zipcode,
-        price,
-        customer_id: (req.session.customer.id)
-      })
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price,
+    customer_id: (req.session.customer.id)
+  })
     .then((Service) => {
       res.json(
         Service
       ); //!customer/:id, this id is the customer in the database. 
     });
-    
+
 });
+
+router.get("/customers/:id/services", (req, res) => {
+  console.log("@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+  db.Services.findAll({
+    where: {
+      customer_id: req.params.customer.id,
+    }.then((res) => {
+      res.json();
+      console.log(data);
+      console.log("you are here~~~~");
+    }),
+  });
+});
+
+
 
 // router.get('/checkout', checkAuthentication, (req, res) => {
 //   db.customer.findByPk()

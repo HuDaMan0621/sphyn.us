@@ -34,9 +34,18 @@ export default function ProfilePage(props) {
                         <Logout />
                     </form>
                     <Link to='/booking'>Book Service</Link>
+                    {/* <Link to={`http://localhost:3000/customer/${data2.data.id}/showcase`}>
+                        Showcase
+                    </Link> */}
+                    <Link to="/showcase">the real showcase</Link>
+                    <div>
+                    </div>
                 </div>
+
             )}
             <Service />
+            {/* need a new route,  */}
+
         </div>
     );
 }
