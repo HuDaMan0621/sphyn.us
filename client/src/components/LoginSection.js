@@ -116,6 +116,7 @@ export default class LoginSection extends Component {
               placeholder="Password"
               onChange={this.handleChange}
               value={this.state.login_password}
+              type="password"
             ></input>
           </label>
           <button className="submit" type="submit">
