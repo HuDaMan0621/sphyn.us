@@ -8,16 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      nick_name:{
+      nick_name: {
         type: Sequelize.TEXT
       },
-      sq_ft:{
+      sq_ft: {
         type: Sequelize.TEXT
       },
-      address:{
+      address: {
         type: Sequelize.TEXT
       },
-      city:{
+      city: {
         type: Sequelize.TEXT
       },
       state: {
@@ -37,13 +37,30 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       },
-      order_id: {
-        allowNull: true,
-        type: Sequelize.INTEGER
-      },
       customer_id: {
         allowNull: true,
         type: Sequelize.INTEGER
+      },
+      completed: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      reschedule: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      schedule_confirm: {
+        allowNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
+      },
+      payment_id: {
+        type: Sequelize.STRING,
+      },
+      service_date: {
+        type: Sequelize.DATE
       }
     });
   },

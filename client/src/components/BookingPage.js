@@ -11,7 +11,7 @@ const register = css`
   align-items: center;
   margin: 1rem;
 
-  .m-heading {
+    .m-heading {
     font-size: 2rem;
     margin: auto;
     border-bottom: solid 2px ${colors.primaryColor};
@@ -102,155 +102,155 @@ const register = css`
 `;
 
 export default class BookingPage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            nick_name: '',
-            sq_ft: '',
-            address: '',
-            city: '',
-            state: '',
-            zipcode: '',
-            price: '',
-            submitted: false,
+  constructor(props) {
+    super(props);
+    this.state = {
+      nick_name: '',
+      sq_ft: '',
+      address: '',
+      city: '',
+      state: '',
+      zipcode: '',
+      price: '',
+      submitted: false,
+    }
+  }
+
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    fetch('/api/v1/booking', {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8'
+      },
+    })
+      .then(res => {
+        if (res.ok === false) {
+          this.props.history.push(`/login`)
         }
-    }
-
-    handleFormSubmit = (e) => {
-        e.preventDefault();
-        fetch('/api/v1/booking', {
-            method: 'POST',
-            body: JSON.stringify(this.state),
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8'
-            },
-        })
-            .then(res => {
-                if (res.ok === false) {
-                    this.props.history.push(`/login`)
-                }
-                else {
-                    this.setState({ submitted: true })
-                }
-            })
-    }
+        else {
+          this.setState({ submitted: true })
+        }
+      })
+  }
 
 
-    handleChange = async (e) => {
-        const { name, value } = e.target;
-        await this.setState({
-            [name]: value
-        })
-    }
+  handleChange = async (e) => {
+    const { name, value } = e.target;
+    await this.setState({
+      [name]: value
+    })
+  }
 
   render() {
     return (
-        <div >{
-            !this.state.submitted ? (
-      <div css={register}>
-        <form onSubmit={this.handleFormSubmit}>
-          <label htmlFor="nick_name">
-            <input
-              className="nickName"
-              name="nick_name"
-              placeholder="Enter name of home"
-              onChange={this.handleChange}
-              value={this.state.nick_name}
-            ></input>
-          </label>
-          <label htmlFor="sq_ft">
-            <input
-              className="sq_ft"
-              name="sq_ft"
-              placeholder="Square Foot of the House"
-              onChange={this.handleChange}
-              value={this.state.sq_ft}
-            ></input>
-          </label>
-          <label htmlFor="address">
-            <input
-              className="address"
-              name="address"
-              placeholder="Address of the house needs 3D service"
-              onChange={this.handleChange}
-              value={this.state.address}
-            ></input>
-          </label>
-          <label htmlFor="city">
-            <input
-              className="city"
-              name="city"
-              placeholder="City"
-              onChange={this.handleChange}
-              value={this.state.city}
-            ></input>
-          </label>
-          <label htmlFor="state">
-            <input
-              className="state"
-              name="state"
-              placeholder="State"
-              onChange={this.handleChange}
-              value={this.state.state}
-            ></input>
-          </label>
-          <label htmlFor="zipcode">
-            <input
-              className="zipcode"
-              name="zipcode"
-              placeholder="Zip Code"
-              onChange={this.handleChange}
-              value={this.state.zipcode}
-            ></input>
-          </label>
-          <label htmlFor="price">
-            <select
-              name="price"
-              onChange={this.handleChange}
-              value={this.state.price}
-              required
-            >
-              <option className="packageEmpty" value="" disabled>
-                Please Select a Package
+      <div >{
+        !this.state.submitted ? (
+          <div css={register}>
+            <form onSubmit={this.handleFormSubmit}>
+              <label htmlFor="nick_name">
+                <input
+                  className="nickName"
+                  name="nick_name"
+                  placeholder="Enter name of home"
+                  onChange={this.handleChange}
+                  value={this.state.nick_name}
+                ></input>
+              </label>
+              <label htmlFor="sq_ft">
+                <input
+                  className="sq_ft"
+                  name="sq_ft"
+                  placeholder="Square Foot of the House"
+                  onChange={this.handleChange}
+                  value={this.state.sq_ft}
+                ></input>
+              </label>
+              <label htmlFor="address">
+                <input
+                  className="address"
+                  name="address"
+                  placeholder="Address of the house needs 3D service"
+                  onChange={this.handleChange}
+                  value={this.state.address}
+                ></input>
+              </label>
+              <label htmlFor="city">
+                <input
+                  className="city"
+                  name="city"
+                  placeholder="City"
+                  onChange={this.handleChange}
+                  value={this.state.city}
+                ></input>
+              </label>
+              <label htmlFor="state">
+                <input
+                  className="state"
+                  name="state"
+                  placeholder="State"
+                  onChange={this.handleChange}
+                  value={this.state.state}
+                ></input>
+              </label>
+              <label htmlFor="zipcode">
+                <input
+                  className="zipcode"
+                  name="zipcode"
+                  placeholder="Zip Code"
+                  onChange={this.handleChange}
+                  value={this.state.zipcode}
+                ></input>
+              </label>
+              <label htmlFor="price">
+                <select
+                  name="price"
+                  onChange={this.handleChange}
+                  value={this.state.price}
+                  required
+                >
+                  <option className="packageEmpty" value="" disabled>
+                    Please Select a Package
               </option>
-              <option className="package1" value="150">
-                Package 1 $150
+                  <option className="package1" value="150">
+                    Package 1 $150
               </option>
-              <option className="package2" value="300">
-                Package 2 $300
+                  <option className="package2" value="300">
+                    Package 2 $300
               </option>
-              <option className="package3" value="5000">
-                Package 3 $500
+                  <option className="package3" value="5000">
+                    Package 3 $500
               </option>
-            </select>
-          </label>
-          <button className="submit" type="submit">
-            Submit
+                </select>
+              </label>
+              <button className="submit" type="submit">
+                Submit
           </button>
-        </form>
-        <div className="package">
-          <div className="heading">
-            <h3>Package</h3>
+            </form>
+            <div className="package">
+              <div className="heading">
+                <h3>Package</h3>
+              </div>
+              <div className="price">$150</div>
+              <div className="details">
+                <ul>
+                  <li>
+                    <span>-</span> Test bullet
+              </li>
+                  <li>
+                    <span>-</span> Test bullet
+              </li>
+                  <li>
+                    <span>-</span> Test bullet
+              </li>
+                  <li>
+                    <span>-</span> Test bullet
+              </li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <div className="price">$150</div>
-          <div className="details">
-            <ul>
-              <li>
-                <span>-</span> Test bullet
-              </li>
-              <li>
-                <span>-</span> Test bullet
-              </li>
-              <li>
-                <span>-</span> Test bullet
-              </li>
-              <li>
-                <span>-</span> Test bullet
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    ) : <Checkout nick_name={this.state.nick_name} price={this.state.price} />}</div>);
+        ) : <Checkout nick_name={this.state.nick_name} price={this.state.price} />}</div>);
   }
 }

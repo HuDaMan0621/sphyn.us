@@ -89,7 +89,7 @@ class Checkout extends Component {
                                     <li>Test bullet</li>
                                 </ul>
                             </div>
-                            <PayPalButton price={this.props.price}/>  {/* turnary operation to show payment buttons 1 2 or 3 depends on the price */}
+                            <PayPalButton price={this.props.price} />  {/* turnary operation to show payment buttons 1 2 or 3 depends on the price */}
                         </div>
                     </div>
                 </div >

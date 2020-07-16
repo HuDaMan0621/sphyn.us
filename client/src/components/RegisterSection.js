@@ -87,7 +87,7 @@ export default class RegisterSection extends Component {
     });
   };
 
-  
+
 
   render() {
     return (
