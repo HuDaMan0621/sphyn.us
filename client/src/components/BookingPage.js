@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
 import Checkout from "./Checkout";
+import Package1 from "./packageDetails/Package1";
+import Package2 from "./packageDetails/Package2";
+import Package3 from "./packageDetails/Package3";
 
 const register = css`
   display: flex;
@@ -113,6 +116,7 @@ export default class BookingPage extends Component {
       price: "",
       submitted: false,
       package: "Package",
+      packageDetails: "",
     };
   }
 
@@ -139,6 +143,7 @@ export default class BookingPage extends Component {
       [name]: value,
     });
     this.checkPackage();
+    this.packageDetails(this.state.package);
   };
 
   checkPackage = () => {
@@ -150,6 +155,18 @@ export default class BookingPage extends Component {
       this.setState({ package: "Package 3" });
     } else {
       this.setState({ package: "Package " });
+    }
+  };
+
+  packageDetails = (packageChoice) => {
+    if (packageChoice === "Package 1") {
+      this.setState({ packageDetails: <Package1 /> });
+    } else if (packageChoice === "Package 2") {
+      this.setState({ packageDetails: <Package2 /> });
+    } else if (packageChoice === "Package 3") {
+      this.setState({ packageDetails: <Package3 /> });
+    } else {
+      this.setState({ packageDetails: "Waiting for package selection" });
     }
   };
 
@@ -241,22 +258,7 @@ export default class BookingPage extends Component {
             <div className="package">
               <div className="heading">{this.state.package}</div>
               <div className="price">${this.state.price}</div>
-              <div className="details">
-                <ul>
-                  <li>
-                    <span>-</span> Test bullet
-                  </li>
-                  <li>
-                    <span>-</span> Test bullet
-                  </li>
-                  <li>
-                    <span>-</span> Test bullet
-                  </li>
-                  <li>
-                    <span>-</span> Test bullet
-                  </li>
-                </ul>
-              </div>
+              <div className="details">{this.state.packageDetails}</div>
             </div>
           </div>
         ) : (
