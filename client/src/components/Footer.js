@@ -1,52 +1,48 @@
-import React from 'react'
+import React from "react";
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { colors, utilities } from '../styleVars';
-
-const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
-const { borderRadius, animationSpeed } = utilities;
+import { jsx, css } from "@emotion/core";
+import { colors, utilities } from "../styleVars";
 
 const footer = css`
-.Footer-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 1rem;
-    padding: 2rem;
-    background-color: ${secondaryColor};
-    color: ${lightColor};
-    margin-top: 3rem;
-    
-}
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  background-color: ${colors.darkColor};
+  color: ${colors.lightColor};
 
-span {
-    display: block;
-    padding: .5rem 0;
-}
-`
+  div {
+    padding: 1rem;
+    margin: 1rem;
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+`;
 
 export default function Footer() {
-    return (
-        <div css={footer}>
-            <div className="Footer-wrapper">
-                <div>
-                    <h3>Mailing Address</h3>
-                    <span>SPHYN</span>
-                    <span>123 Business Address</span>
-                    <span>Atlanta, GA 30301</span>
-                </div>
-                <div>
-                    <h3>Call Us</h3>
-                    <span>(222) 222 - 2222</span>
-                </div>
-                <div>
-                    <h3>Email Us</h3>
-                    <span>saesha@sphyn.us</span>
-                    <span>princeton@sphyn.us</span>
-                    <span>harley@sphyn.us</span>
-                    <span>ying@sphyn.us</span>
-                    <span>nick@sphyn.us</span>
-                </div>
-            </div>
-        </div>
-    )
+  return (
+    <div css={footer}>
+      <div>
+        <h3>Mailing Address</h3>
+        <ul>
+          <li>Sphyn</li>
+          <li>9001 Peachtree St.</li>
+          <li>Atlanta, Ga 30303</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Call Us</h3>
+        <ul>
+          <li>Phone: 770-998-9832</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Email Us</h3>
+        <ul>
+          <li>info@sphyn.us</li>
+        </ul>
+      </div>
+    </div>
+  );
 }

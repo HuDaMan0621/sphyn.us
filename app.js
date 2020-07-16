@@ -22,10 +22,6 @@ app.use(
     resave: false, // update session even w/ no changes
     saveUninitialized: true, // always create a session
     store,
-    // cookie: {
-    //   secure: false, // true: only accept https req’s
-    //   maxAge: 6000000, // time in seconds
-    // },
   })
 );
 
