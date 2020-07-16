@@ -6,6 +6,7 @@ import Checkout from "./Checkout";
 import Package1 from "./packageDetails/Package1";
 import Package2 from "./packageDetails/Package2";
 import Package3 from "./packageDetails/Package3";
+import { Link } from "react-router-dom";
 
 const register = css`
   display: flex;
@@ -13,6 +14,11 @@ const register = css`
   flex-direction: column;
   align-items: center;
   margin: 1rem;
+
+  a {
+    color: ${colors.darkColor};
+    margin-top: 2rem;
+  }
 
   .m-heading {
     font-size: 2rem;
@@ -260,6 +266,7 @@ export default class BookingPage extends Component {
               <div className="price">${this.state.price}</div>
               <div className="details">{this.state.packageDetails}</div>
             </div>
+            <Link to="/">Back to home</Link>
           </div>
         ) : (
           <Checkout nick_name={this.state.nick_name} price={this.state.price} />
