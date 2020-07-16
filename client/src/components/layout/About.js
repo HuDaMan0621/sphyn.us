@@ -1,7 +1,7 @@
 import React from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import {colors, utilities} from '../styleVars';
+import {colors, utilities} from '../../styleVars';
 import { Link } from 'react-router-dom'; 
 
 const {primaryColor, darkColor, secondaryColor, lightColor} = colors;

@@ -33,6 +33,8 @@ router.get('/customer/profile', checkAuthentication, function (req, res) {
 //   })
 // });
 
+
+
 router.get('/service', checkAuthentication, (req, res,) => {
   db.Service.findByPk(req.session.customer.id)
     .then(data => {
@@ -54,7 +56,6 @@ router.post('/customer', (req, res) => {
       first_name,
       last_name,
       email,
-      // login_name,
       login_password: hash,
       phone_number: phone_number || false,
     })
@@ -89,11 +90,21 @@ router.post('/login', (req, res) => {
       res.send('Username not found. Please return to previous page and try again.')
     });
 });
+//! redirect with json ?
+
+// router.get('/logout', function (req, res) {
+//   req.logout();
+//   res.status(200).json({ 
+//     status: 'Bye Bye'
+//   });
+//   res.clearCookie('duoshuo_token');
+//   req.session.destroy();
+//   res.redirect('/');
+// });
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
 })
-
 
 router.delete('/customer/:id', (req, res) => {
   db.Customer.destroy({
@@ -147,6 +158,9 @@ router.put('/customer/:id', (req, res) => {
   });
 });
 
+//         login_name,  //TODO search db to see if db is available
+//         login_password,  //TODO check to see if the password is matching
+
 router.get('/order/:id', function (req, res, next) {
   db.Orders.findByPk(req.params.id
   ).then(res => {
@@ -156,7 +170,6 @@ router.get('/order/:id', function (req, res, next) {
       console.log(data);
     })
 });
-
 
 router.post('/booking', checkAuthentication, (req, res) => {
   const {
@@ -178,7 +191,8 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price
   })
-
+    // const { id } = req.params;
+    // db.CustomerOrder.findOne({ where: { customer_id : id}})
     .then((Service) => {
       res.json(
         Service
@@ -186,5 +200,12 @@ router.post('/booking', checkAuthentication, (req, res) => {
     });
 });
 
+// router.get('/checkout', checkAuthentication, (req, res) => {
+//   db.customer.findByPk()
+//     .then(data => {
+//       res.json(data);
+//       console.log(data);
+//     })
+// })
 
 module.exports = router;

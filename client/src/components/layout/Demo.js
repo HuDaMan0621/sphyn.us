@@ -1,7 +1,7 @@
 import React from 'react';
 /** @jsx jsx */
 import { jsx, css } from '@emotion/core';
-import { colors, utilities } from '../styleVars';
+import { colors, utilities } from '../../styleVars';
 
 const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
 const { borderRadius, animationSpeed } = utilities;
@@ -39,7 +39,8 @@ export default function Demo() {
                 </div>
                 <div className="demo-image">
                     <iframe width='853' height='480' src='http://panoramic-leather.surge.sh/' frameborder='0' allowfullscreen allow='xr-spatial-tracking'></iframe>
-            </div>  
+                </div>
+            </div>
         </div>
     )
 }

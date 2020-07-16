@@ -41,6 +41,36 @@ export default function ProfilePage(props) {
     )
 }
 
+//! Do we want to display their Iframe here? <div> matterport iframe<div>
+//!test 0716
 
+// router.post('/', (req, res) => {
+//     const { username, email, password } = req.body;
+//     db.User.findOne( // get the user info
+//       {
+//         where: {
+//           [Op.or]: [
+//             { username: req.body.username },
+//             { email: req.body.email }
+//           ]
+//         }
+//       }).then((result) => {
+//         console.log(result);
+//         if (result == null) {
+//           bcrypt.hash(req.body.password, 10, (err, hash) => {
+//             db.User.create({
+//               username,
+//               email,
+//               password: hash,
+//             }).then((result) => {
+//               res.render('index', { errorMessage: `Welcome ${result.username} Please Log In` })
+//             });
+//           });
+//         } else {
+//           res.render('index', { errorMessage: 'Username or Email Already in Database' }) //! method to search the db to find if user already exist 
+//         }
+//       })
+//   })
 
-
+//!! original copy do not touch
+//!! testing 2
