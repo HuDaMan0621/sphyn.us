@@ -10,17 +10,17 @@ export default function Service() {
             .then(data => {
                 setServiceInfo(data)
             })
-            .catch (error => console.log('Please Login')          
+            .catch(error => console.log('Please Login')
             )
-    },[])
+    }, [])
 
     return (
         <div>
             <div>Service List:</div>
             {serviceInfo.map((service, i) => {
                 return (
-                    <div key={i}> 
-                        <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br/></p>
+                    <div key={i}>
+                        <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
                     </div>
                 )
             })}

@@ -14,7 +14,7 @@ const register = css`
   align-items: center;
   margin: 1rem;
 
-  .m-heading {
+    .m-heading {
     font-size: 2rem;
     margin: auto;
     border-bottom: solid 2px ${colors.primaryColor};
@@ -239,16 +239,17 @@ export default class BookingPage extends Component {
                 >
                   <option className="packageEmpty" value="" disabled>
                     Please Select a Package
-                  </option>
+              </option>
                   <option className="package1" value="150">
                     Package 1 $150
-                  </option>
+              </option>
                   <option className="package2" value="300">
                     Package 2 $300
-                  </option>
-                  <option className="package3" value="500">
+              </option>
+                  <option className="package3" value="5000">
                     Package 3 $500
-                  </option>
+              </option>
+
                 </select>
               </label>
               <button className="submit" type="submit">

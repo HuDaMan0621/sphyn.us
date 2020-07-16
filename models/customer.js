@@ -7,9 +7,8 @@ module.exports = (sequelize, DataTypes) => {
     login_password: DataTypes.TEXT,
     phone_number: DataTypes.TEXT,
   }, {});
-  Customer.associate = function(models) {
-    Customer.hasMany(models.Order, {foreignKey: 'customer_id'});
-    Customer.hasMany(models.Services, {foreignKey: 'customer_id'})
-};
+  Customer.associate = function (models) {
+    Customer.hasMany(models.Services, { foreignKey: 'customer_id' })
+  };
   return Customer;
 };

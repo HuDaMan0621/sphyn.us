@@ -77,7 +77,6 @@ router.post('/login', (req, res) => {
           req.session.customer = Customer;
           console.log(req.session);
           res.json(Customer)
-          // res.redirect(`/customer/${Customer.id}/profile`);
         }
         else {
           res.send('Incorrect password.')
@@ -88,17 +87,6 @@ router.post('/login', (req, res) => {
       res.send('Username not found. Please return to previous page and try again.')
     });
 });
-//! redirect with json ?
-
-// router.get('/logout', function (req, res) {
-//   req.logout();
-//   res.status(200).json({ 
-//     status: 'Bye Bye'
-//   });
-//   res.clearCookie('duoshuo_token');
-//   req.session.destroy();
-//   res.redirect('/');
-// });
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
@@ -156,19 +144,6 @@ router.put('/customer/:id', (req, res) => {
   });
 });
 
-//         login_name,  //TODO search db to see if db is available
-//         login_password,  //TODO check to see if the password is matching
-
-router.get('/order/:id', function (req, res, next) {
-  db.Order.findByPk(req.params.id
-  ).then(res => {
-    res.json();
-  })
-    .then(data => {
-      console.log(data);
-    })
-});
-
 router.post('/booking', checkAuthentication, (req, res) => {
   const {
     nick_name,
@@ -179,38 +154,22 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price,
   } = req.body;
-
-//   router.post('/register', (req, res) => {
-//     const { name, email, phone, address } = req.body;
-//     db.User.findByPk(req.session.user.id)
-//         .then((User) => {
-//             User.createContact({
-//                 name,
-//                 email,
-//                 phone,
-//                 address,
-//             })
-//         }).then((result) => {
-//             res.redirect('/contact');
-//         });
-// });
-
   db.Services.create({
-        nick_name,
-        sq_ft,
-        address,
-        city,
-        state,
-        zipcode,
-        price,
-        customer_id: (req.session.customer.id)
-      })
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price,
+    customer_id: (req.session.customer.id),
+  })
     .then((Service) => {
       res.json(
         Service
       ); //!customer/:id, this id is the customer in the database. 
     });
-    
+
 });
 
 // router.get('/checkout', checkAuthentication, (req, res) => {
