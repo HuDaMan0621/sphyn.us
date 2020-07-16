@@ -87,8 +87,6 @@ export default class RegisterSection extends Component {
     });
   };
 
-
-
   render() {
     return (
       <div css={login}>
