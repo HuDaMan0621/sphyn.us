@@ -36,6 +36,14 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      order_id: {
+        allowNull: true,
+        type: Sequelize.INTEGER
+      },
+      customer_id: {
+        allowNull: true,
+        type: Sequelize.INTEGER
       }
     });
   },

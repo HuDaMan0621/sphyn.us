@@ -1,8 +1,8 @@
-import React, { Component, useState, useEffect } from "react";
-import axios from "axios";
-import QRCode from "qrcode.react";
-import Logout from "./Logout";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import QRCode from 'qrcode.react';
+import Logout from './Logout';
+import { Link } from 'react-router-dom';
+import Service from './Service';
 
 export default function ProfilePage(props) {
   const [data2, setData2] = useState({ error: " " }); //this is the state for the customer
@@ -24,8 +24,21 @@ export default function ProfilePage(props) {
     <div>
       {data2.error ? (
         <div>
-          User Not Authorized. <br />
-          Please <Link to="/login">Login</Link>
+            {data2.error ? <div>User Not Authorized. <br/>Please <Link to="/login">Login</Link></div> : (
+                <div>
+                    <QRCode value={`http://localhost:3000/customer/${data2.data.id}/showcase`} />
+                    <h1>Profile Page!!!!!!</h1>
+                    <h1>{data2.data.first_name}</h1>
+                    {/* <h1>{data.last_name}</h1> */}
+                    <form onSubmit={e => {
+                        e.preventDefault();
+                    }}>
+                    <Logout/>
+                    </form>
+                    <Link to='/booking'>Book Service</Link>
+                </div>
+            )}
+            <Service />
         </div>
       ) : (
         <div>
