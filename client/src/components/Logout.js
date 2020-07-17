@@ -31,16 +31,16 @@ const header = css`
 export default class Logout extends React.Component {
   constructor(props) {
     super(props)
-  
+
     this.state = {
       redirect: false
     }
   }
-  
+
   render() {
     return (
       <div css={header} className='header'>
-        {this.state.redirect && <Redirect to="/"/>}
+        {this.state.redirect && <Redirect to="/" />}
         <header>
           <h1>Sphyn</h1>
           <div className="user-links">

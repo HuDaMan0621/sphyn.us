@@ -8,15 +8,14 @@ export default function Showcase() {
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks
 
     useEffect(() => {
-        fetch(`/api/v1/customers/${data2}/services`)
-        console.log(data2)
-        console.log("LINE ABOVE IS DATA 2 ")
+        fetch(`/api/v1/customers/services`)
             .then((data) => data.json())
             .then((data) => {
                 console.log('this is the data on showcase@@@@@@!!!!!!!!!')
-                setGalleryInfo(data)
-                setIsLoading(false);
+                // setData2(data);
                 console.log(data)
+                setGalleryInfo(data);
+                setIsLoading(false);
             })
             .catch((error) => console.log("Please Login"));
 
@@ -28,7 +27,7 @@ export default function Showcase() {
             <div>
                 <h1>Showcase</h1>
                 <h1>Display customer information </h1>
-                <QRCode value={`http://localhost:3000/customer/${data2.data.customer_id}/showcase`} />
+                <QRCode value={`http://localhost:3000/customer/services/showcase`} />
             </div>
             )}
         </div>

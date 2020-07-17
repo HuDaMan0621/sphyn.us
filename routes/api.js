@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
+const { Op } = require('sequelize');
 
 const bcrypt = require('bcrypt');
 const checkAuthentication = require('../auth');
@@ -49,16 +50,64 @@ router.post('/customer', (req, res) => {
     login_password,
     phone_number,
   } = req.body;
-  bcrypt.hash(login_password, 10, (err, hash) => {
-    db.Customer.create({
-      first_name,
-      last_name,
-      email,
-      login_password: hash,
-      phone_number: phone_number || false,
-    })
-  });
+  db.Customer.findOne(
+    {
+      where: {
+        email: req.body.email
+      }
+    }).then((result) => {
+      console.log(result);
+      if (result == null) {
+        bcrypt.hash(login_password, 10, (err, hash) => {
+          db.Customer.create({
+            first_name,
+            last_name,
+            email,
+            login_password: hash,
+            phone_number: phone_number || false,
+          }).then((result) => {
+            res.send(`Welcome ${result.first_name || result.email} Please Log In`)
+          });
+        })
+      } else {
+        res.status(403).json({
+          error: 'Email Address Already Exist'
+        })
+        console.log('Username or Email Already in Database')
+      }
+    });
 });
+
+//!examples
+// router.post('/', (req, res) => {
+//   const { username, email, password } = req.body;
+//   db.User.findOne( // get the user info
+//     {
+//       where: {
+//         [Op.or]: [
+//           { username: req.body.username },
+//           { email: req.body.email }
+//         ]
+//       }
+//     }).then((result) => {
+//       console.log(result);
+//       if (result == null) {
+//         bcrypt.hash(req.body.password, 10, (err, hash) => {
+//           db.User.create({
+//             username,
+//             email,
+//             password: hash,
+//           }).then((result) => {
+//             res.render('index', { errorMessage: `Welcome ${result.username} Please Log In` })
+//           });
+//         });
+//       } else {
+//         res.render('index', { errorMessage: 'Username or Email Already in Database' })
+//       }
+//     })
+// })
+//
+
 
 router.get('/login', function (req, res, next) {
   db.Customer.findAll()
@@ -77,7 +126,6 @@ router.post('/login', (req, res) => {
           req.session.customer = Customer;
           console.log(req.session);
           res.json(Customer)
-          // res.redirect(`/customer/${Customer.id}/profile`);
         }
         else {
           res.send('Incorrect password.')
@@ -88,17 +136,6 @@ router.post('/login', (req, res) => {
       res.send('Username not found. Please return to previous page and try again.')
     });
 });
-//! redirect with json ?
-
-// router.get('/logout', function (req, res) {
-//   req.logout();
-//   res.status(200).json({ 
-//     status: 'Bye Bye'
-//   });
-//   res.clearCookie('duoshuo_token');
-//   req.session.destroy();
-//   res.redirect('/');
-// });
 
 router.get('/logout', (req, res) => {
   req.session.destroy();
@@ -156,19 +193,6 @@ router.put('/customer/:id', (req, res) => {
   });
 });
 
-//         login_name,  //TODO search db to see if db is available
-//         login_password,  //TODO check to see if the password is matching
-
-router.get('/order/:id', function (req, res, next) {
-  db.Order.findByPk(req.params.id
-  ).then(res => {
-    res.json();
-  })
-    .then(data => {
-      console.log(data);
-    })
-});
-
 router.post('/booking', checkAuthentication, (req, res) => {
   const {
     nick_name,
@@ -213,16 +237,16 @@ router.post('/booking', checkAuthentication, (req, res) => {
 
 });
 
-router.get("/customers/:id/services", (req, res) => {
+router.get("/customers/services", (req, res) => {
   console.log("@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
   db.Services.findAll({
     where: {
-      customer_id: req.params.customer.id,
-    }.then((res) => {
-      res.json();
-      console.log(data);
-      console.log("you are here~~~~");
-    }),
+      customer_id: req.session.customer.id
+    }
+  }).then((data) => {
+    console.log("you are here~~~~");
+    console.log(data);
+    res.json(data);
   });
 });
 

@@ -2,13 +2,19 @@
 import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const login = css`
   display: flex;
   height: 100vh;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   margin-top: 5vh;
+
+  a {
+    color: ${colors.darkColor};
+  }
 
   .m-heading {
     font-size: 2rem;
@@ -66,33 +72,45 @@ export default class RegisterSection extends Component {
     email: "@email.com",
     login_password: "",
     phone_number: "",
+    error: false,
   };
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    fetch("/api/v1/customer", {
-      method: "POST",
-      body: JSON.stringify(this.state),
-      headers: {
-        "Content-Type": "application/json;charset=UTF-8",
-      },
-    });
-    this.props.history.push("/login");
+    axios.post("/api/v1/customer", { ...this.state })
+      .then((data) => {
+        console.log("this is data from register section");
+        console.log(data.data);
+        this.props.history.push("/login");
+      })
+      .catch((error) => {
+        console.log(error)
+        this.setState({ error: true })
+      })
+    // console.log(res)
+    // if (response.status !== 200) {
+    //   console.log('this is line 88')
+    //   console.log(response.error)
+    //   this.setState({ error: response.error });
+    // } else {
+    // }
   };
 
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
+      error: false
     });
+    
   };
 
-  
-
   render() {
+    const { error } = this.state;
     return (
       <div css={login}>
         <form onSubmit={this.handleFormSubmit}>
+          {error && <h1>Email already in use</h1>}
           <h3 className="m-heading">Register</h3>
           <label htmlFor="firstName">
             <input
@@ -144,6 +162,7 @@ export default class RegisterSection extends Component {
             Submit
           </button>
         </form>
+        <Link to="/">Back to home</Link>
       </div>
     );
   }

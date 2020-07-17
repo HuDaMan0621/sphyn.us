@@ -2,14 +2,19 @@
 import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const login = css`
   display: flex;
   height: 100vh;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   margin-top: 5vh;
+
+  a {
+    color: ${colors.darkColor};
+  }
 
   .m-heading {
     font-size: 1.3rem;
@@ -61,64 +66,65 @@ const login = css`
 `;
 
 export default class LoginSection extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            login_password: "",
-            data: {},
-        };
-    }
-
-
-    handleFormSubmit = (e) => {
-        e.preventDefault();
-        axios
-            .post("/api/v1/login", {
-                ...this.state,
-            })
-            .then((res) => {
-                this.setState({ data: res.data });
-                this.props.history.push(`/customer/profile`);
-            });
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      login_password: "",
+      data: {},
     };
+  }
 
-    handleChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({
-            [name]: value,
-        });
-    };
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/v1/login", {
+        ...this.state,
+      })
+      .then((res) => {
+        this.setState({ data: res.data });
+        this.props.history.push(`/customer/profile`);
+      });
+  };
 
-    render() {
-        return (
-            <div css={login}>
-                <form onSubmit={this.handleFormSubmit}>
-                    <h3 className="m-heading">Sign In</h3>
-                    <label htmlFor="email">
-                        <input
-                            htmlFor="email"
-                            className="email"
-                            name="email"
-                            placeholder="Email"
-                            onChange={this.handleChange}
-                            value={this.state.email}
-                        ></input>
-                    </label>
-                    <label htmlFor="loginPassword">
-                        <input
-                            className="loginPassword"
-                            name="login_password"
-                            placeholder="Password"
-                            onChange={this.handleChange}
-                            value={this.state.login_password}
-                        ></input>
-                    </label>
-                    <button className="submit" type="submit">
-                        Submit
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  render() {
+    return (
+      <div css={login}>
+        <form onSubmit={this.handleFormSubmit}>
+          <h3 className="m-heading">Sign In</h3>
+          <label htmlFor="email">
+            <input
+              htmlFor="email"
+              className="email"
+              name="email"
+              placeholder="Email"
+              onChange={this.handleChange}
+              value={this.state.email}
+            ></input>
+          </label>
+          <label htmlFor="loginPassword">
+            <input
+              className="loginPassword"
+              name="login_password"
+              placeholder="Password"
+              onChange={this.handleChange}
+              value={this.state.login_password}
+              type="password"
+            ></input>
+          </label>
+          <button className="submit" type="submit">
+            Submit
           </button>
-                </form>
-            </div>
-        );
-    }
+        </form>
+        <Link to="/">Back to home</Link>
+      </div>
+    );
+  }
 }

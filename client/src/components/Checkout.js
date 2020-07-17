@@ -1,107 +1,68 @@
-import React, { Component } from 'react'
-import PayPalButton from './Paypal/PayPalButton';
-import PayPalButton2 from './Paypal/PayPalButton';
-import PayPalButton3 from './Paypal/PayPalButton';
-import { Link } from 'react-router-dom';
-// import BookingPage from './BookingPage';
-// import PropTypes from 'prop-types';
-
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { colors, utilities } from '../styleVars';
+import React, { Component } from "react";
+import PayPalButton from "./Paypal/PayPalButton";
+import { Link } from "react-router-dom";
+import { jsx, css } from "@emotion/core";
+import { colors, utilities } from "../styleVars";
 
-const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
-const { borderRadius, animationSpeed } = utilities;
+const packageChoice = css`
+    max-width: 700px;
+    margin: auto; 
+    padding: 1rem;
 
-const packages = css`
-.Packages-wrapper {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 1rem;
-    padding: 0 2rem;
-    justify-content: end;
-    
-}
+    a {
+        color: ${colors.darkColor};
+    }
 
-    .package {
-        border: 1px solid ${lightColor};
-        border-radius: ${borderRadius};
+    h1 {
+        margin-bottom: 1rem;
     }
 
     .heading {
-        background-color: ${darkColor};
-        color: ${lightColor}
+        background-color: ${colors.darkColor};
+        color: ${colors.lightColor};
+        border-radius: ${utilities.borderRadius};
+        font-size: 1.5rem;
     }
 
     .price {
-        border-bottom: 1px solid ${lightColor};
-        font-size: 3em;
+        font-size: 1.5rem;
     }
 
     .details {
-        //  background-color: ${lightColor};
+        //  background-color: ${colors.lightColor};
         text-align: left;
-        // color: ${secondaryColor};
+        // color: ${colors.secondaryColor};
         padding: 1rem .5rem;
 
         li {
             padding: .5rem 0;
-        }
-
-
-        
+        }     
     }
+`;
 
-    h1 {
-        margin: 1rem 0;
-    }
-
-    
-
-`
-//! can't pass the props from BookingPage
 class Checkout extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
 
-    render() {
-        return (
-            <div>
-                {console.log('line 75 ')}
-                {/* <h1>{this.props.nick_name}{this.props.price}</h1> */}
-                <h1>Please Review before Paying!</h1>
-                <div css={packages} >
-                    {/* <h1>Packages</h1> */}
-                    <div className='Packages-wrapper'>
-                        <div className="package1">
-                            <div className="heading">
-                                <h3>Nick Name: {this.props.nick_name}</h3>
-                                <p>Price $ {this.props.price}</p>
-                            </div>
-                            <div className="price"></div>
-                            <div className="details">
-                                <ul>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                    <li>Test bullet</li>
-                                </ul>
-                            </div>
-                            <PayPalButton price={this.props.price}/>  {/* turnary operation to show payment buttons 1 2 or 3 depends on the price */}
-                        </div>
-                    </div>
-                </div >
-            </div>
-        )
-    }
+  render() {
+    return (
+      <div css={packageChoice}>
+        <h1>Please Review before Paying!</h1>
+        <div>
+          <div className="heading">
+            <h3>Name: {this.props.nick_name}</h3>
+            <p className="price">Price $ {this.props.price}</p>
+          </div>
+          <div className="details">{this.props.packageDetails}</div>
+          <PayPalButton price={this.props.price} />{" "}
+        </div>
+        <Link to="/">Back to home</Link>
+      </div>
+    );
+  }
 }
-
-
-// Checkout.propTypes = {
-//     nick_name: PropTypes.string,
-//     price: PropTypes.number
-// };
 
 export default Checkout;
