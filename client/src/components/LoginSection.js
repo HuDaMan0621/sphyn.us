@@ -60,6 +60,7 @@ const login = css`
   }
 `;
 
+
 export default class LoginSection extends Component {
     constructor(props) {
         super(props);
@@ -90,6 +91,19 @@ export default class LoginSection extends Component {
         });
     };
 
+    analyzePassword = (e) => {
+        const realRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value,
+        });
+        if (realRegex.test(e.target.value)) {
+            e.target.setCustomValidity('')
+        } else {
+            e.target.setCustomValidity("Password must contain a minimum of eight characters, with at least one letter, one number, and one special character");
+        }
+    }
+
     render() {
         return (
             <div css={login}>
@@ -97,6 +111,7 @@ export default class LoginSection extends Component {
                     <h3 className="m-heading">Sign In</h3>
                     <label htmlFor="email">
                         <input
+                            required
                             htmlFor="email"
                             className="email"
                             name="email"
@@ -107,18 +122,20 @@ export default class LoginSection extends Component {
                     </label>
                     <label htmlFor="loginPassword">
                         <input
+                            required
                             className="loginPassword"
                             name="login_password"
                             placeholder="Password"
-                            onChange={this.handleChange}
+                            onChange={this.analyzePassword}
                             value={this.state.login_password}
+                            type="password"
                         ></input>
                     </label>
                     <button className="submit" type="submit">
                         Submit
           </button>
                 </form>
-            </div>
+            </div >
         );
     }
 }
