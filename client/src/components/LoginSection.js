@@ -77,22 +77,30 @@ export default class LoginSection extends Component {
   }
 
   handleFormSubmit = (e) => {
+    let customerRole = ''
     e.preventDefault();
     axios
       .post("/api/v1/login", {
         ...this.state,
       })
       .then((res) => {
-        this.setState({ data: res.data });
-        this.props.history.push(`/customer/profile`);
-      });
+        this.setState({ data: res.data })
+        if (this.state.email === 'authorized@gmail.com') {
+          customerRole = 'admin';
+          this.props.history.push('/admin');
+          console.log('ADMIN')
+        } else {
+          this.props.history.push(`/customer/profile`);
+        }
+      })
   };
 
   handleChange = (e) => {
+    let customerRole = ''
     const { name, value } = e.target;
     this.setState({
       [name]: value,
-    });
+    })
   };
 
   analyzePassword = (e) => {

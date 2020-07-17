@@ -196,7 +196,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     price,
     img_url,
   } = req.body;
-  
+
   db.Services.create({
     nick_name,
     sq_ft,
@@ -226,13 +226,50 @@ router.get("/customers/services", (req, res) => {
   });
 });
 
-
-
 // router.get('/checkout', checkAuthentication, (req, res) => {
 //   db.customer.findByPk()
 //     .then(data => {
 //       res.json(data);
 //     })
 // })
+
+router.put('/admin/update', checkAuthentication, (req, res) => {
+  const {
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price,
+    img_url,
+    customer_id,
+    payment_id,
+    schedule_confirm,
+    reschedule,
+    completed,
+    id
+  } = req.body.services[0];
+
+  console.log(req.body)
+  db.Services.update({
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price,
+    img_url,
+    customer_id,
+    payment_id,
+    schedule_confirm,
+    reschedule,
+    completed,
+    id,
+    email: (req.session.customer.email)
+  }, { where: { id: id } })
+
+});
 
 module.exports = router;

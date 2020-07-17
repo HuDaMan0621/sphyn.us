@@ -8,6 +8,7 @@ import RegisterSection from './components/RegisterSection';
 import LoginSection from './components/LoginSection';
 import BookingPage from './components/BookingPage';
 import Showcase from './components/Showcase';
+import Administrator from './components/Administrator'
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/login" component={LoginSection} />
           <Route path="/booking" component={BookingPage} />
           <Route path="/showcase" component={Showcase} />
+          <Route path="/admin" component={Administrator} />
         </Switch>
       </div>
     </BrowserRouter>
