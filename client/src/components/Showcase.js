@@ -36,3 +36,5 @@ export default function Showcase() {
         </div >
     );
 }
+
+//!! try to fix showcase error when user has no matterport url
