@@ -9,6 +9,8 @@ module.exports = (sequelize, DataTypes) => {
     zipcode: DataTypes.TEXT,
     price: DataTypes.INTEGER,
     customer_id: DataTypes.INTEGER,
+    matterport: DataTypes.TEXT,
+
     completed: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
@@ -22,6 +24,11 @@ module.exports = (sequelize, DataTypes) => {
     schedule_confirm: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: false
+    },
+    matterport: {
+      type: DataTypes.TEXT,
+      allowNull: true,
       defaultValue: false
     },
     payment_id: DataTypes.STRING,
