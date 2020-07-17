@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
     },
     payment_id: DataTypes.STRING,
 
-    service_date: DataTypes.DATE
+    service_date: DataTypes.DATE,
+
+    img_url: DataTypes.TEXT,
   }, {});
   Services.associate = function (models) {
     Services.belongsTo(models.Customer, { foreignKey: 'customer_id' });

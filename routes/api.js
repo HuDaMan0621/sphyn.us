@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const db = require('../models');
 const { Op } = require('sequelize');
-
 const bcrypt = require('bcrypt');
 const checkAuthentication = require('../auth');
 
@@ -16,7 +15,6 @@ router.get('/', function (req, res, next) {
 
 //customer profile route 
 router.get('/customer/profile', checkAuthentication, function (req, res) {
-  console.log('this is req.session.customer', req.session.customer)
   if (!req.session.customer) {
     res.status(401).json({
       error: 'Unauthorized User'
@@ -56,7 +54,6 @@ router.post('/customer', (req, res) => {
         email: req.body.email
       }
     }).then((result) => {
-      console.log(result);
       if (result == null) {
         bcrypt.hash(login_password, 10, (err, hash) => {
           db.Customer.create({
@@ -71,9 +68,8 @@ router.post('/customer', (req, res) => {
         })
       } else {
         res.status(403).json({
-          error: 'Email Address Already Exist'
+          error: 'Email Address Already Exists'
         })
-        console.log('Username or Email Already in Database')
       }
     });
 });
@@ -157,7 +153,6 @@ router.delete('/customer/:id', (req, res) => {
 });
 
 router.put('/customer/:id', (req, res) => {
-  console.log('THIS IS THE PUT ROUTE!!!! ')
   const {
     first_name,
     last_name,
@@ -188,7 +183,6 @@ router.put('/customer/:id', (req, res) => {
     zipcode
   }, { where: { id: req.params.id } },
   ).then((result) => {
-    console.log(result)
     res.redirect('/');
   });
 });
@@ -202,6 +196,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     state,
     zipcode,
     price,
+    img_url,
   } = req.body;
   
   db.Services.create({
@@ -212,7 +207,8 @@ router.post('/booking', checkAuthentication, (req, res) => {
     state,
     zipcode,
     price,
-    customer_id: (req.session.customer.id)
+    img_url,
+    customer_id: (req.session.customer.id),
   })
     .then((Service) => {
       res.json(
@@ -223,7 +219,6 @@ router.post('/booking', checkAuthentication, (req, res) => {
 });
 
 router.get("/customers/services", (req, res) => {
-  console.log("@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
   db.Services.findAll({
     where: {
       customer_id: req.session.customer.id
