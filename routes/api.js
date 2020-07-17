@@ -153,6 +153,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     state,
     zipcode,
     price,
+    img_url,
   } = req.body;
   db.Services.create({
     nick_name,
@@ -162,6 +163,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     state,
     zipcode,
     price,
+    img_url,
     customer_id: (req.session.customer.id),
   })
     .then((Service) => {
