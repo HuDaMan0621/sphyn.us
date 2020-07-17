@@ -2,14 +2,19 @@
 import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const login = css`
   display: flex;
   height: 100vh;
-  justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  flex-direction: column;
   margin-top: 5vh;
+
+  a {
+    color: ${colors.darkColor};
+  }
 
   .m-heading {
     font-size: 1.3rem;
@@ -62,47 +67,46 @@ const login = css`
 
 
 export default class LoginSection extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email: "",
-            login_password: "",
-            data: {},
-        };
-    }
-
-
-    handleFormSubmit = (e) => {
-        e.preventDefault();
-        axios
-            .post("/api/v1/login", {
-                ...this.state,
-            })
-            .then((res) => {
-                this.setState({ data: res.data });
-                this.props.history.push(`/customer/profile`);
-            });
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: "",
+      login_password: "",
+      data: {},
     };
+  }
 
-    handleChange = (e) => {
-        const { name, value } = e.target;
-        this.setState({
-            [name]: value,
-        });
-    };
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("/api/v1/login", {
+        ...this.state,
+      })
+      .then((res) => {
+        this.setState({ data: res.data });
+        this.props.history.push(`/customer/profile`);
+      });
+  };
 
-    analyzePassword = (e) => {
-        const realRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
-        const { name, value } = e.target;
-        this.setState({
-            [name]: value,
-        });
-        if (realRegex.test(e.target.value)) {
-            e.target.setCustomValidity('')
-        } else {
-            e.target.setCustomValidity("Password must contain a minimum of eight characters, with at least one letter, one number, and one special character");
-        }
-    }
+  handleChange = (e) => {
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+  };
+
+  analyzePassword = (e) => {
+      const realRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+      const { name, value } = e.target;
+      this.setState({
+          [name]: value,
+      });
+      if (realRegex.test(e.target.value)) {
+          e.target.setCustomValidity('')
+      } else {
+          e.target.setCustomValidity("Password must contain a minimum of eight characters, with at least one letter, one number, and one special character");
+      }
+  }
 
     render() {
         return (

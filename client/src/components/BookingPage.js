@@ -3,6 +3,10 @@ import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
 import Checkout from "./Checkout";
+import Package1 from "./packageDetails/Package1";
+import Package2 from "./packageDetails/Package2";
+import Package3 from "./packageDetails/Package3";
+import { Link } from "react-router-dom";
 
 const register = css`
   display: flex;
@@ -11,7 +15,12 @@ const register = css`
   align-items: center;
   margin: 1rem;
 
-    .m-heading {
+  a {
+    color: ${colors.darkColor};
+    margin-top: 2rem;
+  }
+
+  .m-heading {
     font-size: 2rem;
     margin: auto;
     border-bottom: solid 2px ${colors.primaryColor};
@@ -37,7 +46,7 @@ const register = css`
     }
 
     option {
-        background: red;
+      background: red;
     }
 
     button {
@@ -64,36 +73,35 @@ const register = css`
     }
   }
 
-    .package {
-      border: 1px solid ${colors.darkColor};
-      border-radius: ${utilities.borderRadius};
-      width: 100%;
-      max-width: 600px;
+  .package {
+    border: 1px solid ${colors.darkColor};
+    border-radius: ${utilities.borderRadius};
+    width: 100%;
+    max-width: 600px;
 
-      .heading {
-        background: ${colors.secondaryColor};
-        color: ${colors.lightColor};
-        padding: 1rem;
-      }
+    .heading {
+      background: ${colors.secondaryColor};
+      color: ${colors.lightColor};
+      padding: 1rem;
+    }
 
-      .price {
-        font-size: 2.5rem;
-        border-bottom: 1px solid ${colors.mediumColor};
-        padding: 0.5rem;
-      }
+    .price {
+      font-size: 2.5rem;
+      border-bottom: 1px solid ${colors.mediumColor};
+      padding: 0.5rem;
+    }
 
-      .details {
-        padding: 1rem;
+    .details {
+      padding: 1rem;
 
-        ul {
-          text-align: left;
+      ul {
+        text-align: left;
 
-          li {
-            padding: 0.25rem 0;
+        li {
+          padding: 0.25rem 0;
 
-            span {
-              color: ${colors.primaryColor};
-            }
+          span {
+            color: ${colors.primaryColor};
           }
         }
       }
@@ -105,48 +113,73 @@ export default class BookingPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nick_name: '',
-      sq_ft: '',
-      address: '',
-      city: '',
-      state: '',
-      zipcode: '',
-      price: '',
+      nick_name: "",
+      sq_ft: "",
+      address: "",
+      city: "",
+      state: "",
+      zipcode: "",
+      price: "",
       submitted: false,
-    }
+      package: "Package",
+      packageDetails: "Waiting for package selection",
+    };
   }
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    fetch('/api/v1/booking', {
-      method: 'POST',
+    fetch("/api/v1/booking", {
+      method: "POST",
       body: JSON.stringify(this.state),
       headers: {
-        'Content-Type': 'application/json;charset=UTF-8'
+        "Content-Type": "application/json;charset=UTF-8",
       },
-    })
-      .then(res => {
-        if (res.ok === false) {
-          this.props.history.push(`/login`)
-        }
-        else {
-          this.setState({ submitted: true })
-        }
-      })
-  }
-
+    }).then((res) => {
+      if (res.ok === false) {
+        this.props.history.push(`/login`);
+      } else {
+        this.setState({ submitted: true });
+      }
+    });
+  };
 
   handleChange = async (e) => {
     const { name, value } = e.target;
     await this.setState({
-      [name]: value
-    })
-  }
+      [name]: value,
+    });
+    this.checkPackage();
+    this.packageDetails(this.state.package);
+  };
+
+  checkPackage = () => {
+    if (this.state.price === "150") {
+      this.setState({ package: "Package 1" });
+    } else if (this.state.price === "300") {
+      this.setState({ package: "Package 2" });
+    } else if (this.state.price === "500") {
+      this.setState({ package: "Package 3" });
+    } else {
+      this.setState({ package: "Package " });
+    }
+  };
+
+  packageDetails = (packageChoice) => {
+    if (packageChoice === "Package 1") {
+      this.setState({ packageDetails: <Package1 /> });
+    } else if (packageChoice === "Package 2") {
+      this.setState({ packageDetails: <Package2 /> });
+    } else if (packageChoice === "Package 3") {
+      this.setState({ packageDetails: <Package3 /> });
+    } else {
+      this.setState({ packageDetails: "Waiting for package selection" });
+    }
+  };
 
   render() {
     return (
-      <div >{
-        !this.state.submitted ? (
+      <div>
+        {!this.state.submitted ? (
           <div css={register}>
             <form onSubmit={this.handleFormSubmit}>
               <label htmlFor="nick_name">
@@ -212,45 +245,37 @@ export default class BookingPage extends Component {
                 >
                   <option className="packageEmpty" value="" disabled>
                     Please Select a Package
-              </option>
+                  </option>
                   <option className="package1" value="150">
                     Package 1 $150
-              </option>
+                  </option>
                   <option className="package2" value="300">
                     Package 2 $300
-              </option>
-                  <option className="package3" value="5000">
+                  </option>
+                  <option className="package3" value="500">
                     Package 3 $500
-              </option>
+                  </option>
                 </select>
               </label>
               <button className="submit" type="submit">
                 Submit
-          </button>
+              </button>
             </form>
             <div className="package">
-              <div className="heading">
-                <h3>Package</h3>
-              </div>
-              <div className="price">$150</div>
-              <div className="details">
-                <ul>
-                  <li>
-                    <span>-</span> Test bullet
-              </li>
-                  <li>
-                    <span>-</span> Test bullet
-              </li>
-                  <li>
-                    <span>-</span> Test bullet
-              </li>
-                  <li>
-                    <span>-</span> Test bullet
-              </li>
-                </ul>
-              </div>
+              <div className="heading">{this.state.package}</div>
+              <div className="price">${this.state.price}</div>
+              <div className="details">{this.state.packageDetails}</div>
             </div>
+            <Link to="/">Back to home</Link>
           </div>
-        ) : <Checkout nick_name={this.state.nick_name} price={this.state.price} />}</div>);
+        ) : (
+          <Checkout
+            nick_name={this.state.nick_name}
+            packageDetails={this.state.packageDetails}
+            price={this.state.price}
+          />
+        )}
+      </div>
+    );
   }
 }
