@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
+const { Op } = require('sequelize');
 
 const bcrypt = require('bcrypt');
 const checkAuthentication = require('../auth');
@@ -49,16 +50,64 @@ router.post('/customer', (req, res) => {
     login_password,
     phone_number,
   } = req.body;
-  bcrypt.hash(login_password, 10, (err, hash) => {
-    db.Customer.create({
-      first_name,
-      last_name,
-      email,
-      login_password: hash,
-      phone_number: phone_number || false,
-    })
-  });
+  db.Customer.findOne(
+    {
+      where: {
+        email: req.body.email
+      }
+    }).then((result) => {
+      console.log(result);
+      if (result == null) {
+        bcrypt.hash(login_password, 10, (err, hash) => {
+          db.Customer.create({
+            first_name,
+            last_name,
+            email,
+            login_password: hash,
+            phone_number: phone_number || false,
+          }).then((result) => {
+            res.send(`Welcome ${result.first_name || result.email} Please Log In`)
+          });
+        })
+      } else {
+        res.status(403).json({
+          error: 'Email Address Already Exist'
+        })
+        console.log('Username or Email Already in Database')
+      }
+    });
 });
+
+//!examples
+// router.post('/', (req, res) => {
+//   const { username, email, password } = req.body;
+//   db.User.findOne( // get the user info
+//     {
+//       where: {
+//         [Op.or]: [
+//           { username: req.body.username },
+//           { email: req.body.email }
+//         ]
+//       }
+//     }).then((result) => {
+//       console.log(result);
+//       if (result == null) {
+//         bcrypt.hash(req.body.password, 10, (err, hash) => {
+//           db.User.create({
+//             username,
+//             email,
+//             password: hash,
+//           }).then((result) => {
+//             res.render('index', { errorMessage: `Welcome ${result.username} Please Log In` })
+//           });
+//         });
+//       } else {
+//         res.render('index', { errorMessage: 'Username or Email Already in Database' })
+//       }
+//     })
+// })
+//
+
 
 router.get('/login', function (req, res, next) {
   db.Customer.findAll()
@@ -154,6 +203,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price,
   } = req.body;
+  
   db.Services.create({
     nick_name,
     sq_ft,
@@ -162,7 +212,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     state,
     zipcode,
     price,
-    customer_id: (req.session.customer.id),
+    customer_id: (req.session.customer.id)
   })
     .then((Service) => {
       res.json(
@@ -171,6 +221,21 @@ router.post('/booking', checkAuthentication, (req, res) => {
     });
 
 });
+
+router.get("/customers/services", (req, res) => {
+  console.log("@@@@@@@@!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+  db.Services.findAll({
+    where: {
+      customer_id: req.session.customer.id
+    }
+  }).then((data) => {
+    console.log("you are here~~~~");
+    console.log(data);
+    res.json(data);
+  });
+});
+
+
 
 // router.get('/checkout', checkAuthentication, (req, res) => {
 //   db.customer.findByPk()
