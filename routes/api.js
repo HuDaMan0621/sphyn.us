@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models');
-
+const { Op } = require('sequelize');
 const bcrypt = require('bcrypt');
 const checkAuthentication = require('../auth');
 
@@ -15,7 +15,6 @@ router.get('/', function (req, res, next) {
 
 //customer profile route 
 router.get('/customer/profile', checkAuthentication, function (req, res) {
-  console.log('this is req.session.customer', req.session.customer)
   if (!req.session.customer) {
     res.status(401).json({
       error: 'Unauthorized User'
@@ -49,16 +48,61 @@ router.post('/customer', (req, res) => {
     login_password,
     phone_number,
   } = req.body;
-  bcrypt.hash(login_password, 10, (err, hash) => {
-    db.Customer.create({
-      first_name,
-      last_name,
-      email,
-      login_password: hash,
-      phone_number: phone_number || false,
-    })
-  });
+  db.Customer.findOne(
+    {
+      where: {
+        email: req.body.email
+      }
+    }).then((result) => {
+      if (result == null) {
+        bcrypt.hash(login_password, 10, (err, hash) => {
+          db.Customer.create({
+            first_name,
+            last_name,
+            email,
+            login_password: hash,
+            phone_number: phone_number || false,
+          }).then((result) => {
+            res.send(`Welcome ${result.first_name || result.email} Please Log In`)
+          });
+        })
+      } else {
+        res.status(403).json({
+          error: 'Email Address Already Exists'
+        })
+      }
+    });
 });
+
+//!examples
+// router.post('/', (req, res) => {
+//   const { username, email, password } = req.body;
+//   db.User.findOne( // get the user info
+//     {
+//       where: {
+//         [Op.or]: [
+//           { username: req.body.username },
+//           { email: req.body.email }
+//         ]
+//       }
+//     }).then((result) => {
+//       if (result == null) {
+//         bcrypt.hash(req.body.password, 10, (err, hash) => {
+//           db.User.create({
+//             username,
+//             email,
+//             password: hash,
+//           }).then((result) => {
+//             res.render('index', { errorMessage: `Welcome ${result.username} Please Log In` })
+//           });
+//         });
+//       } else {
+//         res.render('index', { errorMessage: 'Username or Email Already in Database' })
+//       }
+//     })
+// })
+//
+
 
 router.get('/login', function (req, res, next) {
   db.Customer.findAll()
@@ -75,7 +119,6 @@ router.post('/login', (req, res) => {
       bcrypt.compare(login_password, Customer.login_password, (err, match) => {
         if (match) {
           req.session.customer = Customer;
-          console.log(req.session);
           res.json(Customer)
         }
         else {
@@ -108,7 +151,6 @@ router.delete('/customer/:id', (req, res) => {
 });
 
 router.put('/customer/:id', (req, res) => {
-  console.log('THIS IS THE PUT ROUTE!!!! ')
   const {
     first_name,
     last_name,
@@ -139,7 +181,6 @@ router.put('/customer/:id', (req, res) => {
     zipcode
   }, { where: { id: req.params.id } },
   ).then((result) => {
-    console.log(result)
     res.redirect('/');
   });
 });
@@ -153,7 +194,9 @@ router.post('/booking', checkAuthentication, (req, res) => {
     state,
     zipcode,
     price,
+    img_url,
   } = req.body;
+  
   db.Services.create({
     nick_name,
     sq_ft,
@@ -162,6 +205,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     state,
     zipcode,
     price,
+    img_url,
     customer_id: (req.session.customer.id),
   })
     .then((Service) => {
@@ -172,11 +216,22 @@ router.post('/booking', checkAuthentication, (req, res) => {
 
 });
 
+router.get("/customers/services", (req, res) => {
+  db.Services.findAll({
+    where: {
+      customer_id: req.session.customer.id
+    }
+  }).then((data) => {
+    res.json(data);
+  });
+});
+
+
+
 // router.get('/checkout', checkAuthentication, (req, res) => {
 //   db.customer.findByPk()
 //     .then(data => {
 //       res.json(data);
-//       console.log(data);
 //     })
 // })
 
