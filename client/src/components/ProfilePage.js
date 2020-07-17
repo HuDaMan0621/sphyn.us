@@ -14,7 +14,7 @@ export default function ProfilePage(props) {
             .then((data) => {
                 console.log("this is data");
                 console.log(data);
-                setData2(data);
+                setData2(data);  
                 setIsLoading(false);
             })
             .catch((error) => console.log("Please Login"));

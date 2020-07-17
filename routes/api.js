@@ -203,22 +203,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     zipcode,
     price,
   } = req.body;
-
-  //   router.post('/register', (req, res) => {
-  //     const { name, email, phone, address } = req.body;
-  //     db.User.findByPk(req.session.user.id)
-  //         .then((User) => {
-  //             User.createContact({
-  //                 name,
-  //                 email,
-  //                 phone,
-  //                 address,
-  //             })
-  //         }).then((result) => {
-  //             res.redirect('/contact');
-  //         });
-  // });
-
+  
   db.Services.create({
     nick_name,
     sq_ft,
