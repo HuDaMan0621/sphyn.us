@@ -80,12 +80,9 @@ export default class RegisterSection extends Component {
     e.preventDefault();
     axios.post("/api/v1/customer", { ...this.state })
       .then((data) => {
-        console.log("this is data from register section");
-        console.log(data.data);
         this.props.history.push("/login");
       })
       .catch((error) => {
-        console.log(error)
         this.setState({ error: true })
       })
   };
@@ -96,7 +93,6 @@ export default class RegisterSection extends Component {
       [name]: value,
       error: false
     });
-    
   };
 
   analyzePassword = (e) => {

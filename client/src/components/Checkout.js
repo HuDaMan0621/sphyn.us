@@ -60,6 +60,7 @@ class Checkout extends Component {
           <PayPalButton price={this.props.price} />{" "}
         </div>
         <Link to="/">Back to home</Link>
+        <Link to="/customer/profile">Back to profile</Link>
       </div>
     );
   }

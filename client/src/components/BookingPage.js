@@ -269,12 +269,12 @@ export default class BookingPage extends Component {
             <Link to="/">Back to home</Link>
           </div>
         ) : (
-          <Checkout
-            nick_name={this.state.nick_name}
-            packageDetails={this.state.packageDetails}
-            price={this.state.price}
-          />
-        )}
+            <Checkout
+              nick_name={this.state.nick_name}
+              packageDetails={this.state.packageDetails}
+              price={this.state.price}
+            />
+          )}
       </div>
     );
   }

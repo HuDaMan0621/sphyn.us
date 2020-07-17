@@ -11,9 +11,6 @@ export default function Showcase() {
         fetch(`/api/v1/customers/services`)
             .then((data) => data.json())
             .then((data) => {
-                console.log('this is the data on showcase@@@@@@!!!!!!!!!')
-                // setData2(data);
-                console.log(data)
                 setGalleryInfo(data);
                 setIsLoading(false);
             })
@@ -33,11 +30,3 @@ export default function Showcase() {
         </div>
     );
 }
-
-// .then((data) => data.json())
-//             .then((data) => {
-//                 console.log("this is data");
-//                 console.log(data);
-//                 setData2(data);
-//                 setIsLoading(false);
-//             })

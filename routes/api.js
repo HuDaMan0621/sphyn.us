@@ -86,7 +86,6 @@ router.post('/customer', (req, res) => {
 //         ]
 //       }
 //     }).then((result) => {
-//       console.log(result);
 //       if (result == null) {
 //         bcrypt.hash(req.body.password, 10, (err, hash) => {
 //           db.User.create({
@@ -120,7 +119,6 @@ router.post('/login', (req, res) => {
       bcrypt.compare(login_password, Customer.login_password, (err, match) => {
         if (match) {
           req.session.customer = Customer;
-          console.log(req.session);
           res.json(Customer)
         }
         else {
@@ -224,8 +222,6 @@ router.get("/customers/services", (req, res) => {
       customer_id: req.session.customer.id
     }
   }).then((data) => {
-    console.log("you are here~~~~");
-    console.log(data);
     res.json(data);
   });
 });
@@ -236,7 +232,6 @@ router.get("/customers/services", (req, res) => {
 //   db.customer.findByPk()
 //     .then(data => {
 //       res.json(data);
-//       console.log(data);
 //     })
 // })
 

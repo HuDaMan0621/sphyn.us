@@ -4,25 +4,26 @@ module.exports = {
 
   up: async (queryInterface, Sequelize) => {
 
-    await queryInterface.bulkInsert('Services', [
-      {
-        nick_name: 'My First Property in Buckhead',
-        sq_ft: '3000',
-        address: '1 Buckhead RD',
-        city: 'Atlanta',
-        state: 'GA',
-        zipcode: '30324',
-        price: '300',
-        completed: true,
-        reschedule: false,
-        schedule_confirm: false,
-        payment_id: '1',
-        service_date: null,
-        img_url: null,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }
-    ])
+    // await queryInterface.bulkInsert('Services', [
+    //   // {
+    //   //   nick_name: 'My First Property in Buckhead',
+    //   //   sq_ft: '3000',
+    //   //   address: '1 Buckhead RD',
+    //   //   city: 'Atlanta',
+    //   //   state: 'GA',
+    //   //   zipcode: '30324',
+    //   //   price: '300',
+    //   //   completed: true,
+    //   //   reschedule: false,
+    //   //   schedule_confirm: false,
+    //   //   payment_id: '1',
+    //   //   service_date: null,
+    //   //   img_url: null,
+    //   //   createdAt: new Date(),
+    //   //   updatedAt: new Date(),
+    //   // }
+    // ])
+
     return await queryInterface.bulkInsert('Customers', [
       {
         first_name: 'John',

@@ -96,50 +96,50 @@ export default class LoginSection extends Component {
   };
 
   analyzePassword = (e) => {
-      const realRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
-      const { name, value } = e.target;
-      this.setState({
-          [name]: value,
-      });
-      if (realRegex.test(e.target.value)) {
-          e.target.setCustomValidity('')
-      } else {
-          e.target.setCustomValidity("Password must contain a minimum of eight characters, with at least one letter, one number, and one special character");
-      }
+    const realRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+    const { name, value } = e.target;
+    this.setState({
+      [name]: value,
+    });
+    if (realRegex.test(e.target.value)) {
+      e.target.setCustomValidity('')
+    } else {
+      e.target.setCustomValidity("Password must contain a minimum of eight characters, with at least one letter, one number, and one special character");
+    }
   }
 
-    render() {
-        return (
-            <div css={login}>
-                <form onSubmit={this.handleFormSubmit}>
-                    <h3 className="m-heading">Sign In</h3>
-                    <label htmlFor="email">
-                        <input
-                            required
-                            htmlFor="email"
-                            className="email"
-                            name="email"
-                            placeholder="Email"
-                            onChange={this.handleChange}
-                            value={this.state.email}
-                        ></input>
-                    </label>
-                    <label htmlFor="loginPassword">
-                        <input
-                            required
-                            className="loginPassword"
-                            name="login_password"
-                            placeholder="Password"
-                            onChange={this.analyzePassword}
-                            value={this.state.login_password}
-                            type="password"
-                        ></input>
-                    </label>
-                    <button className="submit" type="submit">
-                        Submit
+  render() {
+    return (
+      <div css={login}>
+        <form onSubmit={this.handleFormSubmit}>
+          <h3 className="m-heading">Sign In</h3>
+          <label htmlFor="email">
+            <input
+              required
+              htmlFor="email"
+              className="email"
+              name="email"
+              placeholder="Email"
+              onChange={this.handleChange}
+              value={this.state.email}
+            ></input>
+          </label>
+          <label htmlFor="loginPassword">
+            <input
+              required
+              className="loginPassword"
+              name="login_password"
+              placeholder="Password"
+              onChange={this.analyzePassword}
+              value={this.state.login_password}
+              type="password"
+            ></input>
+          </label>
+          <button className="submit" type="submit">
+            Submit
           </button>
-                </form>
-            </div >
-        );
-    }
+        </form>
+      </div >
+    );
+  }
 }

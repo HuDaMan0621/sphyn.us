@@ -12,15 +12,12 @@ export default function ProfilePage(props) {
         fetch(`/api/v1/customer/profile`)
             .then((data) => data.json())
             .then((data) => {
-                console.log("this is data");
-                console.log(data);
-                setData2(data);  
+                setData2(data);
                 setIsLoading(false);
             })
             .catch((error) => console.log("Please Login"));
     }, []);
 
-    console.log("this is data2", data2);
     return (
         <div>
             {data2.error ? <div>User Not Authorized. <br />Please <Link to="/login">Login</Link></div> : (
