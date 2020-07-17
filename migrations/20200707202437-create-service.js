@@ -61,7 +61,10 @@ module.exports = {
       },
       service_date: {
         type: Sequelize.DATE
-      }
+      },
+      img_url: {
+        type: Sequelize.TEXT,
+      },
     });
   },
   down: (queryInterface, Sequelize) => {

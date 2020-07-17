@@ -18,6 +18,7 @@ module.exports = {
         schedule_confirm: false,
         payment_id: '1',
         service_date: null,
+        img_url: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       }
