@@ -17,7 +17,6 @@ export default function Showcase() {
                 console.log('print 1 times? why')
             })
             .catch((error) => console.log("Please Login"));
-
     }, [])
 
     console.log(galleryInfo)
