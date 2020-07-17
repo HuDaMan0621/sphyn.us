@@ -14,11 +14,13 @@ export default function Showcase() {
             .then((data) => {
                 setGalleryInfo(data);
                 setIsLoading(false);
+                console.log('print 1 times? why')
             })
             .catch((error) => console.log("Please Login"));
 
     }, [])
 
+    console.log(galleryInfo)
     return (
         <div>
             {isLoading ? <div>loading...</div> : (
@@ -28,7 +30,7 @@ export default function Showcase() {
                     <QRCode value={`http://localhost:3000/${galleryInfo[0].id}/showcase`} />
                     <div>{<iframe width="853" height="480" src={`${galleryInfo[0].matterport}`} frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe>}</div>
                     {/* {<iframe width="853" height="480" src="https://my.matterport.com/show/?m=CoPaqg84uwx&brand=0" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe>} */}
-                    <GoogleMaps />
+                    <GoogleMaps address={galleryInfo[0].address} city={galleryInfo[0].city} state={galleryInfo[0].state} zipcode={galleryInfo[0].zipcode} />
                 </div>
             )
             }

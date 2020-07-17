@@ -16,6 +16,7 @@
     "react": "^16.13.1",
     "react-async-script-loader": "^0.3.0",
     "react-dom": "^16.13.1",
+    "react-geocode": "^0.2.1",
     "react-google-api": "^1.0.1",
     "react-google-maps": "^9.4.5",
     "react-paypal-button-v2": "^2.6.2",
