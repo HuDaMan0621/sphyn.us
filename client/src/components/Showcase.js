@@ -11,7 +11,6 @@ export default function Showcase() {
         fetch(`/api/v1/customers/services`)
             .then((data) => data.json())
             .then((data) => {
-                // setData2(data);
                 setGalleryInfo(data);
                 setIsLoading(false);
             })
@@ -22,11 +21,11 @@ export default function Showcase() {
     return (
         <div>
             {isLoading ? <div>loading...</div> : (
-                <div>
-                    <h1>Showcase</h1>
-                    <h1>Display customer information </h1>
-                    <QRCode value={`http://localhost:3000/customer/services/showcase`} />
-                </div>
+            <div>
+                <h1>Showcase</h1>
+                <h1>Display customer information </h1>
+                <QRCode value={`http://localhost:3000/customer/services/showcase`} />
+            </div>
             )}
         </div>
     );

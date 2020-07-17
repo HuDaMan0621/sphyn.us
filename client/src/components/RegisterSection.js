@@ -93,7 +93,6 @@ export default class RegisterSection extends Component {
       [name]: value,
       error: false
     });
-
   };
 
   analyzePassword = (e) => {

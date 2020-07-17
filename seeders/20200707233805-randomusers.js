@@ -23,6 +23,7 @@ module.exports = {
     //   //   updatedAt: new Date(),
     //   // }
     // ])
+
     return await queryInterface.bulkInsert('Customers', [
       {
         first_name: 'John',
