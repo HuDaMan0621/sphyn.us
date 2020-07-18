@@ -112,22 +112,20 @@ export default class BookingPage extends Component {
     this.state = {
       services: [],
       formShown: false,
+      errorMessage: ''
     }
   }
   componentDidMount = () => {
     let customerRole = ''
-    fetch("/api/v1/customer/services")
+    fetch("/api/v1/admin/update")
       .then(data => data.json())
       .then(data => {
-        console.log(data)
         this.setState({
-          services: data
+          services: data,
+          errorMessage: data.error
         })
-        // if (this.state.email !== 'authorized@gmail.com') {
-        //   this.props.history.push(`/customer/profile`);
-        // }
       })
-      .catch(error => console.log('Please Login'))
+      .catch(error => console.log('Please log in.'))
   }
 
   handleFormSubmit = (e, serviceId) => {
@@ -165,10 +163,10 @@ export default class BookingPage extends Component {
     return (
 
       <div>
-        <h1>Services: All Customers</h1>
-        {this.state.services.map((service, i) => {
-          return (
-            (service.email != 'authorized@gmail.com' ? <div>Unauthorized user. Please return to your <Link to="/customer/profile">profile.</Link></div> :
+        <h1>Services</h1>
+        {(this.state.errorMessage ? <div>Unauthorized user. Please return to your <Link to="/customer/profile"><u>profile</u>.</Link></div> :
+          this.state.services.map((service, i) => {
+            return (
               <div css={register} key={service.id}>
                 <span>{service.nick_name}</span><span>{service.sq_ft}</span><span>{service.address}</span><span>{service.city}</span>
                 <span>{service.state}</span><span>{service.zipcode}</span><span>{service.price}</span><span>{service.customer_id}</span>
@@ -307,12 +305,16 @@ export default class BookingPage extends Component {
                     </div>
                   </div>
                   : <div></div>}
-              </div>)
+              </div>
+            )
+          }
           )
-        })}
+        )
+        }
       </div>
     );
   }
 }
+
 
 

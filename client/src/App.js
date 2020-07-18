@@ -22,7 +22,7 @@ function App() {
           <Route path="/login" component={LoginSection} />
           <Route path="/booking" component={BookingPage} />
           <Route path="/showcase" component={Showcase} />
-          <Route path="/admin" component={Administrator} />
+          <Route path="/admin/update" component={Administrator} />
         </Switch>
       </div>
     </BrowserRouter>
