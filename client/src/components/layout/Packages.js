@@ -30,6 +30,11 @@ const packages = css`
     .package {
       border: 1px solid ${colors.darkColor};
       border-radius: ${utilities.borderRadius};
+      transition: all ${utilities.animationSpeed} ease;
+      &:hover {
+        transform: translateY(2px);
+        box-shadow: 1px 1px 20px 2px rgba(0, 0, 0, 0.4);
+      }
 
       .heading {
         background: ${colors.secondaryColor};
@@ -107,46 +112,16 @@ export default function Packages() {
           <div className="details">
             <ul>
               <li>
-                <span>-</span> Test bullet
+                <span>-</span> Interior and exterior photography
               </li>
               <li>
-                <span>-</span> Test bullet
+                <span>-</span> Delivered next day by 11am
               </li>
               <li>
-                <span>-</span> Test bullet
+                <span>-</span> 2000sqft max
               </li>
               <li>
-                <span>-</span> Test bullet
-              </li>
-            </ul>
-            <div className="links">
-              <button>
-                <Link to="/login">Returning User Book Now</Link>
-              </button>
-              <button>
-                <Link to="/register">New User Book Now</Link>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="package">
-          <div className="heading">
-            <h3>Package 1</h3>
-          </div>
-          <div className="price">$150</div>
-          <div className="details">
-            <ul>
-              <li>
-                <span>-</span> Test bullet
-              </li>
-              <li>
-                <span>-</span> Test bullet
-              </li>
-              <li>
-                <span>-</span> Test bullet
-              </li>
-              <li>
-                <span>-</span> Test bullet
+                <span>-</span> $0.20 per sqft over 2000
               </li>
             </ul>
             <div className="links">
@@ -161,22 +136,52 @@ export default function Packages() {
         </div>
         <div className="package">
           <div className="heading">
-            <h3>Package 1</h3>
+            <h3>Package 2</h3>
           </div>
-          <div className="price">$150</div>
+          <div className="price">$300</div>
           <div className="details">
             <ul>
               <li>
-                <span>-</span> Test bullet
+                <span>-</span> 3D walk through tour
               </li>
               <li>
-                <span>-</span> Test bullet
+                <span>-</span> Delivered in 2 days or less
               </li>
               <li>
-                <span>-</span> Test bullet
+                <span>-</span> 2000sqft max
               </li>
               <li>
-                <span>-</span> Test bullet
+                <span>-</span> $0.20 per sqft over 2000
+              </li>
+            </ul>
+            <div className="links">
+              <button>
+                <Link to="/login">Returning User Book Now</Link>
+              </button>
+              <button>
+                <Link to="/register">New User Book Now</Link>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="package">
+          <div className="heading">
+            <h3>Package 3</h3>
+          </div>
+          <div className="price">$500</div>
+          <div className="details">
+            <ul>
+              <li>
+                <span>-</span> Interior and exterior photography
+              </li>
+              <li>
+                <span>-</span> 3D walk through tour
+              </li>
+              <li>
+                <span>-</span> 3000sqft max
+              </li>
+              <li>
+                <span>-</span> $0.20 per sqft over 3000
               </li>
             </ul>
             <div className="links">
