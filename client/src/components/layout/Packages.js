@@ -48,6 +48,10 @@ const packages = css`
         color: ${colors.lightColor};
         padding: 1rem;
         font-size: 2rem;
+
+        span {
+          color: ${colors.primaryColor};
+        }
       }
 
       .price {
@@ -90,18 +94,17 @@ const packages = css`
         transition: all ${utilities.animationSpeed} ease;
 
         &:hover {
-          background: transparent;
-          border: 1px solid ${colors.primaryColor};
-          color: ${colors.darkColor};
+          background: ${colors.secondaryColor};
+          border: 2px solid ${colors.primaryColor};
 
           a {
-            color: ${colors.darkColor};
+            color: ${colors.lightColor};
             display: block;
           }
         }
 
         a {
-          color: ${colors.lightColor};
+          color: ${colors.darkColor};
         }
       }
     }
@@ -115,7 +118,9 @@ export default function Packages() {
       <div className="packages-wrap">
         <div className="package">
           <div className="heading">
-            <h3>Package 1</h3>
+            <h3>
+              Package <span>1</span>
+            </h3>
           </div>
           <div className="price">$150</div>
           <div className="details">
@@ -145,7 +150,9 @@ export default function Packages() {
         </div>
         <div className="package">
           <div className="heading">
-            <h3>Package 2</h3>
+            <h3>
+              Package <span>2</span>
+            </h3>
           </div>
           <div className="price">$300</div>
           <div className="details">
@@ -175,7 +182,9 @@ export default function Packages() {
         </div>
         <div className="package">
           <div className="heading">
-            <h3>Package 3</h3>
+            <h3>
+              Package <span>3</span>
+            </h3>
           </div>
           <div className="price">$500</div>
           <div className="details">

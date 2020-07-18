@@ -58,9 +58,8 @@ const about = css`
         }
 
         .links {
-          display: flex;
-          justify-content: flex-end;
-          padding: 1rem;
+          text-align: right;
+          font-size: 2rem;
 
           a {
             color: ${colors.primaryColor};
@@ -106,7 +105,6 @@ export default function About() {
               headset for an even more immersive experience.
             </p>
             <div className="links">
-              <Link to="/faqs">Faqs</Link>
               <Link to="/guidelines">Guidelines</Link>
             </div>
           </div>
