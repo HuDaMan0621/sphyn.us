@@ -14,11 +14,18 @@ const about = css`
       font-size: 2rem;
       margin: auto;
       border-bottom: solid 2px ${colors.primaryColor};
-      width: 30%;
+      width: 90%;
       margin-bottom: 2rem;
+      padding-bottom: 0.25rem;
 
       @media (min-width: 768px) {
         font-size: 4rem;
+        width: 40%;
+      }
+
+      @media (min-width: 900px) {
+        font-size: 4rem;
+        width: 30%;
       }
     }
 
@@ -80,18 +87,19 @@ export default function About() {
         <div className="about-wrap">
           <div className="about-content">
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-              pellentesque lobortis libero, a viverra arcu condimentum rhoncus.
-              Fusce non nibh sapien. In id scelerisque ante. Pellentesque
-              finibus eros vitae eros porttitor, id semper nisl molestie.
-              Maecenas at est egestas, lobortis nibh dictum, venenatis ante.
-              Proin venenatis venenatis iaculis. Proin vitae erat ante. Fusce
-              porttitor, urna ut finibus euismod, metus mauris posuere libero,
-              ut aliquet ex dui at risus. Phasellus nisi orci, consectetur non
-              dui a, ultrices aliquet velit. Integer sed sapien feugiat,
-              venenatis neque nec, mattis diam. Nunc vel mauris nec nibh feugiat
-              gravida a vitae ex. Duis bibendum sapien sit amet ipsum lacinia
-              euismod a vel ipsum. Nulla aliquam aliquam elementum.
+              Sphyn offers 3D home tours taken with the Matterport camera,
+              prospective buyers, renters, customers or visitors can take a tour
+              of your property anytime, from anywhere. How is this possible?
+              Matterport is a three-dimensional camera system you can use to
+              create realistic, fully immersive experiences. Our designers use
+              this tool to capture imagery, collect measurements and process
+              data to create, edit and share a 3D rendering of your location.
+              Viewers can then explore the location from a variety of
+              viewpoints, learn more about the aspects of the location they’re
+              interested in and get a feel for the space without having to
+              physically travel there. They can view this 3D representation on a
+              desktop computer, a mobile device or with a virtual-reality
+              headset for an even more immersive experience.
             </p>
           </div>
           <div className="about-image">

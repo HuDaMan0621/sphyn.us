@@ -14,7 +14,7 @@ export default function Package3() {
           <span>-</span> 3000sqft max
         </li>
         <li>
-          <span>-</span> $0.20 per sqft over 2000
+          <span>-</span> $0.20 per sqft over 3000
         </li>
       </ul>
     </div>

@@ -6,7 +6,6 @@ export default function Showcase() {
     const [serviceInfo, setServiceInfo] = useState([]);
     const [imgUrl, setImgUrl] = useState([])
 
-
     useEffect(() => {
         fetch('/api/v1/all-services')
             .then(data => data.json())
@@ -33,44 +32,10 @@ export default function Showcase() {
                     </div>
                 )
             })
-                /* )} */
             }
         </div >
     )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // import React, { useState, useEffect } from 'react';
 // import { Link } from "react-router-dom";
