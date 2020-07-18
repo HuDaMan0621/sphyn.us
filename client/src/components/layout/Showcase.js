@@ -1,20 +1,24 @@
-import React from 'react';
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import {colors, utilities} from '../../styleVars';
+import React from "react";
+import { jsx, css } from "@emotion/core";
+import { colors, utilities } from "../../styleVars";
 
-const {primaryColor, darkColor, secondaryColor, lightColor} = colors;
-const {borderRadius, animationSpeed} = utilities;
+const showcase = css`
+  height: 500px;
+  width: 100vw;
 
-const showcase = css `
-  .showcase {
-    background: url("../../public/images/img/showcase.jpg") no-repeat center center/cover;
+  iframe {
+    width: 100%;
+    height: 100%;
   }
-`
+`;
 export default function Showcase() {
   return (
-      <div css={showcase} className="showcase">
-        <img src="./images/showcase.jpg" alt="beautiful home"/>
-      </div>
-  )
+    <div css={showcase}>
+      <iframe
+        src="https://my.matterport.com/show/?m=rvKhT7rSPML&play=1"
+        frameborder="0"
+      ></iframe>
+    </div>
+  );
 }
