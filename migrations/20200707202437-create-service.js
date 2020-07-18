@@ -65,6 +65,11 @@ module.exports = {
       img_url: {
         type: Sequelize.TEXT,
       },
+      matterport: {
+        allowNull: false,
+        type: Sequelize.TEXT,
+        defaultValue: false
+      }
     });
   },
   down: (queryInterface, Sequelize) => {
