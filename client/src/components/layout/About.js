@@ -101,6 +101,10 @@ export default function About() {
               desktop computer, a mobile device or with a virtual-reality
               headset for an even more immersive experience.
             </p>
+            <div className="links">
+              <Link to="/faqs">Faqs</Link>
+              <Link to="/guidelines">Guidelines</Link>
+            </div>
           </div>
           <div className="about-image">
             <img src="./images/about.jpg" alt="" />
