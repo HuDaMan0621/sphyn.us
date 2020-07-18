@@ -20,7 +20,7 @@ export default function ProfilePage(props) {
 
     return (
         <div>
-            {data2.error ? <div>User Not Authorized. <br />Please <Link to="/login">Login</Link></div> : (
+            {data2.error ? <div>User Not Authorized. <br />Please <Link to="/login">log in</Link></div> : (
                 <div>
                     {data2.data.id && <QRCode value={`http://localhost:3000/customer/${data2.data.id}/showcase`} />}
                     <h1>Profile Page!!!!!!</h1>

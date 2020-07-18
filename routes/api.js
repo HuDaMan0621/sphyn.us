@@ -39,6 +39,13 @@ router.get('/customer/services', checkAuthentication, (req, res,) => {
     })
 });
 
+router.get('/customers/all-services', checkAuthentication, (req, res,) => {
+  db.Services.findAll()
+    .then(data => {
+      res.json(data || []);
+    })
+});
+
 //register route  
 router.post('/customer', (req, res) => {
   var {
@@ -196,7 +203,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
     price,
     img_url,
   } = req.body;
-  
+
   db.Services.create({
     nick_name,
     sq_ft,
@@ -216,17 +223,6 @@ router.post('/booking', checkAuthentication, (req, res) => {
 
 });
 
-router.get("/customers/services", (req, res) => {
-  db.Services.findAll({
-    where: {
-      customer_id: req.session.customer.id
-    }
-  }).then((data) => {
-    res.json(data);
-  });
-});
-
-
 
 // router.get('/checkout', checkAuthentication, (req, res) => {
 //   db.customer.findByPk()
@@ -234,5 +230,58 @@ router.get("/customers/services", (req, res) => {
 //       res.json(data);
 //     })
 // })
+
+router.get("/admin/update", (req, res) => {
+  if (req.session.customer.id === 5) {
+    db.Services.findAll({
+    }).then((data) => {
+      res.json(data);
+    })
+  }
+  else {
+    res.status(401).json({
+      error: 'Unauthorized User'
+    })
+  }
+});
+
+router.put('/admin/update', checkAuthentication, (req, res) => {
+  const {
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price,
+    img_url,
+    customer_id,
+    payment_id,
+    schedule_confirm,
+    reschedule,
+    completed,
+    id
+  } = req.body.services[0];
+
+  console.log(req.body)
+  db.Services.update({
+    nick_name,
+    sq_ft,
+    address,
+    city,
+    state,
+    zipcode,
+    price,
+    img_url,
+    customer_id,
+    payment_id,
+    schedule_confirm,
+    reschedule,
+    completed,
+    id,
+    customer_id: req.session.customer.id
+  }, { where: { id: id } })
+
+});
 
 module.exports = router;
