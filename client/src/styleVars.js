@@ -10,5 +10,5 @@ export const utilities = {
   borderRadius: "3px",
   animationSpeed: "0.3s",
   sectionPadding: "3rem 1rem",
-  maxWidth: "1100px",
+  maxWidth: "1300px",
 };
