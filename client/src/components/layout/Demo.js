@@ -15,7 +15,7 @@ const demo = css`
   iframe {
     width: 100%;
     height: 250px;
-    @media (min-width: 768px) {
+    @media (min-width: 600px) {
       height: 100%;
     }
   }

@@ -13,11 +13,18 @@ const packages = css`
     font-size: 2rem;
     margin: auto;
     border-bottom: solid 2px ${colors.primaryColor};
-    width: 30%;
+    width: 90%;
     margin-bottom: 2rem;
+    padding-bottom: 0.25rem;
 
     @media (min-width: 768px) {
       font-size: 4rem;
+      width: 40%;
+    }
+
+    @media (min-width: 900px) {
+      font-size: 4rem;
+      width: 30%;
     }
   }
 
@@ -40,6 +47,7 @@ const packages = css`
         background: ${colors.secondaryColor};
         color: ${colors.lightColor};
         padding: 1rem;
+        font-size: 2rem;
       }
 
       .price {
@@ -74,6 +82,7 @@ const packages = css`
         margin: 0.25rem auto;
         padding: 0.5rem;
         width: 100%;
+        font-size: 1.1rem;
         background: ${colors.primaryColor};
         border: none;
         cursor: pointer;
