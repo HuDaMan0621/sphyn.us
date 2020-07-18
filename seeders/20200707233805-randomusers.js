@@ -47,6 +47,14 @@ module.exports = {
         phone_number: '1112222',
         createdAt: new Date(),
         updatedAt: new Date(),
+      }, {
+        first_name: 'Authorized',
+        last_name: 'User',
+        email: 'authorized@gmail.com',
+        login_password: '$2b$10$y5WE60HrD8AmlP1sehNfx.VZrQnSZeNnSUvXz0aDOJxKjn4BK3Ho6',
+        phone_number: '5555555555',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       }
     ], {})
 
