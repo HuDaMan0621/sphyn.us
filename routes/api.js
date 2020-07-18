@@ -39,7 +39,7 @@ router.get('/customer/services', checkAuthentication, (req, res,) => {
     })
 });
 
-router.get('/customers/all-services', checkAuthentication, (req, res,) => {
+router.get('/all-services', (req, res,) => {
   db.Services.findAll()
     .then(data => {
       res.json(data || []);
