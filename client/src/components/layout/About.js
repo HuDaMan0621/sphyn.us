@@ -57,15 +57,19 @@ const about = css`
           }
         }
 
-        .services {
-          background: ${colors.darkColor};
-          color: ${colors.lightColor};
+        .links {
+          display: flex;
+          justify-content: flex-end;
           padding: 1rem;
-          margin-top: 2rem;
-          border-radius: ${utilities.borderRadius};
 
-          h3 {
-            text-align: center;
+          a {
+            color: ${colors.primaryColor};
+            padding: 0 1rem;
+            transition: all ${utilities.animationSpeed} ease;
+
+            &:hover {
+              color: ${colors.secondaryColor};
+            }
           }
         }
       }
