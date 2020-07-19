@@ -104,10 +104,16 @@ export default class BookingPage extends Component {
   handleFormSubmit = (e, serviceId) => {
     e.preventDefault();
     axios
-      .put("/api/v1/admin/update", {
-        ...this.state,
-        id: serviceId,
-      })
+      .put(
+        "/api/v1/admin/update",
+        {
+          ...this.state,
+          id: serviceId,
+        },
+        this.setState({
+          formShown: !this.state.formShown,
+        })
+      )
       .then((res) => {
         if (res.ok === false) {
           this.props.history.push(`/login`);
@@ -179,7 +185,7 @@ export default class BookingPage extends Component {
                   <span>Rescheduled: </span> {service.reschedule}
                 </p>
                 <p>
-                  <span>Confirmed: </span> {service.schedule_confirm}
+                  <span>Scheduled: </span> {service.schedule_confirm}
                 </p>
                 <p>
                   <span>Payment: </span> {service.payment_id}
@@ -193,6 +199,7 @@ export default class BookingPage extends Component {
                 {this.state.formShown ? (
                   <form onSubmit={(e) => this.handleFormSubmit(e, service.id)}>
                     <label htmlFor="nick_name">
+                      Name:
                       <input
                         className="nickName"
                         name="nick_name"
@@ -201,6 +208,7 @@ export default class BookingPage extends Component {
                         value={service.nick_name}
                       ></input>
                     </label>
+                    SQFT:
                     <label htmlFor="sq_ft">
                       <input
                         className="sq_ft"
@@ -210,6 +218,7 @@ export default class BookingPage extends Component {
                         value={service.sq_ft}
                       ></input>
                     </label>
+                    Address:
                     <label htmlFor="address">
                       <input
                         className="address"
@@ -220,6 +229,7 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="city">
+                      City:
                       <input
                         className="city"
                         name="city"
@@ -229,6 +239,7 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="state">
+                      State:
                       <input
                         className="state"
                         name="state"
@@ -238,6 +249,7 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="zipcode">
+                      Zipcode:
                       <input
                         className="zipcode"
                         name="zipcode"
@@ -247,6 +259,7 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="price">
+                      Price:
                       <input
                         className="price"
                         type="number"
@@ -259,6 +272,7 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="img_url">
+                      Img URL:
                       <input
                         className="img_url"
                         name="img_url"
@@ -268,6 +282,7 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="customer_id">
+                      Customer Id:
                       <input
                         className="customer_id"
                         name="customer_id"
@@ -277,6 +292,7 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="payment_id">
+                      Payment Id:
                       <input
                         className="payment_id"
                         name="payment_id"
@@ -286,31 +302,40 @@ export default class BookingPage extends Component {
                       ></input>
                     </label>
                     <label htmlFor="schedule_confirm">
-                      <input
-                        className="schedule_confirm"
+                      Scheduled:
+                      <select
                         name="schedule_confirm"
-                        placeholder="schedule_confirm"
+                        id="schedule_confirm"
                         onChange={(e) => this.handleChange(e, i)}
                         value={service.schedule_confirm}
-                      ></input>
+                      >
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                      </select>
                     </label>
                     <label htmlFor="reschedule">
-                      <input
-                        className="reschedule"
+                      Reschedule:
+                      <select
                         name="reschedule"
-                        placeholder="reschedule"
+                        id="reschedule"
                         onChange={(e) => this.handleChange(e, i)}
                         value={service.reschedule}
-                      ></input>
+                      >
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                      </select>
                     </label>
                     <label htmlFor="completed">
-                      <input
-                        className="completed"
+                      Completed:
+                      <select
                         name="completed"
-                        placeholder="completed"
+                        id="completed"
                         onChange={(e) => this.handleChange(e, i)}
                         value={service.completed}
-                      ></input>
+                      >
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                      </select>
                     </label>
                     <button className="submit" type="submit">
                       Submit Changes
