@@ -3,7 +3,7 @@ export const colors = {
   darkColor: "#303238",
   secondaryColor: "#3f4456",
   lightColor: "#f8f7f2",
-  mediumColor: "#3c4243",
+  medColor: "#3c4243",
 };
 
 export const utilities = {

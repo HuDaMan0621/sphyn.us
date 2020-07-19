@@ -6,32 +6,40 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const administrator = css`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  text-align: left;
+  background: ${colors.medColor};
   margin: 1rem;
+  border-radius: ${utilities.borderRadius};
+  padding: 1rem;
+  color: ${colors.lightColor};
 
-  a {
-    color: ${colors.darkColor};
-    margin-top: 2rem;
+  .user-btn {
+    width: 30%;
+    margin: 1rem 0;
   }
 
-  .m-heading {
-    font-size: 2rem;
-    margin: auto;
-    border-bottom: solid 2px ${colors.primaryColor};
-    width: 30%;
-    margin-bottom: 2rem;
-    color: ${colors.lightColor};
+  .home-name {
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  p {
+    padding: 0.5rem 0;
+  }
+
+  a {
+    color: ${colors.primaryColor};
+  }
+
+  span {
+    color: ${colors.primaryColor};
   }
 
   form {
     background: ${colors.secondaryColor};
     padding: 1rem;
     width: 100%;
-    max-width: 600px;
-    margin: 1rem;
+    max-width: 900px;
     border-radius: ${utilities.borderRadius};
 
     input,
@@ -45,63 +53,28 @@ const administrator = css`
     option {
       background: red;
     }
-
-    button {
-      display: block;
-      margin: auto;
-      margin: 0.25rem auto;
-      padding: 0.5rem;
-      width: 100%;
-      background: ${colors.primaryColor};
-      border: none;
-      cursor: pointer;
-      border-radius: ${utilities.borderRadius};
-      transition: all ${utilities.animationSpeed} ease;
-
-      &:hover {
-        background: transparent;
-        border: 1px solid ${colors.primaryColor};
-        color: ${colors.lightColor};
-      }
-
-      a {
-        color: ${colors.lightColor};
-      }
-    }
   }
 
-  .package {
-    border: 1px solid ${colors.darkColor};
-    border-radius: ${utilities.borderRadius};
+  button {
+    display: block;
+    margin: auto;
+    margin: 0.25rem auto;
+    padding: 0.5rem;
     width: 100%;
-    max-width: 600px;
+    background: ${colors.primaryColor};
+    border: none;
+    cursor: pointer;
+    border-radius: ${utilities.borderRadius};
+    transition: all ${utilities.animationSpeed} ease;
 
-    .heading {
-      background: ${colors.secondaryColor};
+    &:hover {
+      background: transparent;
+      border: 1px solid ${colors.primaryColor};
       color: ${colors.lightColor};
-      padding: 1rem;
     }
 
-    .price {
-      font-size: 2.5rem;
-      border-bottom: 1px solid ${colors.mediumColor};
-      padding: 0.5rem;
-    }
-
-    .details {
-      padding: 1rem;
-
-      ul {
-        text-align: left;
-
-        li {
-          padding: 0.25rem 0;
-
-          span {
-            color: ${colors.primaryColor};
-          }
-        }
-      }
+    a {
+      color: ${colors.lightColor};
     }
   }
 `;
@@ -164,7 +137,7 @@ export default class BookingPage extends Component {
   render() {
     return (
       <div>
-        <h1>Services</h1>
+        <h1>Sphyn Admin Panel</h1>
         <Link to="/">Back to home</Link>
         {this.state.errorMessage ? (
           <div>
@@ -197,7 +170,7 @@ export default class BookingPage extends Component {
                   <span>Price: </span> {service.price}
                 </p>
                 <p>
-                  <span>Service: </span> {service.customer_id}
+                  <span>Customer Id: </span> {service.customer_id}
                 </p>
                 <p>
                   <span>Completed: </span> {service.completed}
@@ -212,9 +185,11 @@ export default class BookingPage extends Component {
                   <span>Payment: </span> {service.payment_id}
                 </p>
                 <p>
-                  <span>Service: </span> {service.img_url}
+                  <span>Img URL: </span> {service.img_url}
                 </p>
-                <button onClick={this.toggleService}>Edit</button>
+                <button className="user-btn" onClick={this.toggleService}>
+                  Edit
+                </button>
                 {this.state.formShown ? (
                   <form onSubmit={(e) => this.handleFormSubmit(e, service.id)}>
                     <label htmlFor="nick_name">
@@ -342,7 +317,7 @@ export default class BookingPage extends Component {
                     </button>
                   </form>
                 ) : (
-                  <div>Click to edit form</div>
+                  <div className="home-name">🏠: {service.nick_name}</div>
                 )}
               </div>
             );

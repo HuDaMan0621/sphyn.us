@@ -31,10 +31,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: true,
       defaultValue: false
     },
+    price: DataTypes.INTEGER,
     payment_id: DataTypes.STRING,
-
     service_date: DataTypes.DATE,
-
     img_url: DataTypes.TEXT,
   }, {});
   Services.associate = function (models) {
