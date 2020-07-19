@@ -106,7 +106,8 @@ const register = css`
   }
 `;
 
-export default class BookingPage extends Component {
+
+export default class Administration extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -115,17 +116,29 @@ export default class BookingPage extends Component {
       errorMessage: ''
     }
   }
-  componentDidMount = () => {
-    let customerRole = ''
-    fetch("/api/v1/admin/update")
-      .then(data => data.json())
-      .then(data => {
-        this.setState({
-          services: data,
-          errorMessage: data.error
-        })
+
+  // errorReport = (data) => {
+  //   try {
+  //     data.ok
+  //   }
+  //   catch {
+  //     data.error
+  //   }
+  //   throw this.props.history.push('/login')
+  // }
+  componentDidMount = async () => {
+    await fetch("/api/v1/admin/update")
+      .then(data => data.json()).then((data => {
+        data.ok === false ? this.props.history.push('/login') :
+
+          // this.errorReport(data)
+          this.setState({
+            services: data,
+            errorMessage: data.error
+          })
       })
-      .catch(error => console.log('Please log in.'))
+      )
+    // .catch(error => console.log(error))
   }
 
   handleFormSubmit = (e, serviceId) => {
@@ -160,11 +173,12 @@ export default class BookingPage extends Component {
   };
 
   render() {
+    console.log(this.state.services)
     return (
 
       <div>
         <h1>Services</h1>
-        {(this.state.errorMessage ? <div>Unauthorized user. Please return to your <Link to="/customer/profile"><u>profile</u>.</Link></div> :
+        {(this.state.errorMessage ? <div>Unauthorized user. Please return to your <Link to="customer/profile">profile page.</Link></div> : (
           this.state.services.map((service, i) => {
             return (
               <div css={register} key={service.id}>
@@ -309,12 +323,15 @@ export default class BookingPage extends Component {
             )
           }
           )
+
+        )
         )
         }
       </div>
-    );
+    )
   }
 }
+
 
 
 

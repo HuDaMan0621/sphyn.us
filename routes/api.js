@@ -157,7 +157,7 @@ router.delete('/customer/:id', (req, res) => {
     })
 });
 
-router.put('/customer/:id', (req, res) => {
+router.put('/customer', (req, res) => {
   const {
     first_name,
     last_name,
@@ -186,9 +186,9 @@ router.put('/customer/:id', (req, res) => {
     city,
     state,
     zipcode
-  }, { where: { id: req.params.id } },
+  }, { where: { customer_id: req.session.customer.id } },
   ).then((result) => {
-    res.redirect('/');
+    res.redirect('/customer/profile');
   });
 });
 

@@ -6,17 +6,18 @@ module.exports = {
     await queryInterface.bulkInsert('Services', [
       {
         nick_name: 'My First Property in Buckhead',
-        sq_ft: '3000',
-        address: '1 Buckhead RD',
+        sq_ft: '1250',
+        address: '3324 Peachtree RD NE',
         city: 'Atlanta',
         state: 'GA',
-        zipcode: '30324',
+        zipcode: '30326',
         price: '300',
         completed: true,
         reschedule: false,
         schedule_confirm: false,
         payment_id: '1',
         service_date: null,
+        img_url: 'https://my.matterport.com/show/?m=CoPaqg84uwx&brand=0',
         matterport: 'https://my.matterport.com/show/?m=CoPaqg84uwx&brand=0',
         createdAt: new Date(),
         updatedAt: new Date(),
@@ -62,5 +63,5 @@ module.exports = {
       await queryInterface.bulkDelete('Services', null, {})
       await queryInterface.bulkDelete('Customer', null, {})
     }
-  }
+  } 
 };

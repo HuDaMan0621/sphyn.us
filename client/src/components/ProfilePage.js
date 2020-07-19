@@ -3,7 +3,6 @@ import QRCode from 'qrcode.react';
 import Logout from './Logout';
 import { Link } from 'react-router-dom';
 import Service from './Service';
-import Order from './Order';
 
 export default function ProfilePage(props) {
     const [data2, setData2] = useState({ error: " " }); //this is the state for the customer
@@ -39,10 +38,8 @@ export default function ProfilePage(props) {
                     <div>
                     </div>
                 </div>
-
             )}
             <Service />
-            {/* <Order /> */}
         </div>
     );
 }
