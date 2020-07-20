@@ -15,6 +15,22 @@ const profile = css`
     align-items: center;
     background: ${colors.secondaryColor};
     color: ${colors.lightColor};
+    flex-direction: column;
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+
+    div {
+      display: flex;
+
+      a {
+        color: ${colors.lightColor};
+        padding-left: 1rem;
+        &:hover {
+          color: ${colors.primaryColor};
+        }
+      }
+    }
   }
 
   .qrcode {
@@ -81,7 +97,10 @@ export default function ProfilePage(props) {
         <div>
           <header>
             <h1>{data2.data.first_name}</h1>
-            <Logout />
+            <div>
+              <Logout />
+              <Link to="/">Back to home</Link>
+            </div>
           </header>
           <div className="qrcode">
             <div className="code">
