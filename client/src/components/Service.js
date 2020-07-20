@@ -53,18 +53,22 @@ const service = css`
 
 export default function Service() {
   const [serviceInfo, setServiceInfo] = useState([]);
+    const [data2, setData2] = useState({ error: " " }); //this is the state for the customer
 
-  useEffect(() => {
-    fetch(`/api/v1/customer/services`)
-      .then((data) => data.json())
-      .then((data) => {
-        setServiceInfo(data);
-      })
-      .catch((error) => console.log("Please Login"));
-  }, []);
-
+    useEffect(() => {
+        fetch(`/api/v1/customer/services`)
+            .then(data => data.json())
+            .then(data => {
+                setServiceInfo(data)
+                setData2(data);
+            })
+            .catch(error => console.log('Please Login')
+            )
+    }, [])
+  
   return (
     <div css={service}>
+    {data2.error ? <div></div> : (
       <h3 className="m-heading">Services</h3>
       <div className="service-wrap">
         {serviceInfo.map((service, i) => {
@@ -95,6 +99,7 @@ export default function Service() {
           );
         })}
       </div>
+)}
     </div>
   );
 }

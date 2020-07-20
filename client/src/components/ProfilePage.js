@@ -71,19 +71,18 @@ const profile = css`
 `;
 
 export default function ProfilePage(props) {
-  const [data2, setData2] = useState({ error: " " }); //this is the state for the customer
-  const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks
-
-  useEffect(() => {
-    fetch(`/api/v1/customer/profile`)
-      .then((data) => data.json())
-      .then((data) => {
-        setData2(data);
-        setIsLoading(false);
-      })
-      .catch((error) => console.log("Please Login"));
-  }, []);
-
+    const [data2, setData2] = useState({ error: "", data: {} }); //this is the state for the customer
+    const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks
+    useEffect(() => {
+        fetch(`/api/v1/customer/profile`)
+            .then((data) => data.json())
+            .then((data) => {
+                setData2(data);
+                setIsLoading(false);
+            })
+            .catch((error) => console.log("Please Login"));
+    }, []);
+  
   return (
     <div css={profile}>
       {data2.error ? (

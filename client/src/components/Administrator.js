@@ -79,7 +79,8 @@ const administrator = css`
   }
 `;
 
-export default class BookingPage extends Component {
+
+export default class Administration extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -88,18 +89,21 @@ export default class BookingPage extends Component {
       errorMessage: "",
     };
   }
-  componentDidMount = () => {
-    let customerRole = "";
-    fetch("/api/v1/admin/update")
-      .then((data) => data.json())
-      .then((data) => {
+  
+  componentDidMount = async () => {
+    await fetch("/api/v1/admin/update")
+      .then(res => {
+        if (res.ok === false) { this.props.history.push('/login') }
+        return res
+        console.log(res)
+      })
+      .then(data => data.json())
+      .then((data => {
         this.setState({
           services: data,
           errorMessage: data.error,
         });
       })
-      .catch((error) => console.log("Please log in."));
-  };
 
   handleFormSubmit = (e, serviceId) => {
     e.preventDefault();
@@ -141,8 +145,12 @@ export default class BookingPage extends Component {
   };
 
   render() {
+    console.log(this.state.services)
+    console.log(this.state.error)
     return (
       <div>
+        <h1>Services</h1>
+        {(this.state.errorMessage && this.state.error !== '' ? <div>Unauthorized user. Please return to your <Link to="customer/profile">profile page.</Link></div> : (
         <h1>Sphyn Admin Panel</h1>
         <Link to="/">Back to home</Link>
         {this.state.errorMessage ? (
@@ -345,10 +353,13 @@ export default class BookingPage extends Component {
                   <div className="home-name">🏠: {service.nick_name}</div>
                 )}
               </div>
-            );
-          })
-        )}
+            )
+          }
+          )
+        )
+        )
+        }
       </div>
-    );
+    )
   }
 }
