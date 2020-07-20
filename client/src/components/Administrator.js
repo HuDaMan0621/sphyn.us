@@ -128,14 +128,17 @@ export default class Administration extends Component {
   // }
   componentDidMount = async () => {
     await fetch("/api/v1/admin/update")
-      .then(data => data.json()).then((data => {
-        data.ok === false ? this.props.history.push('/login') :
-
-          // this.errorReport(data)
-          this.setState({
-            services: data,
-            errorMessage: data.error
-          })
+      .then(res => {
+        if (res.ok === false) { this.props.history.push('/login') }
+        return res
+        console.log(res)
+      })
+      .then(data => data.json())
+      .then((data => {
+        this.setState({
+          services: data,
+          errorMessage: data.error
+        })
       })
       )
     // .catch(error => console.log(error))
@@ -174,11 +177,12 @@ export default class Administration extends Component {
 
   render() {
     console.log(this.state.services)
+    console.log(this.state.error)
     return (
 
       <div>
         <h1>Services</h1>
-        {(this.state.errorMessage ? <div>Unauthorized user. Please return to your <Link to="customer/profile">profile page.</Link></div> : (
+        {(this.state.errorMessage && this.state.error !== '' ? <div>Unauthorized user. Please return to your <Link to="customer/profile">profile page.</Link></div> : (
           this.state.services.map((service, i) => {
             return (
               <div css={register} key={service.id}>

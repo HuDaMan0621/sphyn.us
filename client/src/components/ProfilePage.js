@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Service from './Service';
 
 export default function ProfilePage(props) {
-    const [data2, setData2] = useState({ error: " " }); //this is the state for the customer
+    const [data2, setData2] = useState({ error: "", data: {} }); //this is the state for the customer
     const [isLoading, setIsLoading] = useState(true); //displays loading when user clicks
     useEffect(() => {
         fetch(`/api/v1/customer/profile`)
