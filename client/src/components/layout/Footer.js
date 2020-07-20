@@ -13,14 +13,15 @@ const footer = css`
     @media (min-width: 768px) {
       display: flex;
       align-items: center;
+      justify-content: space-around;
+      margin: auto;
     }
 
     div {
-      margin: 1rem auto;
-      max-width: 400px;
-
       h3 {
         font-size: 1.5rem;
+        margin-bottom: 0.25rem;
+        color: ${colors.primaryColor};
       }
 
       li {
