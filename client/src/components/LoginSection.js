@@ -10,10 +10,11 @@ const login = css`
   height: 100vh;
   align-items: center;
   flex-direction: column;
-  margin-top: 5vh;
+  margin: 5vh 1rem;
 
   a {
     color: ${colors.darkColor};
+    padding: 1rem;
     &:hover {
       color: ${colors.primaryColor};
     }
@@ -152,7 +153,10 @@ export default class LoginSection extends Component {
             Submit
           </button>
         </form>
-        <Link to="/">Back to home</Link>
+        <div className="links">
+          <Link to="/">Home Page</Link>
+          <Link to="/register">To Registration</Link>
+        </div>
       </div>
     );
   }
