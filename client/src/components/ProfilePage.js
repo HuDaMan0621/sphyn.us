@@ -19,14 +19,37 @@ const profile = css`
 
   .qrcode {
     padding: 1rem;
+    max-width: 500px;
+    margin: auto;
+    @media (min-width: 768px) {
+      display: flex;
+      max-width: ${utilities.maxWidth};
+      justify-content: flex-start;
+    }
 
-    a {
-      display: block;
-      background: ${colors.primaryColor};
-      color: ${colors.darkColor};
-      margin: 0.5rem 0;
-      padding: 0.5rem;
-      border-radius: ${utilities.borderRadius};
+    .links {
+      align-self: center;
+      padding: 0 1rem;
+      width: 100%;
+      @media (min-width: 768px) {
+        width: 30%;
+      }
+
+      a {
+        display: block;
+        background: ${colors.primaryColor};
+        color: ${colors.darkColor};
+        margin: 0.5rem 0;
+        padding: 0.5rem;
+
+        border-radius: ${utilities.borderRadius};
+        transition: all ${utilities.animationSpeed} ease;
+
+        &:hover {
+          background: ${colors.secondaryColor};
+          color: ${colors.lightColor};
+        }
+      }
     }
   }
 `;
@@ -61,13 +84,18 @@ export default function ProfilePage(props) {
             <Logout />
           </header>
           <div className="qrcode">
-            {data2.data.id && (
-              <QRCode
-                value={`http://localhost:3000/customer/${data2.data.id}/showcase`}
-              />
-            )}
-            <Link to="/booking">Book Service</Link>
-            <Link to="/showcase">My Showcase</Link>
+            <div className="code">
+              <p>Scan QR Code</p>
+              {data2.data.id && (
+                <QRCode
+                  value={`http://localhost:3000/customer/${data2.data.id}/showcase`}
+                />
+              )}
+            </div>
+            <div className="links">
+              <Link to="/booking">Book Service</Link>
+              <Link to="/showcase">My Showcase</Link>
+            </div>
           </div>
         </div>
       )}
