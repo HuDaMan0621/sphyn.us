@@ -284,4 +284,22 @@ router.put('/admin/update', checkAuthentication, (req, res) => {
 
 });
 
+router.get("/selectserviceslist/:email", (req, res) => {
+  db.Customer.findOne({
+    where: { email: req.params.email },
+    include: db.Services
+  })
+    .then(data => {
+      res.json(data || []);
+    })
+}
+)
+
+// router.get('/all-services', (req, res,) => {
+//   db.Services.findAll()
+//     .then(data => {
+//       res.json(data || []);
+//     })
+// });
+
 module.exports = router;

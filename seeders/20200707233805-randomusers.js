@@ -5,12 +5,12 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.bulkInsert('Services', [
       {
-        nick_name: 'My First Property in Buckhead',
+        nick_name: 'First sweet home',
         sq_ft: '3000',
-        address: '1 Buckhead RD',
-        city: 'Atlanta',
+        address: '204 Manous Way',
+        city: 'Canton',
         state: 'GA',
-        zipcode: '30324',
+        zipcode: '30115',
         price: '300',
         completed: true,
         reschedule: false,

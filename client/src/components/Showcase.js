@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import QRCode from 'qrcode.react';
-import GoogleMaps from './GoogleMaps'
+import GoogleMaps from './GoogleMaps';
+import ShowcaseFilter from './ShowcaseFilter';
 
 export default function Showcase() {
     const [serviceInfo, setServiceInfo] = useState([]);
-    const [imgUrl, setImgUrl] = useState([])
+    const [imgUrl, setImgUrl] = useState([]);
+    const [email, setEmail] = useState(" ");
 
     useEffect(() => {
         fetch('/api/v1/all-services')
@@ -21,23 +23,28 @@ export default function Showcase() {
     return (
         <div>
             <div>Completed Services</div>
-            <QRCode value={`http://localhost:3000/showcase`} />
+            <QRCode value={`http://localhost:3000/showcase/`} />
             {serviceInfo.map((service, i) => {
                 return (
-                    <div key={i}>
-                        <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
-                        {!service.img_url ? < iframe width="853" height="480" src="https://my.matterport.com/show/?m=rvKhT7rSPML" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe> :
-                            <iframe width="853" height="480" src={service.img_url} frameBorder="0" allowFullScreen allow="xr-spatial-tracking"></iframe>}
-                        <GoogleMaps address={service.address} city={service.city} state={service.state} zipcode={service.zipcode} />
-                    </div>
+                    <>
+                        <div key={i}>
+                            <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
+                            {!service.img_url ? < iframe width="853" height="480" src="https://my.matterport.com/show/?m=rvKhT7rSPML" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe> :
+                                <iframe width="853" height="480" src={service.img_url} frameBorder="0" allowFullScreen allow="xr-spatial-tracking"></iframe>}
+                            <GoogleMaps address={service.address} city={service.city} state={service.state} zipcode={service.zipcode} />
+                        </div>
+                    </>
                 )
             })
             }
+            <ShowcaseFilter />
         </div >
+
     )
+
 }
 
-// import React, { useState, useEffect } from 'react';
+// import React, { useState, useEffect } from 'react'; filteredServices={serviceInfo} 
 // import { Link } from "react-router-dom";
 // import QRCode from "qrcode.react";
 // import GoogleMaps from "./GoogleMaps";
