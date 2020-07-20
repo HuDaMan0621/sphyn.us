@@ -7,7 +7,29 @@ import Logout from "./Logout";
 import { Link } from "react-router-dom";
 import Service from "./Service";
 
-const profile = css``;
+const profile = css`
+  header {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: ${colors.secondaryColor};
+    color: ${colors.lightColor};
+  }
+
+  .qrcode {
+    padding: 1rem;
+
+    a {
+      display: block;
+      background: ${colors.primaryColor};
+      color: ${colors.darkColor};
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: ${utilities.borderRadius};
+    }
+  }
+`;
 
 export default function ProfilePage(props) {
   const [data2, setData2] = useState({ error: " " }); //this is the state for the customer
@@ -44,9 +66,9 @@ export default function ProfilePage(props) {
                 value={`http://localhost:3000/customer/${data2.data.id}/showcase`}
               />
             )}
+            <Link to="/booking">Book Service</Link>
+            <Link to="/showcase">My Showcase</Link>
           </div>
-          <Link to="/booking">Book Service</Link>
-          <Link to="/showcase">My Showcase</Link>
         </div>
       )}
       <Service />
