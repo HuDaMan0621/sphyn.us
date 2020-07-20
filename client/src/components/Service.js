@@ -4,11 +4,16 @@ import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
 
 const service = css`
-  background: ${colors.darkColor};
-  margin: 1rem;
-  color: ${colors.lightColor};
-  border-radius: ${utilities.borderRadius};
-  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+  .property {
+    margin: 0.5rem;
+    background: ${colors.darkColor};
+    color: ${colors.lightColor};
+    border-radius: ${utilities.borderRadius};
+    padding: 1rem;
+  }
 
   .info {
     text-align: left;
@@ -36,7 +41,7 @@ export default function Service() {
     <div css={service}>
       {serviceInfo.map((service, i) => {
         return (
-          <div key={i}>
+          <div className="property" key={i}>
             <div className="info">
               <h4>
                 <span>Name:</span> {service.nick_name}
