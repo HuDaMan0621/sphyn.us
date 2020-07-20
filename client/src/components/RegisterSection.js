@@ -200,6 +200,7 @@ export default class RegisterSection extends Component {
           </button>
         </form>
         <Link to="/">Back to home</Link>
+        <Link to="/login">To Login</Link>
       </div>
     );
   }
