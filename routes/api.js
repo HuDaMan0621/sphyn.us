@@ -290,7 +290,12 @@ router.get("/selectserviceslist/:email", (req, res) => {
     include: db.Services
   })
     .then(data => {
+      console.log(data)
+      if (data == null ){
+        res.json({ error: "email not found" })
+      } else {
       res.json(data || []);
+    }
     })
 }
 )
