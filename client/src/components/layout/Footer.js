@@ -4,18 +4,40 @@ import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../../styleVars";
 
 const footer = css`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   background-color: ${colors.darkColor};
   color: ${colors.lightColor};
+  padding: 1rem;
 
-  div {
-    padding: 1rem;
-    margin: 1rem;
+  .wrap {
+    max-width: ${utilities.maxWidth};
+    @media (min-width: 768px) {
+      display: flex;
+      align-items: center;
+    }
 
-    h3 {
-      font-size: 1.5rem;
-      margin-bottom: 0.5rem;
+    div {
+      margin: 1rem auto;
+      max-width: 400px;
+
+      h3 {
+        font-size: 1.5rem;
+      }
+
+      li {
+        font-size: 1.3rem;
+      }
+
+      .info {
+        margin-bottom: 3rem;
+
+        a {
+          color: ${colors.lightColor};
+        }
+
+        i {
+          padding: 0 1rem;
+        }
+      }
     }
   }
 `;
@@ -23,25 +45,28 @@ const footer = css`
 export default function Footer() {
   return (
     <div css={footer}>
-      <div>
-        <h3>Mailing Address</h3>
-        <ul>
-          <li>Sphyn</li>
-          <li>9001 Peachtree St.</li>
-          <li>Atlanta, Ga 30303</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Call Us</h3>
-        <ul>
-          <li>Phone: 770-998-9832</li>
-        </ul>
-      </div>
-      <div>
-        <h3>Email Us</h3>
-        <ul>
-          <li>info@sphyn.us</li>
-        </ul>
+      <div className="wrap">
+        <div>
+          <h3>Mailing Address</h3>
+          <div className="info">
+            <ul>
+              <li>Sphyn</li>
+              <li>9001 Peachtree St.</li>
+              <li>Atlanta, Ga 30303</li>
+            </ul>
+          </div>
+        </div>
+        <div>
+          <h3>Contact Us</h3>
+          <div className="info">
+            <a href="tel:770-998-0934">
+              <i class="fas fa-phone fa-2x"></i>
+            </a>
+            <a href="mailto:info@sphyn.com">
+              <i class="far fa-envelope fa-2x"></i>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
