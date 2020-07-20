@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import GoogleMaps from './GoogleMaps';
-import { Link } from 'react-router-dom';
 
 export default function ShowcaseFilter() {
     const [data2, setData2] = useState({ error: "" }); //this is the state for the customer
@@ -52,8 +51,6 @@ export default function ShowcaseFilter() {
                     </form>
                     <>
                         {filteredServices && filteredServices.map((service, i) => {
-                            // console.log(filteredServices)
-                            // console.log(service)
                             return (
                                 <div key={i}>
                                     <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
