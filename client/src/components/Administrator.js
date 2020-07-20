@@ -3,7 +3,19 @@ import React, { Component } from "react";
 import { jsx, css } from "@emotion/core";
 import { colors, utilities } from "../styleVars";
 import { Link } from "react-router-dom";
+import Logout from "./Logout";
 import axios from "axios";
+
+const links = css`
+  .links {
+    a {
+      color: ${colors.darkColor};
+      &:hover {
+        color: ${colors.primaryColor};
+      }
+    }
+  }
+`;
 
 const administrator = css`
   text-align: left;
@@ -142,9 +154,12 @@ export default class BookingPage extends Component {
 
   render() {
     return (
-      <div>
+      <div css={links}>
         <h1>Sphyn Admin Panel</h1>
-        <Link to="/">Back to home</Link>
+        <div className="links">
+          <Link to="/">Back to home</Link>
+          <Logout />
+        </div>
         {this.state.errorMessage ? (
           <div>
             Unauthorized user. Please return to your{" "}

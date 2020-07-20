@@ -15,9 +15,18 @@ const register = css`
   align-items: center;
   margin: 1rem;
 
-  a {
-    color: ${colors.darkColor};
-    margin-top: 2rem;
+  .links {
+    margin-top: 1rem;
+
+    a {
+      color: ${colors.darkColor};
+      margin-top: 2rem;
+      padding: 1rem;
+      margin-top: 2rem;
+      &:hover {
+        color: ${colors.primaryColor};
+      }
+    }
   }
 
   .m-heading {
@@ -266,15 +275,18 @@ export default class BookingPage extends Component {
               <div className="price">${this.state.price}</div>
               <div className="details">{this.state.packageDetails}</div>
             </div>
-            <Link to="/">Back to home</Link>
+            <div className="links">
+              <Link to="/">Home Page</Link>
+              <Link to="/customer/profile">Back To Profile</Link>
+            </div>
           </div>
         ) : (
-            <Checkout
-              nick_name={this.state.nick_name}
-              packageDetails={this.state.packageDetails}
-              price={this.state.price}
-            />
-          )}
+          <Checkout
+            nick_name={this.state.nick_name}
+            packageDetails={this.state.packageDetails}
+            price={this.state.price}
+          />
+        )}
       </div>
     );
   }
