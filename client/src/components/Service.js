@@ -68,9 +68,9 @@ export default function Service() {
   
   return (
     <div css={service}>
-    {data2.error ? <div></div> : (
-      <h3 className="m-heading">Services</h3>
+    {data2.error ? <div></div> : (      
       <div className="service-wrap">
+      <h3 className="m-heading">Services</h3>
         {serviceInfo.map((service, i) => {
           return (
             <div className="property" key={i}>
@@ -99,6 +99,7 @@ export default function Service() {
           );
         })}
       </div>
+        
 )}
     </div>
   );

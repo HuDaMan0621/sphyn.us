@@ -82,42 +82,42 @@ export default function ProfilePage(props) {
             })
             .catch((error) => console.log("Please Login"));
     }, []);
-  
-  return (
-    <div css={profile}>
-      {data2.error ? (
-        <div>
-          <h1>User Not Authorized</h1>
-          <h3>
-            Please <Link to="/login">log in</Link>{" "}
-          </h3>
+
+    return (
+        <div css={profile}>
+            {data2.error ? (
+                <div>
+                    <h1>User Not Authorized</h1>
+                    <h3>
+                        Please <Link to="/login">log in</Link>{" "}
+                    </h3>
+                </div>
+            ) : (
+                    <div>
+                        <header>
+                            <h1>{data2.data.first_name}</h1>
+                            <div>
+                                <Logout />
+                                <Link to="/">Back to home</Link>
+                            </div>
+                        </header>
+                        <div className="qrcode">
+                            <div className="code">
+                                <p>Scan QR Code</p>
+                                {data2.data.id && (
+                                    <QRCode
+                                        value={`http://localhost:3000/showcase`}
+                                    />
+                                )}
+                            </div>
+                            <div className="links">
+                                <Link to="/booking">Book Service</Link>
+                                <Link to="/showcase">My Showcase</Link>
+                            </div>
+                        </div>
+                    </div>
+                )}
+            <Service />
         </div>
-      ) : (
-        <div>
-          <header>
-            <h1>{data2.data.first_name}</h1>
-            <div>
-              <Logout />
-              <Link to="/">Back to home</Link>
-            </div>
-          </header>
-          <div className="qrcode">
-            <div className="code">
-              <p>Scan QR Code</p>
-              {data2.data.id && (
-                <QRCode
-                  value={`http://localhost:3000/customer/${data2.data.id}/showcase`}
-                />
-              )}
-            </div>
-            <div className="links">
-              <Link to="/booking">Book Service</Link>
-              <Link to="/showcase">My Showcase</Link>
-            </div>
-          </div>
-        </div>
-      )}
-      <Service />
-    </div>
-  );
+    );
 }
