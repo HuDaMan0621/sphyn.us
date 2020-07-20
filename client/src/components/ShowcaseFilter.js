@@ -34,8 +34,8 @@ export default function ShowcaseFilter() {
             </form>
             {email === "" ? <div></div> :
                 filteredServices.map((service, i) => {
-                    console.log(filteredServices)
-                    console.log(service)
+                    // console.log(filteredServices)
+                    // console.log(service)
                     return (
                         <div key={i}>
                             <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>

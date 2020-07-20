@@ -24,25 +24,33 @@ export default function Showcase() {
         <div>
             <div>Completed Services</div>
             <QRCode value={`http://localhost:3000/showcase/`} />
-            {serviceInfo.map((service, i) => {
-                return (
-                    <>
-                        <div key={i}>
-                            <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
-                            {!service.img_url ? < iframe width="853" height="480" src="https://my.matterport.com/show/?m=rvKhT7rSPML" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe> :
-                                <iframe width="853" height="480" src={service.img_url} frameBorder="0" allowFullScreen allow="xr-spatial-tracking"></iframe>}
-                            <GoogleMaps address={service.address} city={service.city} state={service.state} zipcode={service.zipcode} />
-                        </div>
-                    </>
-                )
-            })
-            }
-            <ShowcaseFilter />
+            {/* {email === " " ?
+                serviceInfo.map((service, i) => {
+                    return (
+                        <>
+                            <div key={i}>
+                                <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
+                                {!service.img_url ? < iframe width="853" height="480" src="https://my.matterport.com/show/?m=rvKhT7rSPML" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe> :
+                                    <iframe width="853" height="480" src={service.img_url} frameBorder="0" allowFullScreen allow="xr-spatial-tracking"></iframe>}
+                                <GoogleMaps address={service.address} city={service.city} state={service.state} zipcode={service.zipcode} />
+                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <input htmlFor="email" className="emailInput" onChange={(e) => setEmail(e.target.value)}
+                                    value={email} type="email" name="email" placeholder="Email address"></input>
+                                <button type="submit">the somewhat working button</button>
+                            </form>
+                        </>
+                    )
+                })
+                : */}
+                <ShowcaseFilter />
         </div >
 
     )
 
 }
+
+//userIsYoungerThan21 ? serveGrapeJuice() : serveWine();
 
 // import React, { useState, useEffect } from 'react'; filteredServices={serviceInfo} 
 // import { Link } from "react-router-dom";
