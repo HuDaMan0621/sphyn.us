@@ -24,8 +24,8 @@ export default function Service() {
               <br />
             </p>
             <iframe
-              width="853"
-              height="480"
+              width="100%"
+              height="100%"
               src={service.img_url}
               frameBorder="0"
               allowFullScreen
