@@ -1,56 +1,41 @@
-import React from 'react';
 /** @jsx jsx */
-import { jsx, css } from '@emotion/core';
-import { colors, utilities } from '../styleVars';
-import { Redirect } from 'react-router-dom';
-const { primaryColor, darkColor, secondaryColor, lightColor } = colors;
-const { borderRadius, animationSpeed } = utilities;
+import React from "react";
+import { jsx, css } from "@emotion/core";
+import { colors, utilities } from "../styleVars";
+import { Redirect } from "react-router-dom";
 
-const header = css`
-  header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    color: ${darkColor};
-    align-items: center;
+const logout = css`
+  cursor: pointer;
+  color: ${colors.primaryColor};
+  transition: all ${utilities.animationSpeed} ease;
 
-    .user-links {
-      a {
-        color: ${darkColor};
-        padding: 0 0.5rem;
-        transition: all ${animationSpeed} ease-in-out;
-
-        &:hover {
-          color: ${primaryColor};
-        }
-      }
-    }
+  &:hover {
+    color: ${colors.darkColor};
   }
-`
+`;
 
 export default class Logout extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      redirect: false
-    }
+      redirect: false,
+    };
   }
 
   render() {
     return (
-      <div css={header} className='header'>
+      <div css={logout}>
         {this.state.redirect && <Redirect to="/" />}
-        <header>
-          <h1>Sphyn</h1>
-          <div className="user-links">
-            <button onClick={() => {
-              fetch('/api/v1/logout');
-              this.setState({ redirect: true })
-            }}>logout</button>
-          </div>
-        </header>
+        <a
+          onClick={() => {
+            fetch("/api/v1/logout");
+            this.setState({ redirect: true });
+          }}
+        >
+          Logout
+        </a>
       </div>
-    )
+    );
   }
 }
