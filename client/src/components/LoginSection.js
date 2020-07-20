@@ -87,11 +87,10 @@ export default class LoginSection extends Component {
         ...this.state,
       })
       .then((res) => {
-        this.setState({ data: res.data });
-        if (this.state.email === "authorized@gmail.com") {
-          customerRole = "admin";
-          this.props.history.push("/admin/update");
-          console.log("ADMIN");
+        this.setState({ data: res.data })
+        if (this.state.email === 'authorized@gmail.com') {
+          customerRole = 'admin';
+          this.props.history.push('/admin/update');
         } else {
           this.props.history.push(`/customer/profile`);
         }
