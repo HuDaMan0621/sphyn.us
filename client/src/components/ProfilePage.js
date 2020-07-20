@@ -99,7 +99,6 @@ export default function ProfilePage(props) {
           </div>
         </div>
       )}
-      <h3>Services</h3>
       <Service />
     </div>
   );

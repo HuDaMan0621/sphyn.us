@@ -5,7 +5,6 @@ import { colors, utilities } from "../../styleVars";
 
 const demo = css`
   height: 500px;
-
   margin: auto;
   @media (min-width: 600px) {
     display: grid;
