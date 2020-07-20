@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const login = css`
- display: flex;
+  display: flex;
   height: 100vh;
   align-items: center;
   flex-direction: column;
@@ -14,6 +14,9 @@ const login = css`
 
   a {
     color: ${colors.darkColor};
+    &:hover {
+      color: ${colors.primaryColor};
+    }
   }
 
   .m-heading {
@@ -24,7 +27,7 @@ const login = css`
     margin-bottom: 2rem;
     color: ${colors.lightColor};
   }
-  
+
   form {
     background: ${colors.secondaryColor};
     padding: 1rem;
@@ -32,14 +35,14 @@ const login = css`
     max-width: 600px;
     margin: 1rem;
     border-radius: ${utilities.borderRadius};
-    
+
     input,
     label {
       display: block;
       width: 100%;
       padding: 0.5rem 0;
     }
-    
+
     button {
       display: block;
       margin: auto;
@@ -51,20 +54,19 @@ const login = css`
       cursor: pointer;
       border-radius: ${utilities.borderRadius};
       transition: all ${utilities.animationSpeed} ease;
-      
+
       &:hover {
         background: transparent;
         border: 1px solid ${colors.primaryColor};
         color: ${colors.lightColor};
       }
-      
+
       a {
         color: ${colors.lightColor};
       }
     }
   }
-  `;
-
+`;
 
 export default class RegisterSection extends Component {
   state = {
@@ -78,48 +80,57 @@ export default class RegisterSection extends Component {
 
   handleFormSubmit = (e) => {
     e.preventDefault();
-    axios.post("/api/v1/customer", { ...this.state })
+    axios
+      .post("/api/v1/customer", { ...this.state })
       .then((data) => {
         this.props.history.push("/login");
       })
       .catch((error) => {
-        this.setState({ error: true })
-      })
+        this.setState({ error: true });
+      });
   };
 
   handleChange = (e) => {
     const { name, value } = e.target;
     this.setState({
       [name]: value,
-      error: false
+      error: false,
     });
   };
 
   analyzePassword = (e) => {
-    const realRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+    const realRegex = new RegExp(
+      "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$"
+    );
     const { name, value } = e.target;
     this.setState({
       [name]: value,
     });
     if (realRegex.test(e.target.value)) {
-      e.target.setCustomValidity('')
+      e.target.setCustomValidity("");
     } else {
-      e.target.setCustomValidity("Password must contain a minimum of eight characters, with at least one letter, one number, and one special character");
+      e.target.setCustomValidity(
+        "Password must contain a minimum of eight characters, with at least one letter, one number, and one special character"
+      );
     }
-  }
+  };
 
   handlePhone = (e) => {
-    const phoneRegex = new RegExp('^(?:\\+?1[-.●]?)?\\(?([0-9]{3})\\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$')
+    const phoneRegex = new RegExp(
+      "^(?:\\+?1[-.●]?)?\\(?([0-9]{3})\\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})$"
+    );
     const { name, value } = e.target;
     this.setState({
       [name]: value,
     });
     if (phoneRegex.test(e.target.value)) {
-      e.target.setCustomValidity('')
+      e.target.setCustomValidity("");
     } else {
-      e.target.setCustomValidity("Phone number must contain a minimum of 10 numbers.");
+      e.target.setCustomValidity(
+        "Phone number must contain a minimum of 10 numbers."
+      );
     }
-  }
+  };
 
   render() {
     const { error } = this.state;

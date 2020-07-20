@@ -9,7 +9,7 @@ import {
 } from "@react-google-maps/api";
 
 // set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-console.log('this is the geo api')
+// console.log('this is the geo api')
 Geocode.setApiKey("AIzaSyCj0AM0URwGVtVqsNxjJclvuskK5U9jJWE");
 
 // set response language. Defaults to english.
@@ -61,24 +61,24 @@ const options = {
 
 
 function GoogleMaps({ address, city, state, zipcode }) {
-    console.log('this is line 63 on google maps, should show the addresssssssss')
+    // console.log('this is line 63 on google maps, should show the addresssssssss')
     // console.log(address, city, state, zipcode)
 
     const [lat, setLat] = useState([]);
     const [lng, setLng] = useState([]);
 
     const fulladdress = `${address}${city}${state}${zipcode}`
-    console.log('!!!!!@!@!@!@!@!@^^%$$%##%$#$%#$%#$%%$#$%^^$%^$')
+    // console.log('!!!!!@!@!@!@!@!@^^%$$%##%$#$%#$%#$%%$#$%^^$%^$')
     Geocode.fromAddress(fulladdress)
         .then(
             response => {
                 const { lat, lng } = response.results[0].geometry.location;
                 setLat(lat)
                 setLng(lng)
-                console.log(lat, lng);
+                // console.log(lat, lng);
             },
             error => {
-                console.error(error);
+                // console.error(error);
             }
         )
     // .then((data) => data.json())
@@ -89,13 +89,13 @@ function GoogleMaps({ address, city, state, zipcode }) {
     //     })
 
 
-    console.log("this is it")
-    console.log();
+    // console.log("this is it")
+    // console.log();
     const center = {
         lat: parseFloat(lat) || parseFloat(10),
         lng: parseFloat(lng) || parseFloat(-84.387985),
     };
-    console.log("this is latandlng")
+    // console.log("this is latandlng")
     // console.log(response.results[0].geometry.location)
 
     // const lat = travelInfo.results[0].coordinates.latitude;
@@ -130,3 +130,5 @@ function GoogleMaps({ address, city, state, zipcode }) {
 }
 
 export default GoogleMaps;
+
+// console log cleared

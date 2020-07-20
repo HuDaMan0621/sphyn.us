@@ -14,6 +14,9 @@ const login = css`
 
   a {
     color: ${colors.darkColor};
+    &:hover {
+      color: ${colors.primaryColor};
+    }
   }
 
   .m-heading {
@@ -65,7 +68,6 @@ const login = css`
   }
 `;
 
-
 export default class LoginSection extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +79,7 @@ export default class LoginSection extends Component {
   }
 
   handleFormSubmit = (e) => {
-    let customerRole = ''
+    let customerRole = "";
     e.preventDefault();
     axios
       .post("/api/v1/login", {
@@ -91,29 +93,33 @@ export default class LoginSection extends Component {
         } else {
           this.props.history.push(`/customer/profile`);
         }
-      })
+      });
   };
 
   handleChange = (e) => {
-    let customerRole = ''
+    let customerRole = "";
     const { name, value } = e.target;
     this.setState({
       [name]: value,
-    })
+    });
   };
 
   analyzePassword = (e) => {
-    const realRegex = new RegExp("^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$");
+    const realRegex = new RegExp(
+      "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$"
+    );
     const { name, value } = e.target;
     this.setState({
       [name]: value,
     });
     if (realRegex.test(e.target.value)) {
-      e.target.setCustomValidity('')
+      e.target.setCustomValidity("");
     } else {
-      e.target.setCustomValidity("Password must contain a minimum of eight characters, with at least one letter, one number, and one special character");
+      e.target.setCustomValidity(
+        "Password must contain a minimum of eight characters, with at least one letter, one number, and one special character"
+      );
     }
-  }
+  };
 
   render() {
     return (
@@ -146,7 +152,8 @@ export default class LoginSection extends Component {
             Submit
           </button>
         </form>
-      </div >
+        <Link to="/">Back to home</Link>
+      </div>
     );
   }
 }

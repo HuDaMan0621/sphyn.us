@@ -13,11 +13,13 @@
         "allowfullscreen",
         "amet",
         "ante",
+        "appt",
         "arcu",
         "at",
         "bibendum",
         "condimentum",
         "consectetur",
+        "covid",
         "diam",
         "dictum",
         "dolor",
@@ -72,6 +74,7 @@
         "porttitor",
         "posuere",
         "proin",
+        "qrcode",
         "rhoncus",
         "risus",
         "sapien",
@@ -90,6 +93,7 @@
         "velit",
         "venenatis",
         "vitae",
-        "viverra"
+        "viverra",
+        "zipcode"
     ]
 }
