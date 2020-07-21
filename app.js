@@ -35,6 +35,8 @@ app.use(cookieParser());
 app.use("/api/v1", apiRouter);
 
 // TODO PUT REACT APP HERE
+app.use(express.static(path.resolve(__dirname, "client/build"))); //try and load something requests the file and its going to look at client/build folder
+
 app.get((req, res) => {
   res.sendFile(path.resolve(__dirname, "client/build/index.html"));
 });
