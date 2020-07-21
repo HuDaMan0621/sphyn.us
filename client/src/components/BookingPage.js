@@ -7,6 +7,7 @@ import Package1 from "./packageDetails/Package1";
 import Package2 from "./packageDetails/Package2";
 import Package3 from "./packageDetails/Package3";
 import { Link } from "react-router-dom";
+import Logout from "./Logout";
 
 const register = css`
   display: flex;
@@ -17,6 +18,10 @@ const register = css`
 
   .links {
     margin-top: 1rem;
+
+    .logout {
+      padding-top: 2rem;
+    }
 
     a {
       color: ${colors.darkColor};
@@ -278,6 +283,7 @@ export default class BookingPage extends Component {
             <div className="links">
               <Link to="/">Home Page</Link>
               <Link to="/customer/profile">Back To Profile</Link>
+              <Logout className="logout" />
             </div>
           </div>
         ) : (
