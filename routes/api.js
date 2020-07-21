@@ -232,7 +232,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
 // })
 
 router.get("/admin/update", (req, res) => {
-  if (req.session.customer.id === 4) {
+  if (req.session.customer.is_admin === true ) {
     db.Services.findAll({
     }).then((data) => {
       res.json(data);

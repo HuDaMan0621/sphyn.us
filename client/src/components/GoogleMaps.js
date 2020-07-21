@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import Geocode from "react-geocode";
 
-import {
-    GoogleMap,
-    useLoadScript,
-    Marker,
-    // InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 
-// set Google Maps Geocoding API for purposes of quota management. Its optional but recommended.
-// console.log('this is the geo api')
 Geocode.setApiKey("AIzaSyCj0AM0URwGVtVqsNxjJclvuskK5U9jJWE");
 
 // set response language. Defaults to english.
@@ -24,18 +17,17 @@ Geocode.enableDebug();
 
 const libraries = ["places"];
 const mapContainerStyle = {
-    width: "100%",
-    height: "500px",
+  width: "100%",
+  height: "300px",
 };
 
 const options = {
-    // styles: mapStyles,
-    disableDefaultUI: true,
-    zoomControl: true,
+  disableDefaultUI: true,
+  zoomControl: true,
 };
 
-
 function GoogleMaps({ address, city, state, zipcode }) {
+
     const [lat, setLat] = useState([]);
     const [lng, setLng] = useState([]);
 
@@ -78,3 +70,4 @@ function GoogleMaps({ address, city, state, zipcode }) {
 }
 
 export default GoogleMaps;
+
