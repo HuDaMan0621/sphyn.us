@@ -39,40 +39,40 @@ export default function Showcase() {
 
   return (
     <div css={showcase}>
-      <h3>Our Showcase</h3>
+    <h3>Our Showcase</h3>
       <QRCode className="qrcode" value={`http://localhost:3000/showcase/`} />
       <ShowcaseFilter />
     </div>
   );
 }
 
-    return (
-        <div>
-            <div>Completed Services</div>
-            <QRCode value={`https://sphyn.herokuapp.com/showcase/`} />
-            {/* {email === " " ?
-                serviceInfo.map((service, i) => {
-                    return (
-                        <>
-                            <div key={i}>
-                                <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
-                                {!service.img_url ? < iframe width="853" height="480" src="https://my.matterport.com/show/?m=rvKhT7rSPML" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe> :
-                                    <iframe width="853" height="480" src={service.img_url} frameBorder="0" allowFullScreen allow="xr-spatial-tracking"></iframe>}
-                                <GoogleMaps address={service.address} city={service.city} state={service.state} zipcode={service.zipcode} />
-                            </div>
-                            <form onSubmit={handleSubmit}>
-                                <input htmlFor="email" className="emailInput" onChange={(e) => setEmail(e.target.value)}
-                                    value={email} type="email" name="email" placeholder="Email address"></input>
-                                <button type="submit">the somewhat working button</button>
-                            </form>
-                        </>
-                    )
-                })
-                : */}
-            <ShowcaseFilter />
-        </div >
-    )
-}
+//     return (
+//         <div>
+//             <div>Completed Services</div>
+//             <QRCode value={`https://sphyn.herokuapp.com/showcase/`} />
+//             {/* {email === " " ?
+//                 serviceInfo.map((service, i) => {
+//                     return (
+//                         <>
+//                             <div key={i}>
+//                                 <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
+//                                 {!service.img_url ? < iframe width="853" height="480" src="https://my.matterport.com/show/?m=rvKhT7rSPML" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe> :
+//                                     <iframe width="853" height="480" src={service.img_url} frameBorder="0" allowFullScreen allow="xr-spatial-tracking"></iframe>}
+//                                 <GoogleMaps address={service.address} city={service.city} state={service.state} zipcode={service.zipcode} />
+//                             </div>
+//                             <form onSubmit={handleSubmit}>
+//                                 <input htmlFor="email" className="emailInput" onChange={(e) => setEmail(e.target.value)}
+//                                     value={email} type="email" name="email" placeholder="Email address"></input>
+//                                 <button type="submit">the somewhat working button</button>
+//                             </form>
+//                         </>
+//                     )
+//                 })
+//                 : */}
+//             <ShowcaseFilter />
+//         </div >
+//     )
+
 
 //userIsYoungerThan21 ? serveGrapeJuice() : serveWine();
 

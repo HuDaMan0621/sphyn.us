@@ -88,7 +88,7 @@ export default class LoginSection extends Component {
       })
       .then((res) => {
         this.setState({ data: res.data })
-        if (this.state.email === 'authorized@gmail.com' || 'saesha.senger@gmail.com' || 'ying.hu@hudaman.dev' || 'charley@gmail.com' || 'nicholasdbess@gmail.com' || 'princeton.bake10@gmail.com') {
+        if (res.data.is_admin === true) {
           customerRole = 'admin';
           this.props.history.push('/admin/update');
         } else {

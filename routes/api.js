@@ -33,7 +33,11 @@ router.get('/customer/profile', checkAuthentication, function (req, res) {
 // });
 
 router.get('/customer/services', checkAuthentication, (req, res,) => {
-  db.Services.findAll()
+  db.Services.findAll({
+    where: {
+      customer_id: req.session.customer.id
+    }
+  })
     .then(data => {
       res.json(data || []);
     })
@@ -232,7 +236,7 @@ router.post('/booking', checkAuthentication, (req, res) => {
 // })
 
 router.get("/admin/update", (req, res) => {
-  if (req.session.customer.is_admin === true ) {
+  if (req.session.customer.is_admin === true) {
     db.Services.findAll({
     }).then((data) => {
       res.json(data);
@@ -291,11 +295,11 @@ router.get("/selectserviceslist/:email", (req, res) => {
   })
     .then(data => {
       console.log(data)
-      if (data == null ){
+      if (data == null) {
         res.json({ error: "email not found" })
       } else {
-      res.json(data || []);
-    }
+        res.json(data || []);
+      }
     })
 }
 )
