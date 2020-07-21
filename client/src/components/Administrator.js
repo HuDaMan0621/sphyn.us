@@ -183,6 +183,9 @@ export default class Administration extends Component {
                     {service.sq_ft}
                   </p>
                   <p>
+                    <span>SQFT: </span> {service.sq_ft}
+                  </p>
+                  <p>
                     <span>Address: </span> {service.address}
                   </p>
                   <p>
