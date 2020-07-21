@@ -91,7 +91,6 @@ const administrator = css`
   }
 `;
 
-
 export default class Administration extends Component {
   constructor(props) {
     super(props);
@@ -104,20 +103,21 @@ export default class Administration extends Component {
 
   componentDidMount = async () => {
     await fetch("/api/v1/admin/update")
-      .then(res => {
-        if (res.ok === false) { this.props.history.push('/login') }
-        return res
-        console.log(res)
+      .then((res) => {
+        if (res.ok === false) {
+          this.props.history.push("/login");
+        }
+        return res;
+        console.log(res);
       })
-      .then(data => data.json())
-      .then((data => {
+      .then((data) => data.json())
+      .then((data) => {
         this.setState({
           services: data,
           errorMessage: data.error,
         });
-      })
-      )
-  }
+      });
+  };
 
   handleFormSubmit = (e, serviceId) => {
     e.preventDefault();
@@ -159,8 +159,8 @@ export default class Administration extends Component {
   };
 
   render() {
-    console.log(this.state.services)
-    console.log(this.state.error)
+    console.log(this.state.services);
+    console.log(this.state.error);
     return (
       <div css={links}>
         <div>
@@ -169,13 +169,21 @@ export default class Administration extends Component {
             <Link to="/">Back to home</Link>
             <Logout />
           </div>
-          {(this.state.errorMessage && this.state.error !== '' ? <div>Unauthorized user. Please return to your <Link to="customer/profile">profile page.</Link></div> : (
+          {this.state.errorMessage && this.state.error !== "" ? (
+            <div>
+              Unauthorized user. Please return to your{" "}
+              <Link to="customer/profile">profile page.</Link>
+            </div>
+          ) : (
             this.state.services.map((service, i) => {
               return (
                 <div css={administrator} key={service.id}>
                   <p>
                     <span>Name: </span> {service.nick_name}
                     {service.sq_ft}
+                  </p>
+                  <p>
+                    <span>SQFT: </span> {service.sq_ft}
                   </p>
                   <p>
                     <span>Address: </span> {service.address}
@@ -212,12 +220,14 @@ export default class Administration extends Component {
                   </p>
                   <button className="user-btn" onClick={this.toggleService}>
                     Edit
-                </button>
+                  </button>
                   {this.state.formShown ? (
-                    <form onSubmit={(e) => this.handleFormSubmit(e, service.id)}>
+                    <form
+                      onSubmit={(e) => this.handleFormSubmit(e, service.id)}
+                    >
                       <label htmlFor="nick_name">
                         Name:
-                      <input
+                        <input
                           className="nickName"
                           name="nick_name"
                           placeholder="Enter name of home"
@@ -225,7 +235,7 @@ export default class Administration extends Component {
                           value={service.nick_name}
                         ></input>
                       </label>
-                    SQFT:
+                      SQFT:
                       <label htmlFor="sq_ft">
                         <input
                           className="sq_ft"
@@ -235,7 +245,7 @@ export default class Administration extends Component {
                           value={service.sq_ft}
                         ></input>
                       </label>
-                    Address:
+                      Address:
                       <label htmlFor="address">
                         <input
                           className="address"
@@ -247,7 +257,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="city">
                         City:
-                      <input
+                        <input
                           className="city"
                           name="city"
                           placeholder="City"
@@ -257,7 +267,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="state">
                         State:
-                      <input
+                        <input
                           className="state"
                           name="state"
                           placeholder="State"
@@ -267,7 +277,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="zipcode">
                         Zipcode:
-                      <input
+                        <input
                           className="zipcode"
                           name="zipcode"
                           placeholder="Zip Code"
@@ -277,7 +287,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="price">
                         Price:
-                      <input
+                        <input
                           className="price"
                           type="number"
                           min="150"
@@ -290,7 +300,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="img_url">
                         Img URL:
-                      <input
+                        <input
                           className="img_url"
                           name="img_url"
                           placeholder="img_url"
@@ -300,7 +310,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="customer_id">
                         Customer Id:
-                      <input
+                        <input
                           className="customer_id"
                           name="customer_id"
                           placeholder="customer_id"
@@ -310,7 +320,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="payment_id">
                         Payment Id:
-                      <input
+                        <input
                           className="payment_id"
                           name="payment_id"
                           placeholder="payment_id"
@@ -320,7 +330,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="schedule_confirm">
                         Scheduled:
-                      <select
+                        <select
                           name="schedule_confirm"
                           id="schedule_confirm"
                           onChange={(e) => this.handleChange(e, i)}
@@ -332,7 +342,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="reschedule">
                         Reschedule:
-                      <select
+                        <select
                           name="reschedule"
                           id="reschedule"
                           onChange={(e) => this.handleChange(e, i)}
@@ -344,7 +354,7 @@ export default class Administration extends Component {
                       </label>
                       <label htmlFor="completed">
                         Completed:
-                      <select
+                        <select
                           name="completed"
                           id="completed"
                           onChange={(e) => this.handleChange(e, i)}
@@ -356,20 +366,17 @@ export default class Administration extends Component {
                       </label>
                       <button className="submit" type="submit">
                         Submit Changes
-                    </button>
+                      </button>
                     </form>
                   ) : (
-                      <div className="home-name">🏠: {service.nick_name}</div>
-
-                    )}
+                    <div className="home-name">🏠: {service.nick_name}</div>
+                  )}
                 </div>
-              )
+              );
             })
-          )
-          )
-          }
+          )}
         </div>
       </div>
-    )
+    );
   }
 }
