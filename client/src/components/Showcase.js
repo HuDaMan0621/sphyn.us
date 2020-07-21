@@ -23,7 +23,7 @@ export default function Showcase() {
     return (
         <div>
             <div>Completed Services</div>
-            <QRCode value={`http://localhost:3000/showcase/`} />
+            <QRCode value={`https://sphyn.herokuapp.com/showcase/`} />
             {/* {email === " " ?
                 serviceInfo.map((service, i) => {
                     return (
@@ -43,7 +43,7 @@ export default function Showcase() {
                     )
                 })
                 : */}
-                <ShowcaseFilter />
+            <ShowcaseFilter />
         </div >
 
     )

@@ -42,7 +42,7 @@ export default function ShowcaseFilter() {
 
     return (
         <>
-            {data2.error || noServices ? <><div>No services for this user</div><a href="/showcase">Click here to reload page and re-enter correct email</a></> :
+            {data2.error || noServices ? <><div>No services for this user</div><a href="https://sphyn.herokuapp.com/showcase">Click here to reload page and re-enter correct email</a></> :
                 (<>
                     <form onSubmit={handleSubmit}>
                         <input htmlFor="email" className="emailInput" onChange={(e) => setEmail(e.target.value)}
