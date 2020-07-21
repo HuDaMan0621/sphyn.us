@@ -93,28 +93,28 @@ export default function ProfilePage(props) {
           </h3>
         </div>
       ) : (
-        <div>
-          <header>
-            <h1>{data2.data.first_name}</h1>
-            <div>
-              <Logout />
-              <Link to="/">Back to home</Link>
-            </div>
-          </header>
-          <div className="qrcode">
-            <div className="code">
-              <p>Scan QR Code</p>
-              {data2.data.id && (
-                <QRCode value={`http://localhost:3000/showcase`} />
-              )}
-            </div>
-            <div className="links">
-              <Link to="/booking">Book Service</Link>
-              <Link to="/showcase">My Showcase</Link>
+          <div>
+            <header>
+              <h1>{data2.data.first_name}</h1>
+              <div>
+                <Logout />
+                <Link to="/">Back to home</Link>
+              </div>
+            </header>
+            <div className="qrcode">
+              <div className="code">
+                <p>Scan QR Code</p>
+                {data2.data.id && (
+                  <QRCode value={`https://sphyn.herokuapp.com/showcase`} />
+                )}
+              </div>
+              <div className="links">
+                <Link to="/booking">Book Service</Link>
+                <Link to="/showcase">My Showcase</Link>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
       <Service />
     </div>
   );
