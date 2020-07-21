@@ -73,7 +73,7 @@ export default class RegisterSection extends Component {
   state = {
     first_name: "",
     last_name: "",
-    email: "@email.com",
+    email: "",
     login_password: "",
     phone_number: "",
     error: false,
@@ -165,8 +165,7 @@ export default class RegisterSection extends Component {
               required
               className="email"
               name="email"
-              placeholder="username@email.com"
-              aria-describedby="email-help"
+              placeholder="Email"
               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
               oninvalid="this.setCustomValidity('username@email.com')"
               onChange={this.handleChange}

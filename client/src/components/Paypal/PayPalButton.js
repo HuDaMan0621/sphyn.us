@@ -51,6 +51,7 @@ class PaypalButton extends React.Component {
       }
     }
   }
+  
   createOrder = (data, actions) => {
     return actions.order.create({
       purchase_units: [
