@@ -9,6 +9,15 @@ const serviceFilter = css`
   max-width: ${utilities.maxWidth};
   margin: auto;
 
+  .links {
+    a {
+      color: ${colors.darkColor};
+      &:hover {
+        color: ${colors.primaryColor};
+      }
+    }
+  }
+
   form {
     padding: 1rem;
     max-width: 600px;
@@ -41,6 +50,38 @@ const serviceFilter = css`
 
       a {
         color: ${colors.darkColor};
+      }
+    }
+  }
+
+  .homes {
+    background: ${colors.darkColor};
+    margin: 1rem;
+    padding: 1rem;
+    border-radius: ${utilities.borderRadius};
+
+    p {
+      color: ${colors.lightColor};
+      padding: 1rem 0;
+
+      .name {
+        color: ${colors.primaryColor};
+      }
+    }
+
+    iframe {
+      width: 100%;
+      height: 300px;
+    }
+
+    .map {
+      width: 100%;
+      height: 300px;
+    }
+
+    .im-width {
+      @media (min-width: 768px) {
+        display: flex;
       }
     }
   }
@@ -82,6 +123,9 @@ export default function ShowcaseFilter() {
         </div>
       ) : (
         <div>
+          <div className="links">
+            <Link to="/">Home Page</Link>
+          </div>
           <form onSubmit={handleSubmit}>
             <input
               htmlFor="email"
@@ -98,33 +142,36 @@ export default function ShowcaseFilter() {
             {filteredServices &&
               filteredServices.map((service, i) => {
                 return (
-                  <div key={i}>
+                  <div className="homes" key={i}>
                     <p>
-                      <span>{service.nick_name}</span>
+                      <span className="name">{service.nick_name}</span>
                       <br />
-                      <span>Address: {service.address}</span>
+                      <span>{service.address}</span>
                     </p>
-                    {!service.img_url ? (
-                      <iframe
-                        src="https://my.matterport.com/show/?m=rvKhT7rSPML"
-                        frameborder="0"
-                        allowfullscreen
-                        allow="xr-spatial-tracking"
-                      ></iframe>
-                    ) : (
-                      <iframe
-                        src={service.img_url}
-                        frameBorder="0"
-                        allowFullScreen
-                        allow="xr-spatial-tracking"
-                      ></iframe>
-                    )}
-                    <GoogleMaps
-                      address={service.address}
-                      city={service.city}
-                      state={service.state}
-                      zipcode={service.zipcode}
-                    />
+                    <div className="im-width">
+                      {!service.img_url ? (
+                        <iframe
+                          src="https://my.matterport.com/show/?m=rvKhT7rSPML"
+                          frameborder="0"
+                          allowfullscreen
+                          allow="xr-spatial-tracking"
+                        ></iframe>
+                      ) : (
+                        <iframe
+                          src={service.img_url}
+                          frameBorder="0"
+                          allowFullScreen
+                          allow="xr-spatial-tracking"
+                        ></iframe>
+                      )}
+                      <GoogleMaps
+                        className="map"
+                        address={service.address}
+                        city={service.city}
+                        state={service.state}
+                        zipcode={service.zipcode}
+                      />
+                    </div>
                   </div>
                 );
               })}
