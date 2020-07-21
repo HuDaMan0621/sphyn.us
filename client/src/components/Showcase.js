@@ -1,30 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import QRCode from 'qrcode.react';
-import GoogleMaps from './GoogleMaps';
-import ShowcaseFilter from './ShowcaseFilter';
+/** @jsx jsx */
+import React, { useEffect, useState } from "react";
+import QRCode from "qrcode.react";
+import GoogleMaps from "./GoogleMaps";
+import ShowcaseFilter from "./ShowcaseFilter";
+import { jsx, css } from "@emotion/core";
+import { colors, utilities } from "../styleVars";
+import { Link } from "react-router-dom";
+
+const showcase = css`
+  h3 {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+    @media (min-width: 768px) {
+      font-size: 4rem;
+    }
+  }
+
+  .qrcode {
+    margin: 1rem;
+  }
+`;
 
 export default function Showcase() {
-    const [serviceInfo, setServiceInfo] = useState([]);
-    const [imgUrl, setImgUrl] = useState([]);
-    const [email, setEmail] = useState(" ");
+  const [serviceInfo, setServiceInfo] = useState([]);
+  const [imgUrl, setImgUrl] = useState([]);
+  const [email, setEmail] = useState(" ");
 
-    useEffect(() => {
-        fetch('/api/v1/all-services')
-            .then(data => data.json())
-            .then(data => {
-                setServiceInfo(data)
-                setImgUrl(data.img_url)
-                console.log(data)
-            })
-            .catch(error => console.log('Please Login')
-            )
-    }, [])
+  useEffect(() => {
+    fetch("/api/v1/all-services")
+      .then((data) => data.json())
+      .then((data) => {
+        setServiceInfo(data);
+        setImgUrl(data.img_url);
+        console.log(data);
+      })
+      .catch((error) => console.log("Please Login"));
+  }, []);
 
-    return (
-        <div>
-            <div>Completed Services</div>
-            <QRCode value={`http://localhost:3000/showcase/`} />
-            {/* {email === " " ?
+  return (
+    <div css={showcase}>
+      <h3>Our Showcase</h3>
+      <QRCode className="qrcode" value={`http://localhost:3000/showcase/`} />
+      <ShowcaseFilter />
+    </div>
+  );
+}
+
+{
+  /* {email === " " ?
                 serviceInfo.map((service, i) => {
                     return (
                         <>
@@ -42,17 +65,12 @@ export default function Showcase() {
                         </>
                     )
                 })
-                : */}
-                <ShowcaseFilter />
-        </div >
-
-    )
-
+                : */
 }
 
 //userIsYoungerThan21 ? serveGrapeJuice() : serveWine();
 
-// import React, { useState, useEffect } from 'react'; filteredServices={serviceInfo} 
+// import React, { useState, useEffect } from 'react'; filteredServices={serviceInfo}
 // import { Link } from "react-router-dom";
 // import QRCode from "qrcode.react";
 // import GoogleMaps from "./GoogleMaps";
@@ -108,7 +126,6 @@ export default function Showcase() {
 // }
 
 // //!! try to fix showcase error when user has no matterport url
-
 
 // // {data2.error ? <div>User Not Authorized. <br />Please <Link to="/login">Login</Link></div> : (
 // //     <div>
