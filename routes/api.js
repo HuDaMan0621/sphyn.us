@@ -265,7 +265,7 @@ router.put('/admin/update', checkAuthentication, (req, res) => {
     reschedule,
     completed,
     id
-  } = req.body.services[0];
+  } = req.body;
 
   console.log(req.body)
   db.Services.update({
@@ -281,10 +281,11 @@ router.put('/admin/update', checkAuthentication, (req, res) => {
     payment_id,
     schedule_confirm,
     reschedule,
-    completed,
-    id,
-    customer_id: req.session.customer.id
+    completed
   }, { where: { id: id } })
+    .then(() => {
+      res.status(201).json()
+    })
 
 });
 

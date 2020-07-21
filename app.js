@@ -37,7 +37,7 @@ app.use("/api/v1", apiRouter);
 // TODO PUT REACT APP HERE
 app.use(express.static(path.resolve(__dirname, "client/build"))); //try and load something requests the file and its going to look at client/build folder
 
-app.get((req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "client/build/index.html"));
 });
 
@@ -51,7 +51,7 @@ app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
- console.error(err)
+  console.error(err)
 
   // render the error page
   res.status(err.status || 500);
