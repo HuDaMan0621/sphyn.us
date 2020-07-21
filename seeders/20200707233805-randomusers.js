@@ -40,27 +40,12 @@ module.exports = {
     ])
     return await queryInterface.bulkInsert('Customers', [
       {
-        first_name: 'John',
-        last_name: 'Doe',
-        email: 'JohnDoe@John.com',
-
-        login_password: 'password',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }, {
-        first_name: 'Bobby',
-        last_name: 'Bobs',
-        email: 'BobbyBobs@Bobs.com',
-        login_password: 'password',
-        phone_number: '1112222',
-        createdAt: new Date(),
-        updatedAt: new Date(),
-      }, {
         first_name: 'Sam',
         last_name: 'Sammy',
-        email: 'test@email.com',
-        login_password: '$2b$10$g5HBNZzSpAI574Yk7mcvFOToqHTnWPWMHInMmxnDX6JN31XXW3Ta.',
+        email: 'sam@email.com',
+        login_password: '$2b$10$y5WE60HrD8AmlP1sehNfx.VZrQnSZeNnSUvXz0aDOJxKjn4BK3Ho6',
         phone_number: '1112222',
+        is_admin: false,
         createdAt: new Date(),
         updatedAt: new Date(),
       }, {
@@ -69,6 +54,7 @@ module.exports = {
         email: 'authorized@gmail.com',
         login_password: '$2b$10$y5WE60HrD8AmlP1sehNfx.VZrQnSZeNnSUvXz0aDOJxKjn4BK3Ho6',
         phone_number: '5555555555',
+        is_admin: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       }
@@ -78,5 +64,5 @@ module.exports = {
       await queryInterface.bulkDelete('Services', null, {})
       await queryInterface.bulkDelete('Customer', null, {})
     }
-  } 
+  }
 };
