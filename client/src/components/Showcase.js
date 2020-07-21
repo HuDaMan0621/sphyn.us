@@ -46,8 +46,11 @@ export default function Showcase() {
   );
 }
 
-{
-  /* {email === " " ?
+    return (
+        <div>
+            <div>Completed Services</div>
+            <QRCode value={`https://sphyn.herokuapp.com/showcase/`} />
+            {/* {email === " " ?
                 serviceInfo.map((service, i) => {
                     return (
                         <>
@@ -65,7 +68,10 @@ export default function Showcase() {
                         </>
                     )
                 })
-                : */
+                : */}
+            <ShowcaseFilter />
+        </div >
+    )
 }
 
 //userIsYoungerThan21 ? serveGrapeJuice() : serveWine();

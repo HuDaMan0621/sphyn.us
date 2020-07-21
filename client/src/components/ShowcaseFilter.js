@@ -69,130 +69,30 @@ const serviceFilter = css`
       }
     }
 
-    iframe {
-      width: 100%;
-      height: 300px;
-    }
-
-    .map {
-      width: 100%;
-      height: 300px;
-    }
-
-    .im-width {
-      @media (min-width: 768px) {
-        display: flex;
-        position: relative;
-
-        iframe {
-          width: 50%;
-        }
-
-        .map {
-          width: 50%;
-          position: absolute;
-          top: 0;
-          left: 50;
-          bottom: 0;
-          right: 0;
-        }
-      }
-    }
-  }
-`;
-
-export default function ShowcaseFilter() {
-  const [data2, setData2] = useState({ error: "" }); //this is the state for the customer
-  const [filteredServices, setFilteredServices] = useState(null);
-  const [email, setEmail] = useState(" ");
-  const [noServices, setNoServices] = useState(false);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEmail({
-      [name]: value,
-    });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email);
-    fetch(`/api/v1/selectserviceslist/${email}`) //!todo
-      .then((data) => data.json())
-      .then((data) => {
-        setData2(data);
-        setFilteredServices(data.Services);
-        if (data.Services && data.Services.length == 0) {
-          setNoServices(true);
-        }
-      });
-  };
-
-  return (
-    <div css={serviceFilter}>
-      {data2.error || noServices ? (
-        <div>
-          <p>No services for this user</p>
-          <a href="/showcase">Click here to reload page and re-enter email</a>
-        </div>
-      ) : (
-        <div>
-          <div className="links">
-            <Link to="/">Home Page</Link>
-          </div>
-          <form onSubmit={handleSubmit}>
-            <input
-              htmlFor="email"
-              className="emailInput"
-              onChange={(e) => setEmail(e.target.value)}
-              value={email}
-              type="email"
-              name="email"
-              placeholder="Email address"
-            ></input>
-            <button type="submit">Submit</button>
-          </form>
-          <div>
-            {filteredServices &&
-              filteredServices.map((service, i) => {
-                return (
-                  <div className="homes" key={i}>
-                    <p>
-                      <span className="name">{service.nick_name}</span>
-                      <br />
-                      <span>{service.address}</span>
-                    </p>
-                    <div className="im-width">
-                      {!service.img_url ? (
-                        <iframe
-                          src="https://my.matterport.com/show/?m=rvKhT7rSPML"
-                          frameborder="0"
-                          allowfullscreen
-                          allow="xr-spatial-tracking"
-                        ></iframe>
-                      ) : (
-                        <iframe
-                          src={service.img_url}
-                          frameBorder="0"
-                          allowFullScreen
-                          allow="xr-spatial-tracking"
-                        ></iframe>
-                      )}
-                      <div className="map">
-                        <GoogleMaps
-                          address={service.address}
-                          city={service.city}
-                          state={service.state}
-                          zipcode={service.zipcode}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    return (
+        <>
+            {data2.error || noServices ? <><div>No services for this user</div><a href="https://sphyn.herokuapp.com/showcase">Click here to reload page and re-enter correct email</a></> :
+                (<>
+                    <form onSubmit={handleSubmit}>
+                        <input htmlFor="email" className="emailInput" onChange={(e) => setEmail(e.target.value)}
+                            value={email} type="email" name="email" placeholder="Email address"></input>
+                        <button type="submit">the somewhat working button</button>
+                    </form>
+                    <>
+                        {filteredServices && filteredServices.map((service, i) => {
+                            return (
+                                <div key={i}>
+                                    <p><span>{service.nick_name}</span>{service.sq_ft}<span>{service.address}</span><br /></p>
+                                    {!service.img_url ? < iframe width="853" height="480" src="https://my.matterport.com/show/?m=rvKhT7rSPML" frameborder='0' allowfullscreen allow="xr-spatial-tracking"></iframe> :
+                                        <iframe width="853" height="480" src={service.img_url} frameBorder="0" allowFullScreen allow="xr-spatial-tracking"></iframe>}
+                                    <GoogleMaps address={service.address} city={service.city} state={service.state} zipcode={service.zipcode} />
+                                </div>
+                            )
+                        }
+                        )}
+                    </>
+                </>)
+            }
+        </>)
 }
+
