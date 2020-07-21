@@ -6,6 +6,11 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.TEXT,
     login_password: DataTypes.TEXT,
     phone_number: DataTypes.TEXT,
+    is_admin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false
+    }
   }, {});
   Customer.associate = function (models) {
     Customer.hasMany(models.Services, { foreignKey: 'customer_id' })
