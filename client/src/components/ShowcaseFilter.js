@@ -82,6 +82,20 @@ const serviceFilter = css`
     .im-width {
       @media (min-width: 768px) {
         display: flex;
+        position: relative;
+
+        iframe {
+          width: 50%;
+        }
+
+        .map {
+          width: 50%;
+          position: absolute;
+          top: 0;
+          left: 50;
+          bottom: 0;
+          right: 0;
+        }
       }
     }
   }
@@ -164,13 +178,14 @@ export default function ShowcaseFilter() {
                           allow="xr-spatial-tracking"
                         ></iframe>
                       )}
-                      <GoogleMaps
-                        className="map"
-                        address={service.address}
-                        city={service.city}
-                        state={service.state}
-                        zipcode={service.zipcode}
-                      />
+                      <div className="map">
+                        <GoogleMaps
+                          address={service.address}
+                          city={service.city}
+                          state={service.state}
+                          zipcode={service.zipcode}
+                        />
+                      </div>
                     </div>
                   </div>
                 );
