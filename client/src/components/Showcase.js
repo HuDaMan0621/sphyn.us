@@ -39,8 +39,8 @@ export default function Showcase() {
 
   return (
     <div css={showcase}>
-    <h3>Our Showcase</h3>
-      <QRCode className="qrcode" value={`http://localhost:3000/showcase/`} />
+      <h3>Our Showcase</h3>
+      <QRCode className="qrcode" value={`https://sphyn.herokuapp.com/showcase`} />
       <ShowcaseFilter />
     </div>
   );

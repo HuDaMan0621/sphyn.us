@@ -20,7 +20,7 @@ app.use(
   session({
     secret: "secret", // used to sign the cookie
     resave: false, // update session even w/ no changes
-    saveUninitialized: true, // always create a session
+    saveUninitialized: true, // always create a session //!test recommit
     store,
   })
 );
