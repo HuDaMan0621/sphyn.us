@@ -119,26 +119,24 @@ export default class Administration extends Component {
       });
   };
 
-  handleFormSubmit = (e, serviceId) => {
+  handleFormSubmit = (e, i) => {
     e.preventDefault();
     axios
       .put(
-        "/api/v1/admin/update",
-        {
-          ...this.state,
-          id: serviceId,
-        },
-        this.setState({
-          formShown: !this.state.formShown,
-        })
+        "/api/v1/admin/update", 
+        this.state.services[i]
       )
       .then((res) => {
         if (res.ok === false) {
           this.props.history.push(`/login`);
         } else {
-          this.setState({ submitted: true });
+          this.setState({
+            submitted: true,
+            formShown: !this.state.formShown,
+          })
         }
-      });
+      })
+      ;
   };
 
   toggleService = (e) => {
@@ -175,206 +173,205 @@ export default class Administration extends Component {
               <Link to="customer/profile">profile page.</Link>
             </div>
           ) : (
-            this.state.services.map((service, i) => {
-              return (
-                <div css={administrator} key={service.id}>
-                  <p>
-                    <span>Name: </span> {service.nick_name}
-                    {service.sq_ft}
-                  </p>
-                  <p>
-                    <span>SQFT: </span> {service.sq_ft}
-                  </p>
-                  <p>
-                    <span>Address: </span> {service.address}
-                  </p>
-                  <p>
-                    <span>City: </span> {service.city}
-                  </p>
-                  <p>
-                    <span>State: </span> {service.state}
-                  </p>
-                  <p>
-                    <span>Zipcode: </span> {service.zipcode}
-                  </p>
-                  <p>
-                    <span>Price: </span> {service.price}
-                  </p>
-                  <p>
-                    <span>Customer Id: </span> {service.customer_id}
-                  </p>
-                  <p>
-                    <span>Completed: </span> {service.completed}
-                  </p>
-                  <p>
-                    <span>Rescheduled: </span> {service.reschedule}
-                  </p>
-                  <p>
-                    <span>Scheduled: </span> {service.schedule_confirm}
-                  </p>
-                  <p>
-                    <span>Payment: </span> {service.payment_id}
-                  </p>
-                  <p>
-                    <span>Img URL: </span> {service.img_url}
-                  </p>
-                  <button className="user-btn" onClick={this.toggleService}>
-                    Edit
+              this.state.services.map((service, i) => {
+                return (
+                  <div css={administrator} key={service.id}>
+                    <p>
+                      <span>Name: </span> {service.nick_name}
+                    </p>
+                    <p>
+                      <span>SQFT: </span> {service.sq_ft}
+                    </p>
+                    <p>
+                      <span>Address: </span> {service.address}
+                    </p>
+                    <p>
+                      <span>City: </span> {service.city}
+                    </p>
+                    <p>
+                      <span>State: </span> {service.state}
+                    </p>
+                    <p>
+                      <span>Zipcode: </span> {service.zipcode}
+                    </p>
+                    <p>
+                      <span>Price: </span> {service.price}
+                    </p>
+                    <p>
+                      <span>Customer Id: </span> {service.customer_id}
+                    </p>
+                    <p>
+                      <span>Completed: </span> {service.completed}
+                    </p>
+                    <p>
+                      <span>Rescheduled: </span> {service.reschedule}
+                    </p>
+                    <p>
+                      <span>Scheduled: </span> {service.schedule_confirm}
+                    </p>
+                    <p>
+                      <span>Payment: </span> {service.payment_id}
+                    </p>
+                    <p>
+                      <span>Img URL: </span> {service.img_url}
+                    </p>
+                    <button className="user-btn" onClick={this.toggleService}>
+                      Edit
                   </button>
-                  {this.state.formShown ? (
-                    <form
-                      onSubmit={(e) => this.handleFormSubmit(e, service.id)}
-                    >
-                      <label htmlFor="nick_name">
-                        Name:
+                    {this.state.formShown ? (
+                      <form
+                        onSubmit={(e) => this.handleFormSubmit(e, i)}
+                      >
+                        <label htmlFor="nick_name">
+                          Name:
                         <input
-                          className="nickName"
-                          name="nick_name"
-                          placeholder="Enter name of home"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.nick_name}
-                        ></input>
-                      </label>
+                            className="nickName"
+                            name="nick_name"
+                            placeholder="Enter name of home"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.nick_name}
+                          ></input>
+                        </label>
                       SQFT:
-                      <label htmlFor="sq_ft">
-                        <input
-                          className="sq_ft"
-                          name="sq_ft"
-                          placeholder="Square Foot of the House"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.sq_ft}
-                        ></input>
-                      </label>
+                        <label htmlFor="sq_ft">
+                          <input
+                            className="sq_ft"
+                            name="sq_ft"
+                            placeholder="Square Foot of the House"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.sq_ft}
+                          ></input>
+                        </label>
                       Address:
-                      <label htmlFor="address">
+                        <label htmlFor="address">
+                          <input
+                            className="address"
+                            name="address"
+                            placeholder="Address of the house needs 3D service"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.address}
+                          ></input>
+                        </label>
+                        <label htmlFor="city">
+                          City:
                         <input
-                          className="address"
-                          name="address"
-                          placeholder="Address of the house needs 3D service"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.address}
-                        ></input>
-                      </label>
-                      <label htmlFor="city">
-                        City:
+                            className="city"
+                            name="city"
+                            placeholder="City"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.city}
+                          ></input>
+                        </label>
+                        <label htmlFor="state">
+                          State:
                         <input
-                          className="city"
-                          name="city"
-                          placeholder="City"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.city}
-                        ></input>
-                      </label>
-                      <label htmlFor="state">
-                        State:
+                            className="state"
+                            name="state"
+                            placeholder="State"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.state}
+                          ></input>
+                        </label>
+                        <label htmlFor="zipcode">
+                          Zipcode:
                         <input
-                          className="state"
-                          name="state"
-                          placeholder="State"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.state}
-                        ></input>
-                      </label>
-                      <label htmlFor="zipcode">
-                        Zipcode:
+                            className="zipcode"
+                            name="zipcode"
+                            placeholder="Zip Code"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.zipcode}
+                          ></input>
+                        </label>
+                        <label htmlFor="price">
+                          Price:
                         <input
-                          className="zipcode"
-                          name="zipcode"
-                          placeholder="Zip Code"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.zipcode}
-                        ></input>
-                      </label>
-                      <label htmlFor="price">
-                        Price:
+                            className="price"
+                            type="number"
+                            min="150"
+                            max="500"
+                            name="price"
+                            placeholder="price"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.price}
+                          ></input>
+                        </label>
+                        <label htmlFor="img_url">
+                          Img URL:
                         <input
-                          className="price"
-                          type="number"
-                          min="150"
-                          max="500"
-                          name="price"
-                          placeholder="price"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.price}
-                        ></input>
-                      </label>
-                      <label htmlFor="img_url">
-                        Img URL:
+                            className="img_url"
+                            name="img_url"
+                            placeholder="img_url"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.img_url}
+                          ></input>
+                        </label>
+                        <label htmlFor="customer_id">
+                          Customer Id:
                         <input
-                          className="img_url"
-                          name="img_url"
-                          placeholder="img_url"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.img_url}
-                        ></input>
-                      </label>
-                      <label htmlFor="customer_id">
-                        Customer Id:
+                            className="customer_id"
+                            name="customer_id"
+                            placeholder="customer_id"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.customer_id}
+                          ></input>
+                        </label>
+                        <label htmlFor="payment_id">
+                          Payment Id:
                         <input
-                          className="customer_id"
-                          name="customer_id"
-                          placeholder="customer_id"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.customer_id}
-                        ></input>
-                      </label>
-                      <label htmlFor="payment_id">
-                        Payment Id:
-                        <input
-                          className="payment_id"
-                          name="payment_id"
-                          placeholder="payment_id"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.payment_id}
-                        ></input>
-                      </label>
-                      <label htmlFor="schedule_confirm">
-                        Scheduled:
+                            className="payment_id"
+                            name="payment_id"
+                            placeholder="payment_id"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.payment_id}
+                          ></input>
+                        </label>
+                        <label htmlFor="schedule_confirm">
+                          Scheduled:
                         <select
-                          name="schedule_confirm"
-                          id="schedule_confirm"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.schedule_confirm}
-                        >
-                          <option value="true">True</option>
-                          <option value="false">False</option>
-                        </select>
-                      </label>
-                      <label htmlFor="reschedule">
-                        Reschedule:
+                            name="schedule_confirm"
+                            id="schedule_confirm"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.schedule_confirm}
+                          >
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                          </select>
+                        </label>
+                        <label htmlFor="reschedule">
+                          Reschedule:
                         <select
-                          name="reschedule"
-                          id="reschedule"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.reschedule}
-                        >
-                          <option value="true">True</option>
-                          <option value="false">False</option>
-                        </select>
-                      </label>
-                      <label htmlFor="completed">
-                        Completed:
+                            name="reschedule"
+                            id="reschedule"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.reschedule}
+                          >
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                          </select>
+                        </label>
+                        <label htmlFor="completed">
+                          Completed:
                         <select
-                          name="completed"
-                          id="completed"
-                          onChange={(e) => this.handleChange(e, i)}
-                          value={service.completed}
-                        >
-                          <option value="true">True</option>
-                          <option value="false">False</option>
-                        </select>
-                      </label>
-                      <button className="submit" type="submit">
-                        Submit Changes
+                            name="completed"
+                            id="completed"
+                            onChange={(e) => this.handleChange(e, i)}
+                            value={service.completed}
+                          >
+                            <option value="true">True</option>
+                            <option value="false">False</option>
+                          </select>
+                        </label>
+                        <button className="submit" type="submit">
+                          Submit Changes
                       </button>
-                    </form>
-                  ) : (
-                    <div className="home-name">🏠: {service.nick_name}</div>
-                  )}
-                </div>
-              );
-            })
-          )}
+                      </form>
+                    ) : (
+                        <div className="home-name">🏠: {service.nick_name}</div>
+                      )}
+                  </div>
+                );
+              })
+            )}
         </div>
       </div>
     );
