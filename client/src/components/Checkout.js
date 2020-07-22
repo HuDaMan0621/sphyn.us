@@ -12,6 +12,11 @@ const packageChoice = css`
 
     a {
         color: ${colors.darkColor};
+        padding: 0 1rem;
+
+        &:hover {
+          color: ${colors.primaryColor};
+        }
     }
 
     h1 {

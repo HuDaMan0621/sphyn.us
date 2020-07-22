@@ -19,10 +19,6 @@ const register = css`
   .links {
     margin-top: 1rem;
 
-    .logout {
-      padding-top: 2rem;
-    }
-
     a {
       color: ${colors.darkColor};
       margin-top: 2rem;
@@ -283,7 +279,6 @@ export default class BookingPage extends Component {
             <div className="links">
               <Link to="/">Home Page</Link>
               <Link to="/customer/profile">Back To Profile</Link>
-              <Logout className="logout" />
             </div>
           </div>
         ) : (
