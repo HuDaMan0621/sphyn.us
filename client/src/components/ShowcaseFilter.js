@@ -10,15 +10,6 @@ const serviceFilter = css`
   max-width: ${utilities.maxWidth};
   margin: auto;
 
-  .links {
-    a {
-      color: ${colors.darkColor};
-      &:hover {
-        color: ${colors.primaryColor};
-      }
-    }
-  }
-
   form {
     padding: 1rem;
     max-width: 600px;
@@ -27,13 +18,11 @@ const serviceFilter = css`
     input {
       width: 100%;
       padding: 0.5rem;
-      margin-bottom: 0.5rem;
     }
 
     button {
       display: block;
       margin: auto;
-      margin: 0.25rem auto;
       padding: 0.5rem;
       width: 100%;
       font-size: 1.1rem;
@@ -61,13 +50,14 @@ const serviceFilter = css`
     padding: 1rem;
     border-radius: ${utilities.borderRadius};
 
+    .home-wrap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
+
     p {
       color: ${colors.lightColor};
       padding: 1rem 0;
-
-      .name {
-        color: ${colors.primaryColor};
-      }
     }
   }
 `;
@@ -130,31 +120,37 @@ export default function ShowcaseFilter() {
                       <span>{service.address}</span>
                       <br />
                     </p>
-                    {!service.img_url ? (
-                      <iframe
-                        width="100%"
-                        height="300"
-                        src="https://my.matterport.com/show/?m=rvKhT7rSPML"
-                        frameborder="0"
-                        allowfullscreen
-                        allow="xr-spatial-tracking"
-                      ></iframe>
-                    ) : (
-                      <iframe
-                        width="100%"
-                        height="300"
-                        src={service.img_url}
-                        frameBorder="0"
-                        allowFullScreen
-                        allow="xr-spatial-tracking"
-                      ></iframe>
-                    )}
-                    <GoogleMaps
-                      address={service.address}
-                      city={service.city}
-                      state={service.state}
-                      zipcode={service.zipcode}
-                    />
+                    <div className="home-wrap">
+                      <div>
+                        {!service.img_url ? (
+                          <iframe
+                            width="100%"
+                            height="300"
+                            src="https://my.matterport.com/show/?m=rvKhT7rSPML"
+                            frameborder="0"
+                            allowfullscreen
+                            allow="xr-spatial-tracking"
+                          ></iframe>
+                        ) : (
+                          <iframe
+                            width="100%"
+                            height="300"
+                            src={service.img_url}
+                            frameBorder="0"
+                            allowFullScreen
+                            allow="xr-spatial-tracking"
+                          ></iframe>
+                        )}
+                      </div>
+                      <div>
+                        <GoogleMaps
+                          address={service.address}
+                          city={service.city}
+                          state={service.state}
+                          zipcode={service.zipcode}
+                        />
+                      </div>
+                    </div>
                   </div>
                 );
               })}
