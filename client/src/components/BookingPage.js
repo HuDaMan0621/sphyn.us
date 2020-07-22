@@ -20,7 +20,7 @@ const register = css`
     margin-top: 1rem;
 
     .logout {
-      padding-top: 2rem;
+      display: inline;
     }
 
     a {
@@ -283,7 +283,6 @@ export default class BookingPage extends Component {
             <div className="links">
               <Link to="/">Home Page</Link>
               <Link to="/customer/profile">Back To Profile</Link>
-              <Logout className="logout" />
             </div>
           </div>
         ) : (
