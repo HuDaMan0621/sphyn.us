@@ -14,6 +14,10 @@ const showcase = css`
   h3 {
     font-size: 2rem;
     margin: 1rem 0;
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
   }
 
   .qrcode {
