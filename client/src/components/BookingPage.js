@@ -19,10 +19,6 @@ const register = css`
   .links {
     margin-top: 1rem;
 
-    .logout {
-      display: inline;
-    }
-
     a {
       color: ${colors.darkColor};
       margin-top: 2rem;
