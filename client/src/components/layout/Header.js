@@ -37,6 +37,7 @@ export default function Header() {
       <header>
         <h1>Sphyn</h1>
         <div className="user-links">
+          <Link to="/showcase">Showcase</Link>
           <Link to="/login">Sign In</Link>
           <Link to="/register">Sign Up</Link>
         </div>

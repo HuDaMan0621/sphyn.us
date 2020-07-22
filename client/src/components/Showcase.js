@@ -20,6 +20,17 @@ const showcase = css`
     }
   }
 
+  .links {
+    a {
+      color: ${colors.darkColor};
+      padding: 0 0.5rem;
+
+      &:hover {
+        color: ${colors.primaryColor};
+      }
+    }
+  }
+
   .qrcode {
     margin-bottom: 1rem;
   }
@@ -48,6 +59,10 @@ export default function Showcase() {
         className="qrcode"
         value={`https://sphyn.herokuapp.com/showcase`}
       />
+      <div className="links">
+        <Link to="/">Home Page</Link>
+        <Link to="/customer/profile">To Profile</Link>
+      </div>
       <ShowcaseFilter />
     </div>
   );
