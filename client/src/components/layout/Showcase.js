@@ -16,7 +16,7 @@ export default function Showcase() {
   return (
     <div css={showcase}>
       <iframe
-        src="https://my.matterport.com/show/?m=rvKhT7rSPML&play=1"
+        src="https://my.matterport.com/show/?m=jyJ4ULrw5yz"
         frameborder="0"
       ></iframe>
     </div>
